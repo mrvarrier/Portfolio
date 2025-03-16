@@ -3,35 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-DQXH7NP5Z2');
-    </script>
-
     <title>Manish - UX Designer & Researcher</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Inline critical CSS -->
     <style>
-        @import url('https://fonts.cdnfonts.com/css/lucida-sans-typewriter-std');
-        
         /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         /* Typewriter font class */
         .lucida-typewriter {
-            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
             font-weight: normal;
         }
 
@@ -40,7 +26,7 @@
             max-width: 1280px;
             margin: 0 auto;
             padding: 0;
-            min-height: 1942px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -49,12 +35,6 @@
             padding: 0 5px 0 100px;
         }
         
-        @media (max-width: 768px) {
-            body {
-                padding: 0 20px;
-            }
-        }
-
         /* Header section */
         header {
             margin-top: 110px;
@@ -73,7 +53,7 @@
             text-decoration: none;
             color: #000;
             font-size: 16px;
-            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
             font-weight: normal;
         }
 
@@ -120,11 +100,6 @@
             font-size: 12px;
             text-decoration: none;
         }
-        
-        .social-links a i {
-            font-size: 12px;
-            color: white;
-        }
 
         /* Work section */
         .work-section h2 {
@@ -159,30 +134,11 @@
             flex-shrink: 0;
         }
         
-        @media (max-width: 1200px) {
-            .case-study-img {
-                width: 500px;
-                height: 300px;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .case-study {
-                flex-direction: column;
-                gap: 40px;
-            }
-            
-            .case-study-img {
-                width: 100%;
-                height: auto;
-                aspect-ratio: 16/9;
-            }
-        }
-
         .case-study-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 15px;
         }
 
         .case-study-content {
@@ -227,8 +183,29 @@
             }
         }
         
-        /* Responsive styling */
+        /* Basic responsive styling */
+        @media (max-width: 992px) {
+            .case-study {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .case-study-img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 16/9;
+            }
+        }
+        
         @media (max-width: 768px) {
+            body {
+                padding: 0 20px;
+            }
+            
+            .content-wrapper {
+                padding: 0;
+            }
+            
             .title {
                 font-size: 42px;
             }
@@ -245,14 +222,6 @@
             nav a {
                 margin-left: 30px;
             }
-            
-            .case-studies {
-                gap: 80px;
-            }
-            
-            .case-study-content h3 {
-                font-size: 24px;
-            }
         }
         
         @media (max-width: 576px) {
@@ -263,23 +232,41 @@
             .title {
                 font-size: 32px;
             }
-            
-            .work-section h2 {
-                font-size: 32px;
-            }
         }
-
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .case-study {
-                flex-direction: column;
-            }
-
-            .case-study-img {
-                width: 100%;
-            }
-        }
+        
+        /* Font awesome minimal icons used in the page */
+        .fa-linkedin-in:before { content: "\f0e1"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-instagram:before { content: "\f16d"; }
     </style>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Minimal Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Defer Google Analytics -->
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var script = document.createElement('script');
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2';
+                script.async = true;
+                document.head.appendChild(script);
+                
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-DQXH7NP5Z2');
+            }, 3000); // 3 second delay
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -292,82 +279,85 @@
     <div class="content-wrapper">
         <!-- Header section -->
         <header id="home">
-        <h1 class="title lucida-typewriter">hi</h1>
-        <h1 class="title lucida-typewriter">I'm Manish</h1>
-        <p class="subtitle">I am a UX Designer & Researcher with a background in computer science and engineering</p>
-        
-        <!-- Social links -->
-        <div class="social-links">
-            <a href="https://linkedin.com/in/manish-varrier" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:manishvarrier@gmail.com" title="Email"><i class="far fa-envelope"></i></a>
-            <a href="https://instagram.com/_manishr_" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-    </header>
+            <h1 class="title lucida-typewriter">hi</h1>
+            <h1 class="title lucida-typewriter">I'm Manish</h1>
+            <p class="subtitle">I am a UX Designer & Researcher with a background in computer science and engineering</p>
+            
+            <!-- Social links -->
+            <div class="social-links">
+                <a href="https://linkedin.com/in/manish-varrier" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:manishvarrier@gmail.com" title="Email"><i class="far fa-envelope"></i></a>
+                <a href="https://instagram.com/_manishr_" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </header>
 
-    <!-- Work section -->
-    <section class="work-section">
-        <h2 class="lucida-typewriter">I've worked on</h2>
-        
-        <div class="case-studies">
-            <!-- Case study 1 -->
-            <div class="case-study">
-                <a href="case-study-1/case-study-1.html" class="case-study-img">
-                    <img src="case_study1.png" alt="Empath.ly Project" style="border-radius: 15px">
-                </a>
-                <div class="case-study-content">
-                    <h3>Empath.ly</h3>
-                    <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                    <a href="case-study-1/case-study-1.html">View Case Study</a>
+        <!-- Work section -->
+        <section class="work-section">
+            <h2 class="lucida-typewriter">I've worked on</h2>
+            
+            <div class="case-studies">
+                <!-- Case study 1 -->
+                <div class="case-study">
+                    <a href="case-study-1/case-study-1.html" class="case-study-img">
+                        <img src="case_study1.png" alt="Empath.ly Project" loading="lazy">
+                    </a>
+                    <div class="case-study-content">
+                        <h3>Empath.ly</h3>
+                        <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
+                        <a href="case-study-1/case-study-1.html">View Case Study</a>
+                    </div>
+                </div>
+
+                <!-- Case study 2 -->
+                <div class="case-study">
+                    <a href="#case-study-2" class="case-study-img">
+                        <img src="/api/placeholder/600/350" alt="Empath.ly Project" loading="lazy">
+                    </a>
+                    <div class="case-study-content">
+                        <h3>Empath.ly</h3>
+                        <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
+                        <a href="#case-study-2">View Case Study</a>
+                    </div>
+                </div>
+
+                <!-- Case study 3 -->
+                <div class="case-study">
+                    <a href="#case-study-3" class="case-study-img">
+                        <img src="/api/placeholder/600/350" alt="Empath.ly Project" loading="lazy">
+                    </a>
+                    <div class="case-study-content">
+                        <h3>Empath.ly</h3>
+                        <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
+                        <a href="#case-study-3">View Case Study</a>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Case study 2 -->
-            <div class="case-study">
-                <a href="#case-study-2" class="case-study-img">
-                    <img src="/api/placeholder/600/350" alt="Empath.ly Project">
-                </a>
-                <div class="case-study-content">
-                    <h3>Empath.ly</h3>
-                    <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                    <a href="#case-study-2">View Case Study</a>
-                </div>
-            </div>
-
-            <!-- Case study 3 -->
-            <div class="case-study">
-                <a href="#case-study-3" class="case-study-img">
-                    <img src="/api/placeholder/600/350" alt="Empath.ly Project">
-                </a>
-                <div class="case-study-content">
-                    <h3>Empath.ly</h3>
-                    <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                    <a href="#case-study-3">View Case Study</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Manish. All rights reserved.</p>
-    </footer>
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Manish. All rights reserved.</p>
+        </footer>
+    </div>
 
     <script>
-        // Intersection Observer for scroll animations
+        // Intersection Observer for scroll animations - defer execution
         document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeUp 0.6s forwards';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+            setTimeout(function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeUp 0.6s forwards';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
 
-            // Observe all case studies
-            document.querySelectorAll('.case-study').forEach(caseStudy => {
-                observer.observe(caseStudy);
-            });
+                // Observe all case studies
+                document.querySelectorAll('.case-study').forEach(caseStudy => {
+                    observer.observe(caseStudy);
+                });
+            }, 100);
         });
     </script>
 </body>
