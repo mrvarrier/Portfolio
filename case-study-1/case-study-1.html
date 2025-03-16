@@ -188,16 +188,53 @@
         }
         
         .highlight-box {
-            background-color: #333;
-            color: white;
-            padding: 40px;
+            background-color: #3C3C3C;
+            color: #F5F5F5;
+            padding: 80px;
             margin: 50px 0;
             text-align: center;
+            width: 100vw; /* This makes it viewport width */
+            margin-left: 50%;
+            transform: translateX(-50%);
+            box-sizing: border-box;
         }
-        
+
+        .highlight-box h3{
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
         .highlight-box p {
-            font-size: 24px;
+            font-size: 18px;
             line-height: 1.4;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .highlight-box2 {
+            background-color: #E6E7E6;
+            color: #353635;
+            padding: 80px;
+            margin: 50px 0;
+            text-align: center;
+            width: 100vw; /* This makes it viewport width */
+            margin-left: 50%;
+            transform: translateX(-50%);
+            box-sizing: border-box;
+        }
+
+        .highlight-box2 h3{
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .highlight-box2 p {
+            font-size: 18px;
+            line-height: 1.4;
+            font-style: italic;
             margin: 0;
         }
         
@@ -277,6 +314,12 @@
         
         .column-right p {
             margin-top: 0;
+        }
+
+        .section-divider {
+            border-bottom: 1px solid #e0e0e0; /* Light grey color */
+            margin: 20px 0; /* Adjust spacing above and below as needed */
+            width: 100%; /* Full width */
         }
         
         /* Media queries for responsive layout */
@@ -365,6 +408,14 @@
             .highlight-box p {
                 font-size: 18px;
             }
+
+            .highlight-box2 {
+                padding: 25px;
+            }
+            
+            .highlight-box2 p {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -399,6 +450,8 @@
                 <p>36 hours (Hackathon)</p>
             </section>
             
+            <div class="section-divider"></div>
+
             <!-- Overview Section -->
             <section class="case-study-section">
                 
@@ -413,6 +466,8 @@
                     </div>
                 </div>
             </section>
+
+            <div class="section-divider"></div>
             
             <!-- Context Section -->
             <section class="case-study-section">
@@ -421,6 +476,8 @@
                 <p>COVID revolutionized the way we communicate and work by normalizing remoteness. It also created a massive emotional drought - we weren't made to empathize with each other through screens. As video conferencing turns into the new normal, marketers and managers continue to struggle with remote communication's lack of nuance and engagement, and those with sensory impairments likely have it even worse. This calls for ways to better understand what is felt throughout a meeting.</p>
                 
             </section>
+
+            <div class="section-divider"></div>
             
             <!-- Research Section -->
             <section class="case-study-section">
@@ -469,9 +526,9 @@
             
             <!-- Problem Statement Section -->
             <section class="case-study-section">
-                <h2 class="section-title">PROBLEM STATEMENT</h2>
                 <div class="highlight-box">
-                    <p>"How can we help users (especially marketing and HR department) help better understand the emotions felt throughout the meeting?"</p>
+                    <h3>PROBLEM STATEMENT</h3>
+                    <p>"How can we help users (especially marketing and HR department) help<br> better understand the emotions felt throughout the meeting?"</p>
                 </div>
             </section>
             
@@ -481,18 +538,19 @@
                 
                 <div class="two-column">
                     <div class="column-left">
-                        <h3>Designing for usability</h3>
+                        <div class="image-container">
+                            <a href="#" class="placeholder-link">
+                                <div class="image-size-label">800 x 450</div>
+                            </a>
+                        </div>
                     </div>
                     <div class="column-right">
+                        <h3>Designing for usability</h3>
                         <p>The first thing I made sure to do is to design the landing page for usability. From research, it was evident that many users have a hard time achieving a defined goal in a platform like Zoom since they are cluttered with options. This, in turn, makes users lose their valuable time and this is very crucial, especially in domains like HR and marketing. So I designed the landing page in such a way that users can easily achieve their goal, i.e., start or join a meeting.</p>
                     </div>
                 </div>
 
-                <div class="image-container">
-                    <a href="#" class="placeholder-link">
-                        <div class="image-size-label">800 x 450</div>
-                    </a>
-                </div>
+                
                 
                 <div class="two-column">
                     <div class="column-left">
@@ -518,11 +576,16 @@
                     </div>
                 </div>
 
+                <div class="highlight-box2">
+                    <h3>Showing data is all good and well, but what is that our target audience is looking for?</h3>
+                    <p>While ideating, we explored various ways to present the data, but that wasn't enough. We needed to understand what the target audience truly looks for—specific parameters and insights. To address these questions, I went back to research for deeper clarity.</p>
+                </div>
+
                 <div class="image-container">
                     <div class="image-size-label">800 x 450</div>
                 </div>
                 
-                <p>While ideating, we explored various ways to present the data, but that wasn't enough. We needed to understand what the target audience truly looks for—specific parameters and insights. To address these questions, I went back to research for deeper clarity.</p>
+                <p></p>
                 
                 <div class="two-column">
                     <div class="column-left">
@@ -550,6 +613,8 @@
                     <div class="image-size-label">800 x 450</div>
                 </div>
             
+            <div class="section-divider"></div>
+
             <!-- Results and Future Work Section -->
             <section class="case-study-section">
                 <h2 class="section-title">RESULTS AND FUTURE WORK</h2>
@@ -560,6 +625,13 @@
                 <p>One place the project lacks in is that it is a stand alone web application. There already exist prominent video conferencing platforms such as Zoom and Google meet. So it wouldn't make sense for users to start moving onto a new application. Rather as part of our future work we will start building our application as a zoom plugin rather than a stand alone application.</p>
                 
                 <p>Presentation of the project - <a href="#" style="color: #0066cc; text-decoration: none;">Empath.ly - HackHarvard</a></p>
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/Ln9x96JU-2A?si=8dZySXB7S9Ant1g5" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+
             </section>
         </div>
     </div>
