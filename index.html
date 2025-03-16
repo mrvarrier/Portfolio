@@ -243,6 +243,9 @@
     <!-- Preload critical fonts -->
     <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
     
+    <!-- Preload hero image -->
+    <link rel="preload" as="image" href="case_study1.webp">
+    
     <!-- Defer non-critical CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -250,6 +253,9 @@
     
     <!-- Minimal Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Add cache control headers -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
     
     <!-- Defer Google Analytics -->
     <script>
@@ -296,10 +302,10 @@
             <h2 class="lucida-typewriter">I've worked on</h2>
             
             <div class="case-studies">
-                <!-- Case study 1 -->
+                <!-- Case study 1 - First visible case study should NOT be lazily loaded -->
                 <div class="case-study">
                     <a href="case-study-1/case-study-1.html" class="case-study-img">
-                        <img src="case_study1.png" alt="Empath.ly Project" loading="lazy">
+                        <img src="case_study1.png" alt="Empath.ly Project">
                     </a>
                     <div class="case-study-content">
                         <h3>Empath.ly</h3>
@@ -308,10 +314,10 @@
                     </div>
                 </div>
 
-                <!-- Case study 2 -->
+                <!-- Case study 2 - Below the fold, can be lazily loaded -->
                 <div class="case-study">
                     <a href="#case-study-2" class="case-study-img">
-                        <img src="/api/placeholder/600/350" alt="Empath.ly Project" loading="lazy">
+                        <img src="/api/placeholder/600/350" alt="Second Project" loading="lazy">
                     </a>
                     <div class="case-study-content">
                         <h3>Empath.ly</h3>
@@ -320,10 +326,10 @@
                     </div>
                 </div>
 
-                <!-- Case study 3 -->
+                <!-- Case study 3 - Below the fold, can be lazily loaded -->
                 <div class="case-study">
                     <a href="#case-study-3" class="case-study-img">
-                        <img src="/api/placeholder/600/350" alt="Empath.ly Project" loading="lazy">
+                        <img src="/api/placeholder/600/350" alt="Third Project" loading="lazy">
                     </a>
                     <div class="case-study-content">
                         <h3>Empath.ly</h3>
