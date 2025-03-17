@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resume of Manish Varrier - UX Designer, Project Manager, and Researcher with expertise in computer science and engineering.">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DQXH7NP5Z2');
+    </script>
+
+    <title>Manish Varrier - Resume</title>
+    
+    <!-- Inline critical CSS -->
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Typewriter font class */
+        .lucida-typewriter {
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+        }
+
+        body {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-wrapper {
+            padding: 0 5% 0 5%;
+            max-width: 100%;
+        }
+        
+        /* Header section */
+        header {
+            margin-top: 110px;
+            margin-bottom: 60px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 30px 30px 10px 0;
+            background-color: transparent;
+        }
+
+        nav a {
+            margin-left: 50px;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+        }
+
+        .title {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 0px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards;
+            font-weight: normal;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* Resume section */
+        .resume-section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.3s;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: normal;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+        }
+
+        .resume-item {
+            margin-bottom: 50px;
+        }
+
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .resume-title {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .resume-company {
+            font-size: 16px;
+            font-weight: 200;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .resume-date {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .resume-description {
+            margin-bottom: 20px;
+        }
+
+        .resume-list {
+            list-style-type: none;
+            margin-left: 0;
+        }
+
+        .resume-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+
+        .resume-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #000;
+        }
+
+        /* Education section */
+        .education-section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.4s;
+        }
+
+        /* Skills section */
+        .skills-section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.5s;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .skill-category {
+            margin-bottom: 30px;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skill-category h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-item {
+            background-color: #f5f5f5;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* Honors and Awards section */
+        .honors-section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.6s;
+        }
+
+        /* Leadership section */
+        .leadership-section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.7s;
+        }
+
+        .section-divider {
+            border-bottom: 1px solid #e0e0e0; /* Light grey color */
+            margin-bottom: 60px;
+            width: 100%; /* Full width */
+            margin-top: -15px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+            color: #666;
+            margin-top: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Basic responsive styling */
+        @media (max-width: 992px) {
+            .resume-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .skill-category {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0 20px;
+            }
+            
+            .content-wrapper {
+                padding: 0;
+            }
+            
+            .title {
+                font-size: 42px;
+            }
+            
+            nav {
+                margin-right: 0;
+            }
+            
+            nav a {
+                margin-left: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav {
+                justify-content: center;
+            }
+            
+            .title {
+                font-size: 32px;
+            }
+        }
+
+        .download-icon i {
+            color: #000000; /* Change this to your desired color */
+            font-size: 18px; /* Optional: Adjust size */
+        }
+    </style>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Minimal Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Add cache control headers -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html">home</a>
+        <a href="about_me/about.html">about</a>
+        <a href="resume.html">resume</a>
+    </nav>
+    
+    <div class="content-wrapper">
+        <!-- Header section -->
+        <header id="resume">
+            <div class="header-flex">
+                <h1 class="title lucida-typewriter">Resume</h1>
+                <a href="https://drive.google.com/file/d/1Pl2JjSYH7AoyVf-QXi9xhVaqILJyMfJk/view?usp=sharing" target="_blank" class="download-icon">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </header>
+
+        <div class="section-divider"></div>
+
+        <!-- Education section -->
+        <section class="education-section">
+            <h2 class="section-title lucida-typewriter">Education</h2>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">Human Centered Design & Engineering</h3>
+                        <p class="resume-company">University of Washington</p>
+                    </div>
+                    <p class="resume-date">September 2025 - June 2027</p>
+                </div>
+            </div>
+
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">B.Tech, Computer Science & Engineering with a Specialization in Information Security</h3>
+                        <p class="resume-company">Vellore Institute of Technology</p>
+                    </div>
+                    <p class="resume-date">September 2020 - May 2024</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Experience section -->
+        <section class="resume-section">
+            <h2 class="section-title lucida-typewriter">Professional Experience</h2>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">Project Manager / Junior UX Designer & Researcher</h3>
+                        <p class="resume-company">Correlate AS</p>
+                    </div>
+                    <p class="resume-date">August 2023 - Present</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Managed over five cross-functional projects from inception to completion; facilitated effective communication between design and development teams, which led to a 23% reduction in project delivery times</li>
+                    <li>Streamlined AI design processes; improved existing workflows to allow users to perform operations more intuitively, which resulted in a 36% increase in user satisfaction scores</li>
+                    <li>Conducted comprehensive testing on production and staging environments to verify developer fixes; reduced critical UX issues and enhanced overall system stability</li>
+                    <li>Led the integration of the Zenodo application; conducted user requirement analysis, set up APIs, and created a high-fidelity prototype; expanded system capabilities and improved data accessibility for users</li>
+                    <li>Performed extensive desk research on language translation capabilities of GPT-3 and GPT-4 models; compared efficiencies to optimize system performance</li>
+                    <li>Reduced token usage by 61% for AI operations by implementing vectorization databases; enhanced system efficiency and lowered operational costs</li>
+                    <li>Mentored a UX intern; guided their daily tasks and provided insights to enhance their understanding and skills in UX design</li>
+                </ul>
+            </div>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">Total Experience Intern</h3>
+                        <p class="resume-company">Correlate AS</p>
+                    </div>
+                    <p class="resume-date">May 2023 - August 2023</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Improved the onboarding process by creating and implementing user-friendly templates; reduced onboarding time by 41% and enhanced new user retention rates by 18%</li>
+                    <li>Conducted Total Addressable Market (TAM) calculations and assisted in developing a five-year business projection; supported strategic decision-making that projected potential revenue growth of $2 million</li>
+                    <li>Identified and resolved over 30 UX bugs; significantly enhanced overall user experience and increased app stability</li>
+                    <li>Optimized backend prompts through advanced prompt engineering; led to improved user interactions and reduced response times</li>
+                    <li>Addressed accessibility issues by ensuring proper color contrast in adherence to WCAG standards; increased accessibility compliance and made the application more inclusive</li>
+                    <li>Collaborated with the Chief Design Officer to design a task list item calendar; enhanced project management efficiency and increased task completion rates</li>
+                    <li>Redesigned the application's homepage; improved visibility and scannability of cards, which resulted in increased user engagement and click-through rates</li>
+                </ul>
+            </div>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">User Experience Intern</h3>
+                        <p class="resume-company">Stealth Startup</p>
+                    </div>
+                    <p class="resume-date">October 2022 - February 2023</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Conducted comprehensive user research, segmentation, and surveys with over 200 participants to define the target audience and refine problem statements; directly influenced product development strategies</li>
+                    <li>Developed innovative solutions based on data-driven insights; enhanced product effectiveness and aligned features with user needs</li>
+                    <li>Utilized Google Ads for A/B testing; identified user preferences that optimized product features and increased engagement rates by 34%</li>
+                    <li>Analyzed A/B testing results to inform design decisions; ensured a user-centric approach in product development and improved conversion rates by 17%</li>
+                </ul>
+            </div>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">UX Designer – Freelancer</h3>
+                        <p class="resume-company">Al Madar Holding</p>
+                    </div>
+                    <p class="resume-date">May 2022 - July 2022</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Designed and developed the user experience for Al Madar Holding's website; enhanced usability and increased client engagement</li>
+                    <li>Collaborated closely with developers to ensure accurate translation of designs into functional code; resulted in a seamless user interface and reduced development time</li>
+                    <li>Implemented SEO best practices; improved website discoverability and increased organic traffic, which attracted more potential clients</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Leadership section -->
+        <section class="leadership-section">
+            <h2 class="section-title lucida-typewriter">Leadership & Activities</h2>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">President</h3>
+                        <p class="resume-company">Toastmasters International - Agua VIT</p>
+                    </div>
+                    <p class="resume-date">July 2022 - December 2022</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Oversaw club operations; ensured high-quality standards and member satisfaction through strategic initiatives</li>
+                    <li>Mentored new members; facilitated their development in public speaking and leadership skills, and fostered a supportive and growth-oriented environment</li>
+                    <li>Led monthly meetings and workshops; introduced innovative communication techniques that promoted active engagement and skill enhancement among members</li>
+                </ul>
+            </div>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">First Place Overall Hack and Best Lifehack Hack</h3>
+                        <p class="resume-company">HackHarvard 2022 - Harvard University</p>
+                    </div>
+                    <p class="resume-date">October 2022</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Developed Empath.ly, a video conferencing web application that provided analytics on emotions felt throughout meetings, integrating real-time emotion identification</li>
+                    <li>Led a team to create a system that analyzed the emotions of each user sixty times a second through their camera feed during video calls</li>
+                    <li>Implemented a comprehensive post-call dashboard; displayed emotional data and data-derived insights such as the most common emotions throughout the call, changes in emotions over time, and notable contrasts or sudden changes in emotion</li>
+                    <li>Applied HCI principles to enhance virtual communication; aimed to improve empathy and understanding in remote interactions by providing deeper insights into participants' emotional states</li>
+                </ul>
+            </div>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">Keynote Speaker</h3>
+                        <p class="resume-company">Learnit World Education Conference</p>
+                    </div>
+                    <p class="resume-date">January 2019</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Presented a groundbreaking educational product designed to revolutionize learning for students with learning challenges; generated significant interest and support from educational professionals</li>
+                    <li>Collaborated with a multidisciplinary team to develop and showcase the product; emphasized its impact on accessibility and inclusive education</li>
+                    <li>Engaged stakeholders and industry experts; advocated for the adoption of innovative technologies in special education to improve learning outcomes</li>
+                </ul>
+            </div>
+            
+            <div class="resume-item">
+                <div class="resume-header">
+                    <div>
+                        <h3 class="resume-title">Top 5 in the World – Transforming Education Through Technology</h3>
+                        <p class="resume-company">Conrad Challenge</p>
+                    </div>
+                    <p class="resume-date">April 2019</p>
+                </div>
+                <ul class="resume-list">
+                    <li>Presented the project at NASA in Florida; showcased a pioneering solution aimed at transforming education through technology to an international audience</li>
+                    <li>Selected as a keynote speaker at the Learn-it World Education Conference and as a speaker at BETT in London; shared insights on innovative educational technology</li>
+                    <li>Collaborated with a dedicated team; focused on user-centered design to address educational challenges, emphasized technology's role in enhancing learning experiences</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Honors and Awards section -->
+        <section class="honors-section">
+            <h2 class="section-title lucida-typewriter">Honors & Awards</h2>
+            
+            <div class="resume-item">
+                <ul class="resume-list">
+                    <li>First Place Overall Hack and Best Lifehack Hack, HackHarvard 2022 - Harvard University, October 2022</li>
+                    <li>Keynote Speaker, Learnit World Education Conference, January 2019</li>
+                    <li>Top 5 in the World – Transforming Education Through Technology, Conrad Challenge, April 2019</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Skills section -->
+        <section class="skills-section">
+            <h2 class="section-title lucida-typewriter">Skills</h2>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Technical</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Figma</span>
+                        <span class="skill-item">Adobe Photoshop</span>
+                        <span class="skill-item">Adobe Illustrator</span>
+                        <span class="skill-item">HTML</span>
+                        <span class="skill-item">CSS</span>
+                        <span class="skill-item">C++</span>
+                        <span class="skill-item">C</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">Java</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Product Management</span>
+                        <span class="skill-item">Product Design</span>
+                        <span class="skill-item">Leadership</span>
+                        <span class="skill-item">Public Speaking</span>
+                        <span class="skill-item">Team Management</span>
+                        <span class="skill-item">Critical Thinking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Manish. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations - defer execution
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeUp 0.6s forwards';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+
+                // Observe all sections
+                document.querySelectorAll('section').forEach(section => {
+                    observer.observe(section);
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
