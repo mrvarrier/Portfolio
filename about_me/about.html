@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Manish - UX Designer & Researcher with a background 
+    in computer science and engineering. Learn more about my experience, skills, and interests.">
+
+    <title>About Manish - UX Designer & Researcher</title>
+    
+    <!-- Inline critical CSS -->
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Typewriter font class */
+        .lucida-typewriter {
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+        }
+
+        body {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-wrapper {
+            padding: 0 5px 0 100px;
+        }
+        
+        /* Header section */
+        header {
+            margin-top: 110px;
+            margin-bottom: 100px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 30px 30px 10px 0;
+            background-color: transparent;
+        }
+
+        nav a {
+            margin-left: 50px;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+        }
+
+        .title {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards;
+            font-weight: normal;
+        }
+
+        /* About section */
+        .about-section {
+            margin-bottom: 100px;
+        }
+
+        .about-container {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.3s;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 15px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .about-content {
+            max-width: 600px;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Recommendations section */
+        .recommendations-section {
+            margin-bottom: 100px;
+        }
+
+        .recommendations-section h2 {
+            font-size: 42px;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.5s;
+            font-weight: normal;
+        }
+
+        .recommendations {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .recommendation {
+            display: flex;
+            gap: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .recommender-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .recommendation-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recommendation-text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .recommender-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .recommender-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* Photography section */
+        .photography-section {
+            margin-bottom: 100px;
+        }
+
+        .photography-section h2 {
+            font-size: 42px;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.7s;
+            font-weight: normal;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.9s;
+        }
+
+        .photo-item {
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+            color: #666;
+            margin-top: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Basic responsive styling */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .about-content {
+                max-width: 100%;
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0 20px;
+            }
+            
+            .content-wrapper {
+                padding: 0;
+            }
+            
+            .title {
+                font-size: 42px;
+            }
+
+            .recommendation {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            nav {
+                margin-right: 0;
+            }
+            
+            nav a {
+                margin-left: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav {
+                justify-content: center;
+            }
+            
+            .title {
+                font-size: 32px;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Font awesome minimal icons used in the page */
+        .fa-linkedin-in:before { content: "\f0e1"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-instagram:before { content: "\f16d"; }
+    </style>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Minimal Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Add cache control headers -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="../index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="https://drive.google.com/file/d/1Pl2JjSYH7AoyVf-QXi9xhVaqILJyMfJk/view?usp=sharing" target="_blank">resume</a>
+    </nav>
+    
+    <div class="content-wrapper">
+        <!-- Header section -->
+        <header id="about">
+            <h1 class="title lucida-typewriter">about me</h1>
+        </header>
+
+        <!-- About section -->
+        <section class="about-section">
+            <div class="about-container">
+                <!-- Replace with your actual image path -->
+                <img src="/api/placeholder/300/300" alt="Manish" class="profile-image">
+                <div class="about-content">
+                    <p>I'm Manish, a UX Designer and Researcher with strong foundations in Computer Science and Engineering. My unique background bridges technical expertise with human-centered design, allowing me to create intuitive digital experiences that solve real problems.</p>
+                    
+                    <p>Having worked as both a Project Manager and UX Designer at Correlate AS, I've developed a holistic understanding of product development — from research and conceptualization to implementation and optimization. My approach combines analytical thinking with creative problem-solving to deliver solutions that balance business goals with user needs.</p>
+                    
+                    <p>Outside of design, I'm passionate about photography and travel. Exploring new cultures and perspectives through my camera lens enriches my design thinking and helps me approach problems with fresh insights. These experiences inform my work, making me a more empathetic and versatile designer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations section -->
+        <section class="recommendations-section">
+            <h2 class="lucida-typewriter">recommendations</h2>
+            
+            <div class="recommendations">
+                <!-- Recommendation 1 -->
+                <div class="recommendation">
+                    <img src="/api/placeholder/80/80" alt="Kushal Kaushik" class="recommender-img">
+                    <div class="recommendation-content">
+                        <p class="recommender-name">Kushal Kaushik</p>
+                        <p class="recommender-title">Head of Growth at Byggr.ai</p>
+                        <p class="recommendation-text">"I had the pleasure of working with Manish, and he consistently proved to be an invaluable asset to our team. His versatility and intelligence are truly remarkable, akin to a Swiss Army knife. Time and again, Manish has gone above and beyond his designated role, tackling pivotal tasks and solving complex problems that extended beyond his initial responsibilities. His proactive and dedicated approach made a significant impact on our success. Without hesitation, I would choose to work with Manish in any organization I am part of or create in the future."</p>
+                    </div>
+                </div>
+
+                <!-- Recommendation 2 -->
+                <div class="recommendation">
+                    <img src="/api/placeholder/80/80" alt="Ole Goethe" class="recommender-img">
+                    <div class="recommendation-content">
+                        <p class="recommender-name">Ole Goethe</p>
+                        <p class="recommender-title">Data Aware Design | Product Design | User Experience Design</p>
+                        <p class="recommendation-text">"I've known Manish Varrier for more than three months as a talented Total eXperience Designer Intern at Correlate AS, where I am the Chief Design Officer. Manish's character has proven to be of the highest quality. In the time he was part of the organization, his sincerity and dedication to learning and growing was always evident. The process of defining and refining the user experience were often challenging, but he never settled for anything less than what was needed to deploy the new practices. Given what I know of his diligence, skill, knowledge and energy, I believe he will succeed at whatever he undertakes in the area of total experience design and life."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photography section -->
+        <section class="photography-section">
+            <h2 class="lucida-typewriter">photography</h2>
+            
+            <div class="photo-grid">
+                <!-- Replace with your actual photos -->
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 1" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 2" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 3" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 4" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 5" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 6" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 7" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 8" loading="lazy">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/400/400" alt="Photography 9" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Manish. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations - defer execution
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeUp 0.6s forwards';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+
+                // Observe recommendations and photo grid
+                document.querySelectorAll('.recommendation').forEach(recommendation => {
+                    observer.observe(recommendation);
+                });
+
+                document.querySelectorAll('.photo-grid').forEach(grid => {
+                    observer.observe(grid);
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
