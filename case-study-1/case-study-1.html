@@ -49,6 +49,8 @@
             padding: 0 40px;
             max-width: 1200px;
             margin: 0 auto;
+            overflow-x: hidden;
+            width: 100%;
         }
         
         @media (max-width: 768px) {
@@ -58,6 +60,25 @@
             
             .content-wrapper {
                 padding: 0 20px;
+            }
+            
+            /* Add these new styles */
+            .pdf-layout .pdf-left,
+            .two-column .column-right,
+            .two-column .column-left,
+            .pdf-layout .pdf-right {
+                width: 100%;
+                max-width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            
+            .highlight-box, .highlight-box2 {
+                padding: 25px 15px;
+            }
+            
+            .two-column, .pdf-layout {
+                padding: 0;
             }
         }
 
@@ -341,6 +362,31 @@
             height: auto;
             object-fit: contain;
             border-radius: 8px;
+        }
+
+        /* Fix for the highlight boxes */
+        .highlight-box, .highlight-box2 {
+            width: 100%; /* Change from 100vw */
+            margin-left: 0;
+            transform: none;
+            padding: 40px 20px; /* Reduced padding for mobile */
+        }
+
+        /* Make iframe responsive */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
                 
         /* Media queries for responsive layout */
@@ -672,12 +718,14 @@
                 <p>One place the project lacks in is that it is a stand alone web application. There already exist prominent video conferencing platforms such as Zoom and Google meet. So it wouldn't make sense for users to start moving onto a new application. Rather as part of our future work we will start building our application as a zoom plugin rather than a stand alone application.</p>
                 
                 <p style="font-weight: 500; text-decoration: underline;"><br>Presentation of the project</p>
-                <iframe width="560" height="315" 
-                    src="https://www.youtube.com/embed/Ln9x96JU-2A?si=8dZySXB7S9Ant1g5" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Ln9x96JU-2A?si=8dZySXB7S9Ant1g5" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
             </section>
         </div>
