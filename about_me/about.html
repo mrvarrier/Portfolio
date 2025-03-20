@@ -321,6 +321,22 @@
     
     <!-- Add cache control headers -->
     <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+
+    <!-- Defer Google Analytics -->
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var script = document.createElement('script');
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2';
+                script.async = true;
+                document.head.appendChild(script);
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-DQXH7NP5Z2');
+            }, 3000); // 3 second delay
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -540,17 +556,6 @@
                     observer.observe(item);
                 });
             });
-        });
-    </script>
-    
-    <!-- Google Analytics - deferred to end of page -->
-    <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2"></script>
-    <script>
-        window.addEventListener('load', function() {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-DQXH7NP5Z2');
         });
     </script>
 </body>

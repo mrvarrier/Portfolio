@@ -6,15 +6,6 @@
     <meta name="description" content="Manish Varrier's UX Design Resume - Professional experience as UX Designer and 
     Project Manager at Correlate AS. Computer Science background with expertise in user research, wireframing, and prototyping.">
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-DQXH7NP5Z2');
-    </script>
-
     <title>Manish Varrier - Resume</title>
     
     <!-- Inline critical CSS -->
@@ -302,6 +293,22 @@
     
     <!-- Add cache control headers -->
     <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+
+    <!-- Defer Google Analytics -->
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var script = document.createElement('script');
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2';
+                script.async = true;
+                document.head.appendChild(script);
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-DQXH7NP5Z2');
+            }, 3000); // 3 second delay
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation -->
