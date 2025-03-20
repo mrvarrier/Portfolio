@@ -104,6 +104,16 @@
             text-decoration: none;
         }
 
+        .disabled-link {
+            display: inline-block;
+            color: #888; /* Lighter color to indicate disabled state */
+            text-decoration: none;
+            cursor: not-allowed;
+            opacity: 0.7; /* Slightly faded appearance */
+            pointer-events: none; /* Prevents clicks */
+            font-weight: 500; /* Match the weight of the active link */
+        }
+
         /* Work section */
         .work-section h2 {
             font-size: 42px;
@@ -153,13 +163,13 @@
         .case-study-content h3 {
             font-size: 28px;
             font-weight: 600;
-            margin-bottom: 24px;
+            margin-bottom: 10px;
         }
 
         .case-study-content p {
             font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 25px;
             max-width: 460px;
         }
 
@@ -307,19 +317,19 @@
                     <!-- Case study 1 - First visible case study should NOT be lazily loaded -->
                     <div class="case-study">
                         <a href="case-study-1/case-study-1.html" class="case-study-img">
-                            <img src="casestudy1.png" alt="Zenodo">
+                            <img src="zenodo.png" alt="Zenodo">
                         </a>
                         <div class="case-study-content">
                             <h3>Zenodo</h3>
-                            <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                            <a href="case-study-1/case-study-1.html">View Case Study</a>
+                            <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
+                            <a class="disabled-link" aria-disabled="true">Coming Soon</a>
                         </div>
                     </div>
 
                     <!-- Case study 2 - Below the fold, can be lazily loaded -->
                     <div class="case-study">
                         <a href="case-study-1/case-study-1.html" class="case-study-img">
-                            <img src="case_study1.png" alt="Second Project" loading="lazy">
+                            <img src="empathly.png" alt="Second Project" loading="lazy">
                         </a>
                         <div class="case-study-content">
                             <h3>Empath.ly</h3>
@@ -329,6 +339,7 @@
                     </div>
 
                     <!-- Case study 3 - Below the fold, can be lazily loaded -->
+                    <!--
                     <div class="case-study">
                         <a href="#case-study-3" class="case-study-img">
                             <img src="/api/placeholder/600/350" alt="Third Project" loading="lazy">
@@ -338,7 +349,7 @@
                             <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
                             <a href="#case-study-3">View Case Study</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </section>
 
