@@ -212,6 +212,29 @@
             margin-top: auto;
         }
 
+        /* My Approach section */
+        .approach-section {
+            margin-bottom: 100px;
+        }
+
+        .approach-section h2 {
+            font-size: 42px;
+            margin-bottom: 50px;
+            font-weight: normal;
+        }
+
+        .approach-content {
+            max-width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .approach-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
         /* Animations */
         @keyframes fadeUp {
             to {
@@ -325,12 +348,30 @@
                     height="500"
                     fetchpriority="high">
                 <div class="about-content">
-                    <p>I'm Manish, a UX Designer and Researcher who transforms complex technical challenges into elegant human experiences. My journey began in Computer Science and Engineering, where I developed a deep understanding of technology's inner workings. But I quickly realized my true passion lay not in the code itself, but in the human experience of interacting with it.</p>
-                    
-                    <p>At Correlate AS, I've worn both Project Manager and UX Designer hats—giving me a rare 360° view of product development. This dual perspective allows me to speak the language of developers while advocating fiercely for users. My approach is methodical yet creative; I analyze problems systematically, but solve them with imagination, looking for the unexpected connections and hidden patterns in user behavior that others miss.</p>
-                    
-                    <p>When I'm not designing, my camera becomes my third eye. Photography and travel aren't just hobbies—they're my training grounds for empathy and perspective. I bring this combination of technical knowledge, design thinking, and cultural curiosity to every project—creating digital experiences that don't just work flawlessly, but feel intuitively right.</p>
+                    <p>I'm Manish, a UX Designer and Researcher who transforms complex technical challenges into elegant human experiences. My journey began in Computer Science and Engineering, where I developed a deep understanding of technology's inner workings before discovering my true passion in the human experience of interacting with it.</p>
+               
+                    <p>At Correlate AS, I've worn both Project Manager and UX Designer hats—giving me a rare 360° view of product development and the ability to translate between technical and user needs, finding the balance where innovation meets usability. 
+                        What sets me apart is my analytical mindset paired with creative intuition. I naturally look for unexpected connections and hidden patterns in user behavior—insights that often lead to breakthrough solutions. My perspective is enriched by photography and travel, which serve as training grounds for empathy and observation, teaching me to see the world through different lenses.</p>
+
+                    <p>I bring this unique combination of technical knowledge, business understanding, and cultural curiosity to every project—creating digital experiences that genuinely enhance how people interact with technology.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- My Approach section -->
+        <section class="approach-section">
+            <h2 class="lucida-typewriter">My Approach</h2>
+            
+            <div class="approach-content">
+                <p>I believe effective UX design begins with understanding the complete picture. Before sketching a single wireframe, I immerse myself in the business landscape—analyzing the product's lifecycle stage, identifying key performance indicators, and mapping available resources and constraints.</p>
+                
+                <p>My research methodology extends beyond surface-level user feedback. I dig deep to uncover the underlying pain points that users themselves might not articulate, explore diverse usage scenarios, and examine alternative solutions that might not be immediately obvious. Market analysis, for me, isn't just competitive benchmarking—it's about recognizing successful patterns while identifying opportunities to differentiate and innovate.</p>
+                
+                <p>I'm a firm believer in hypothesis-driven design. Each design decision emerges from a testable assumption about user behavior or business impact, allowing for rapid validation and refinement. This approach keeps projects focused and evidence-based rather than driven by subjective preferences.</p>
+                
+                <p>When challenges arise—as they inevitably do—I turn to the data for guidance. Whether a solution falls short in communicating value, presents unexpected complexity, or creates navigation hurdles, I see these not as failures but as valuable learning opportunities. My iterative process is deliberate and strategic, with each revision carefully tested against key metrics to ensure meaningful improvement.</p>
+                
+                <p>This methodical yet flexible approach helps me bridge the gap between business objectives and user needs, creating digital experiences that are both strategically sound and intuitively satisfying.</p>
             </div>
         </section>
 
@@ -478,6 +519,26 @@
 
             document.querySelectorAll('.photo-grid').forEach(grid => {
                 observer.observe(grid);
+            });
+
+            document.querySelectorAll('.approach-section h2, .approach-content').forEach(item => {
+                observer.observe(item);
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeUp 0.6s forwards';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+
+                // Observe recommendations and photo grid
+                document.querySelectorAll('.recommendation, .photo-grid, .approach-container').forEach(item => {
+                    observer.observe(item);
+                });
             });
         });
     </script>

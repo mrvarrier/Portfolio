@@ -54,6 +54,21 @@
             overflow-x: hidden;
             width: 100%;
         }
+
+        .pdf-left, .column-right .pdf-left {
+            background-color: transparent;
+            box-shadow: none;
+            padding: 0;
+        }
+        
+        .pdf-left img, .column-right .pdf-left img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0;
+            box-shadow: none;
+            background-color: transparent;
+        }
         
         @media (max-width: 768px) {
             body {
@@ -151,14 +166,16 @@
         }
 
         .image-container {
+            box-shadow: none;
+            background-color: transparent;
             margin: 40px 0;
         }
 
         .image-container img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: none;
+            box-shadow: none;
         }
 
         .insight-box {
@@ -747,6 +764,12 @@
     <script>
         // Intersection Observer for scroll animations
         document.addEventListener('DOMContentLoaded', function() {
+            // Add initial styles to all elements we want to animate
+            document.querySelectorAll('.case-study-section, .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container, .research-grid, .research-item, .research-desc').forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+            });
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -754,14 +777,14 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
-
-            // Observe all case study sections
-            document.querySelectorAll('.case-study-section, .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container').forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(20px)';
-                observer.observe(element);
-            });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    
+            // Start observing with slight delay
+            setTimeout(() => {
+                document.querySelectorAll('.case-study-section, .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container, .research-grid, .research-item, .research-desc').forEach(element => {
+                    observer.observe(element);
+                });
+            }, 100);
         });
     </script>
 </body>
