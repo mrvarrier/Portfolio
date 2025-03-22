@@ -194,6 +194,71 @@
             color: #666;
         }
 
+        /* Add this to your CSS in index.html */
+
+        /* Link hover effect */
+        .case-study-content a {
+            position: relative;
+            transition: all 0.3s ease;
+            padding-right: 25px;
+        }
+
+        .case-study-content a::after {
+            content: "→";
+            position: absolute;
+            right: 0;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .case-study-content a:hover {
+            padding-right: 30px;
+        }
+
+        .case-study-content a:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Add a subtle background effect to the case study image on hover */
+        .case-study-img {
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .case-study-img img {
+            transition: transform 0.6s ease;
+        }
+
+        .case-study:hover .case-study-img {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .case-study:hover .case-study-img img {
+            transform: scale(1.03);
+        }
+
+        .manual-page-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .manual-page-transition-overlay.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Animations */
         @keyframes fadeUp {
             to {
@@ -344,18 +409,6 @@
                         </div>
                     </div>
 
-                    <!-- Case study 3 - Below the fold, can be lazily loaded -->
-                    <!--
-                    <div class="case-study">
-                        <a href="#case-study-3" class="case-study-img">
-                            <img src="/api/placeholder/600/350" alt="Third Project" loading="lazy">
-                        </a>
-                        <div class="case-study-content">
-                            <h3>Empath.ly</h3>
-                            <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                            <a href="#case-study-3">View Case Study</a>
-                        </div>
-                    </div> -->
                 </div>
             </section>
 
@@ -385,5 +438,61 @@
                 }, 100);
             });
         </script>
+
+        <script src="transitions.js"></script>
+
+        <script>
+            // Direct implementation for transitions
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('Direct implementation initialized');
+                
+                // Get both case study links and image links
+                const viewCaseStudyLinks = document.querySelectorAll('.case-study-content a[href*="case-study"]');
+                const caseStudyImageLinks = document.querySelectorAll('a.case-study-img[href*="case-study"]');
+                const overlay = document.getElementById('manual-page-transition-overlay');
+                
+                if (!overlay) {
+                    console.error('Manual overlay element not found!');
+                    return;
+                }
+                
+                console.log('Found view case study links:', viewCaseStudyLinks.length);
+                console.log('Found case study image links:', caseStudyImageLinks.length);
+                
+                // Function to handle transition
+                function handleTransition(e) {
+                    console.log('Link clicked for transition');
+                    e.preventDefault();
+                    
+                    const targetUrl = this.getAttribute('href');
+                    console.log('Target URL:', targetUrl);
+                    
+                    // Store that we're transitioning in session storage
+                    sessionStorage.setItem('isDirectTransitioning', 'true');
+                    
+                    // Show overlay
+                    overlay.classList.add('active');
+                    
+                    // Navigate after animation
+                    setTimeout(function() {
+                        window.location.href = targetUrl;
+                    }, 500);
+                }
+                
+                // Apply event listener to text links
+                viewCaseStudyLinks.forEach(link => {
+                    link.addEventListener('click', handleTransition);
+                });
+                
+                // Apply event listener to image links
+                caseStudyImageLinks.forEach(link => {
+                    link.addEventListener('click', handleTransition);
+                });
+            });
+        </script>
+
+        <!-- Page transition overlay -->
+        <div id="manual-page-transition-overlay" class="manual-page-transition-overlay"></div>
+
     </body>
 </html>
