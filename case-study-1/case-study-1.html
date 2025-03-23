@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="../icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
-    <link rel="manifest" href="../icon/site.webmanifest">
-
-    <meta name="description" content="UX Case Studies by Manish Varrier - Explore my user research methodologies, design process, 
-    and solutions for real-world problems. See how I create intuitive digital experiences through research-driven design.">
-
+    <meta name="description" content="UX Case Studies by Manish Varrier - Explore my user research methodologies, design process, and solutions for real-world problems.">
     <title>Empath.ly - UX Case Study</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="1.png" as="image" fetchpriority="high">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
+    
+    <!-- Critical CSS inline (above the fold) -->
     <style>
         @import url('https://fonts.cdnfonts.com/css/lucida-sans-typewriter-std');
         
@@ -25,16 +27,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
         
-        /* Typewriter font class */
-        .lucida-typewriter {
-            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
-            font-weight: normal;
-        }
-
         body {
+            font-family: 'Inter', sans-serif;
             width: 100%;
             max-width: 1440px;
             margin: 0 auto;
@@ -48,65 +44,14 @@
             padding: 0 40px;
             max-width: 1200px;
             margin: 0 auto;
-            overflow-x: hidden;
             width: 100%;
         }
-
-        .pdf-left, .column-right .pdf-left {
-            background-color: transparent;
-            box-shadow: none;
-            padding: 0;
-        }
         
-        .pdf-left img, .column-right .pdf-left img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 0;
-            box-shadow: none;
-            background-color: transparent;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 0;
-            }
-            
-            .content-wrapper {
-                padding: 0 20px;
-            }
-            
-            /* Add these new styles */
-            .pdf-layout .pdf-left,
-            .two-column .column-right,
-            .two-column .column-left,
-            .pdf-layout .pdf-right {
-                width: 100%;
-                max-width: 100%;
-                padding-left: 0;
-                padding-right: 0;
-            }
-            
-            .highlight-box, .highlight-box2 {
-                padding: 25px 15px;
-            }
-            
-            .two-column, .pdf-layout {
-                padding: 0;
-            }
-        }
-
         /* Header section */
-        header {
-            margin-top: 70px;
-            margin-bottom: 40px;
-        }
-        
         nav {
             display: flex;
             justify-content: flex-end;
             padding: 30px 30px 10px 0;
-            background-color: transparent;
         }
 
         nav a {
@@ -118,28 +63,44 @@
             font-weight: normal;
         }
 
-        .case-study-header {
-            margin-bottom: 30px;
+        header {
+            margin-top: 70px;
+            margin-bottom: 40px;
         }
-
+        
         .case-study-title {
             font-size: 56px;
             line-height: 1.2;
             margin-bottom: 30px;
+            font-weight: normal;
+            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.8s forwards;
-            font-weight: normal;
         }
-
-        /* Case study content */
+        
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 40px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+        
+        .back-home i {
+            margin-right: 8px;
+        }
+        
+        /* Main content styles */
         .case-study-section {
             margin-bottom: 60px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.8s forwards 0.3s;
         }
-
+        
         .section-title {
             font-size: 16px;
             margin-bottom: 20px;
@@ -148,60 +109,76 @@
             text-decoration: underline;
             color: #333;
         }
-
-        .section-subtitle {
-            font-size: 22px;
-            margin-bottom: 15px;
-            font-weight: 500;
-            margin-top: 30px;
-        }
-
+        
         .case-study-content p {
             font-size: 16px;
             line-height: 1.8;
             margin-bottom: 20px;
         }
-
-        .image-container {
-            box-shadow: none;
-            background-color: transparent;
-            margin: 40px 0;
-        }
-
-        .image-container img {
+        
+        .section-divider {
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 60px;
             width: 100%;
-            height: auto;
-            border-radius: none;
-            box-shadow: none;
-        }
-
-        .insight-box {
-            background-color: transparent;
-            padding: 25px 30px;
-            border-left: 4px solid #000;
-            margin: 15px 0;
-        }
-
-        .insight-box h4 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .insight-box p {
-            margin-bottom: 0;
         }
         
-        /* PDF Layout Styles */
+        /* Animation for fade in */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 0 20px;
+            }
+            
+            .case-study-title {
+                font-size: 42px;
+            }
+            
+            nav a {
+                margin-left: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav {
+                justify-content: center;
+            }
+            
+            .case-study-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+    
+    <!-- Non-critical CSS (loaded asynchronously) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for browsers that don't support JS loading -->
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    
+    <!-- Additional styles loaded after initial render -->
+    <style>
+        /* Layout components */
         .pdf-layout {
             display: flex;
             gap: 40px;
             margin: 40px 0;
             align-items: center;
+            opacity: 0;
         }
 
         .pdf-layout .pdf-left {
-            flex: 0 0 45%; /* Fixed width ratio */
+            flex: 0 0 45%;
             width: 45%;
             max-width: 45%;
         }
@@ -221,7 +198,6 @@
         .pdf-left img {
             width: 100%;
             height: auto;
-            max-height: 350px;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -233,13 +209,12 @@
             padding: 80px;
             margin: 50px 0;
             text-align: center;
-            width: 100vw; /* This makes it viewport width */
-            margin-left: 50%;
-            transform: translateX(-50%);
+            width: 100%;
             box-sizing: border-box;
+            opacity: 0;
         }
 
-        .highlight-box h3{
+        .highlight-box h3 {
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 40px;
@@ -259,13 +234,12 @@
             padding: 80px;
             margin: 50px 0;
             text-align: center;
-            width: 100vw; /* This makes it viewport width */
-            margin-left: 50%;
-            transform: translateX(-50%);
+            width: 100%;
             box-sizing: border-box;
+            opacity: 0;
         }
 
-        .highlight-box2 h3{
+        .highlight-box2 h3 {
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 40px;
@@ -278,12 +252,33 @@
             margin: 0;
         }
         
+        .two-column {
+            display: flex;
+            gap: 60px;
+            margin: 40px 0;
+            align-items: center;
+            opacity: 0;
+        }
+
+        .two-column .column-left {
+            flex: 1;
+            padding-right: 20px;
+            max-width: 45%;
+        }
+
+        .two-column .column-right {
+            flex: 0 0 45%;
+            width: 45%;
+            max-width: 45%;
+        }
+        
         .research-grid {
             display: grid;
             grid-template-columns: 1fr 1.8fr;
             gap: 60px;
             margin-bottom: 40px;
             align-items: start;
+            opacity: 0;
         }
         
         .research-item {
@@ -296,105 +291,27 @@
             line-height: 1.4;
         }
         
-        .research-desc {
-            line-height: 1.6;
+        .insight-box {
+            background-color: transparent;
+            padding: 25px 30px;
+            border-left: 4px solid #000;
+            margin: 15px 0;
+            opacity: 0;
+        }
+
+        .insight-box h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
         
-        .insights-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            font-size: 14px;
-            color: #666;
-            margin-top: auto;
-        }
-
-        /* Back to home button */
-        .back-home {
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 40px;
-            text-decoration: none;
-            color: #000;
-            font-weight: 500;
-            transition: transform 0.3s;
-        }
-
-        .back-home:hover {
-            transform: translateX(-5px);
-        }
-
-        .back-home i {
-            margin-right: 8px;
-        }
-        
-        /* Two column layout */
-        .two-column {
-            display: flex;
-            gap: 60px;
-            margin: 40px 0;
-            align-items: center;
-        }
-
-        .two-column .column-left {
-            flex: 1;
-            padding-right: 20px;
-            max-width: 45%; /* Match the top left image width */
-        }
-
-        .two-column .column-right {
-            flex: 0 0 45%; /* Fixed width ratio */
-            width: 45%;
-            max-width: 45%;
-        }
-
-        /* Adjust content in the bottom portion */
-        .two-column .column-right .pdf-left {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        .column-right p {
-            margin-top: 0;
-        }
-
-        .section-divider {
-            border-bottom: 1px solid #e0e0e0; /* Light grey color */
-            margin-bottom: 60px;
-            width: 100%; /* Full width */
-        }
-
-        /* Ensure images fit properly */
-        .pdf-left img, 
-        .column-right .pdf-left img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        /* Fix for the highlight boxes */
-        .highlight-box, .highlight-box2 {
-            width: 100%; /* Change from 100vw */
-            margin-left: 0;
-            transform: none;
-            padding: 40px 20px; /* Reduced padding for mobile */
-        }
-
-        /* Make iframe responsive */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
+            opacity: 0;
         }
 
         .video-container iframe {
@@ -404,108 +321,15 @@
             width: 100%;
             height: 100%;
         }
-
-        /* Add this to your style section */
-        .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-                
-        /* Media queries for responsive layout */
-        @media (max-width: 768px) {
-            .pdf-layout, .two-column {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .pdf-left {
-                margin-bottom: 20px;
-            }
-            
-            .research-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+            color: #666;
+            margin-top: auto;
         }
         
-        /* Responsive styling */
-        @media (max-width: 768px) {
-            .case-study-title {
-                font-size: 42px;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .section-subtitle {
-                font-size: 20px;
-            }
-            
-            nav {
-                margin-right: 0;
-            }
-            
-            nav a {
-                margin-left: 30px;
-            }
-            
-            .overview-box {
-                flex-direction: column;
-            }
-            
-            .overview-text {
-                padding-right: 0;
-                margin-bottom: 20px;
-            }
-            
-            .research-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .two-column {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            nav {
-                justify-content: center;
-            }
-            
-            .case-study-title {
-                font-size: 32px;
-            }
-            
-            .section-title {
-                font-size: 22px;
-            }
-            
-            .highlight-box {
-                padding: 25px;
-            }
-            
-            .highlight-box p {
-                font-size: 18px;
-            }
-
-            .highlight-box2 {
-                padding: 25px;
-            }
-            
-            .highlight-box2 p {
-                font-size: 18px;
-            }
-        }
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .pdf-layout, .two-column {
@@ -519,8 +343,18 @@
                 width: 100%;
                 max-width: 100%;
             }
+            
+            .research-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .highlight-box, .highlight-box2 {
+                padding: 40px 20px;
+            }
         }
     </style>
+    
     <!-- Defer Google Analytics -->
     <script>
         window.addEventListener('load', function() {
@@ -533,7 +367,7 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-DQXH7NP5Z2');
-            }, 3000); // 3 second delay
+            }, 5000); // 5 second delay for GA to prioritize content loading
         });
     </script>
 </head>
@@ -551,7 +385,7 @@
         
         <!-- Case Study Header -->
         <header class="case-study-header">
-            <h1 class="case-study-title lucida-typewriter">UX Case Study - Empath.ly</h1>
+            <h1 class="case-study-title">UX Case Study - Empath.ly</h1>
         </header>
         
         <!-- Case Study Content -->
@@ -573,10 +407,9 @@
 
             <!-- Overview Section -->
             <section class="case-study-section">
-                
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="1.png" alt="Project overview image" width="400" height="350">
+                        <img src="1.png" alt="Project overview image" width="400" height="350" loading="eager">
                     </div>
                     <div class="pdf-right">
                         <h2 class="section-title">OVERVIEW</h2>
@@ -593,7 +426,6 @@
                 <h2 class="section-title">CONTEXT</h2>
                 <h3 class="pdf-subtitle">Remote work has created an emotional disconnect in how we communicate with each other through screens.</h3>
                 <p>COVID-19 changed how we communicate and work by making remote interactions normal. However, this shift created a major emotional gap - humans weren't designed to connect emotionally through screens. As video calls become standard, marketers and managers struggle with the missing emotional cues and engagement that come naturally in person. People with sensory challenges face even greater barriers. This situation calls for better tools to understand the feelings expressed during online meetings.</p>
-                
             </section>
 
             <div class="section-divider"></div>
@@ -657,7 +489,7 @@
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="2.png" alt="Design 1">
+                        <img src="2.png" alt="Design 1" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Designing for usability</h3>
@@ -672,14 +504,14 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="3.png" alt="Design 2">
+                            <img src="3.png" alt="Design 2" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="4.png" alt="Design 1">
+                        <img src="4.png" alt="Design 3" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Biggest Challenge: Effective Data Visualization</h3>
@@ -694,7 +526,7 @@
 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="5.png" alt="Design 1">
+                        <img src="5.png" alt="Design 4" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Respecting Users' Time Constraints</h3>
@@ -709,7 +541,7 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="6.png" alt="Design 2">
+                            <img src="6.png" alt="Design 5" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -731,12 +563,11 @@
                 <div class="video-container">
                     <iframe 
                         src="https://www.youtube.com/embed/Ln9x96JU-2A?si=8dZySXB7S9Ant1g5" 
-                        frameborder="0" 
+                        loading="lazy"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
                     </iframe>
                 </div>
-
             </section>
         </div>
     </div>
@@ -746,30 +577,35 @@
         <p>&copy; 2025 Manish. All rights reserved.</p>
     </footer>
 
+    <!-- Optimized intersection observer script -->
     <script>
-        // Intersection Observer for scroll animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Add initial styles to all elements we want to animate
-            document.querySelectorAll('.case-study-section, .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container, .research-grid, .research-item, .research-desc').forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(20px)';
-            });
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeUp 0.6s forwards';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-    
-            // Start observing with slight delay
-            setTimeout(() => {
-                document.querySelectorAll('.case-study-section, .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container, .research-grid, .research-item, .research-desc').forEach(element => {
+            // Use requestIdleCallback for non-critical initialization
+            (window.requestIdleCallback || window.setTimeout)(function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeUp 0.6s forwards';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+                // Observe elements in batches to avoid layout thrashing
+                const observeElements = [
+                    '.pdf-layout', '.two-column', '.insight-box', 
+                    '.highlight-box', '.highlight-box2', '.video-container', 
+                    '.research-grid'
+                ].flatMap(selector => 
+                    Array.from(document.querySelectorAll(selector))
+                );
+                
+                observeElements.forEach(element => {
+                    element.style.opacity = 0;
+                    element.style.transform = 'translateY(20px)';
                     observer.observe(element);
                 });
-            }, 100);
+            }, { timeout: 500 });
         });
     </script>
 </body>
