@@ -3,70 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Favicon preload -->
     <link rel="apple-touch-icon" sizes="180x180" href="../icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
     <link rel="manifest" href="../icon/site.webmanifest">
 
-    <meta name="description" content="About Manish Varrier - UX Designer bridging technical expertise with human-centered design. 
-    Learn about my background in computer science, experience at Correlate AS, and design philosophy.">
+    <meta name="description" content="About Manish Varrier - UX Designer bridging technical expertise with human-centered design. Learn about my background in computer science, experience at Correlate AS, and design philosophy.">
 
     <title>About Manish</title>
     
-    <!-- Inline critical CSS -->
+    <!-- Preload critical fonts -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Preload critical image -->
+    <link rel="preload" as="image" href="manish.webp">
+    
+    <!-- Critical CSS inlined -->
     <style>
-        /* Reset and base styles */
+        /* Base styles */
+        :root {
+            --primary-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono-font: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            --text-color: #000;
+            --text-secondary: #666;
+            --spacing-sm: 20px;
+            --spacing-md: 30px;
+            --spacing-lg: 50px;
+            --spacing-xl: 100px;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
-        /* Typewriter font class */
-        .lucida-typewriter {
-            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
-            font-weight: normal;
-        }
-
         body {
             width: 100%;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0;
+            font-family: var(--primary-font);
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
         
         .content-wrapper {
-            padding: 0 5% 0 5%;
+            padding: 0 5%;
             max-width: 100%;
         }
         
-        /* Header section */
-        header {
-            margin-top: 110px;
-            margin-bottom: 100px;
+        /* Typography */
+        .lucida-typewriter {
+            font-family: var(--mono-font);
+            font-weight: normal;
         }
         
+        h1, h2 {
+            font-weight: normal;
+        }
+        
+        /* Layout */
+        header {
+            margin-top: 110px;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        /* Navigation */
         nav {
             display: flex;
             justify-content: flex-end;
-            padding: 30px 30px 10px 0;
-            background-color: transparent;
+            padding: var(--spacing-md) var(--spacing-md) 10px 0;
         }
-
+        
         nav a {
             margin-left: 50px;
             text-decoration: none;
-            color: #000;
+            color: var(--text-color);
             font-size: 16px;
-            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
-            font-weight: normal;
+            font-family: var(--mono-font);
         }
-
+        
+        /* Header */
         .title {
             font-size: 56px;
             line-height: 1.2;
@@ -74,14 +103,9 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.8s forwards;
-            font-weight: normal;
         }
-
+        
         /* About section */
-        .about-section {
-            margin-bottom: 100px;
-        }
-
         .about-container {
             margin-top: -50px;
             display: flex;
@@ -92,7 +116,7 @@
             animation: fadeUp 0.8s forwards 0.3s;
             align-items: center;
         }
-
+        
         .profile-image {
             width: 400px;
             height: 500px;
@@ -100,44 +124,38 @@
             object-fit: cover;
             flex-shrink: 0;
         }
-
+        
         .about-content {
             max-width: 600px;
         }
-
-        .about-content p {
+        
+        .about-content p, 
+        .approach-content p {
             font-size: 16px;
             line-height: 1.8;
             margin-bottom: 20px;
         }
-
+        
         /* Recommendations section */
-        .recommendations-section {
-            margin-bottom: 100px;
-        }
-
-        .recommendations-section h2 {
+        .recommendations-section h2,
+        .approach-section h2,
+        .photography-section h2 {
             font-size: 42px;
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.5s;
-            font-weight: normal;
+            margin-bottom: var(--spacing-lg);
         }
-
+        
         .recommendations {
             display: flex;
             flex-direction: column;
             gap: 60px;
         }
-
+        
         .recommendation {
             display: flex;
             gap: 30px;
             opacity: 0;
-            transform: translateY(20px);
         }
-
+        
         .recommender-img {
             width: 80px;
             height: 80px;
@@ -145,102 +163,59 @@
             object-fit: cover;
             flex-shrink: 0;
         }
-
-        .recommendation-content {
-            display: flex;
-            flex-direction: column;
+        
+        .recommender-name {
+            font-weight: 600;
+            margin-bottom: 5px;
         }
-
+        
+        .recommender-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        
         .recommendation-text {
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: -5px;
             font-style: italic;
         }
-
-        .recommender-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .recommender-title {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        /* Photography section */
-        .photography-section {
-            margin-bottom: 100px;
-            width: 100%;
-        }
-
-        .photography-section h2 {
-            font-size: 42px;
-            margin-bottom: 50px;
+        
+        /* Approach section */
+        .approach-content {
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.7s;
-            font-weight: normal;
         }
-
+        
+        /* Photography section */
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.9s;
             width: 100%;
-            padding: 0;
         }
-
+        
         .photo-item {
             aspect-ratio: 1/1;
-            border-radius: 0px !important;
             overflow: hidden;
         }
-
+        
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: none !important;
-            transform: none !important;
         }
-
+        
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: var(--spacing-md) 0;
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
             margin-top: auto;
         }
-
-        /* My Approach section */
-        .approach-section {
-            margin-bottom: 100px;
-        }
-
-        .approach-section h2 {
-            font-size: 42px;
-            margin-bottom: 50px;
-            font-weight: normal;
-        }
-
-        .approach-content {
-            max-width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .approach-content p {
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
+        
         /* Animations */
         @keyframes fadeUp {
             to {
@@ -249,16 +224,11 @@
             }
         }
         
-        /* Basic responsive styling */
+        /* Responsive styles */
         @media (max-width: 992px) {
             .about-container {
                 flex-direction: column;
-                align-items: center;
                 text-align: center;
-            }
-
-            .about-content {
-                max-width: 100%;
             }
             
             .photo-grid {
@@ -267,26 +237,14 @@
         }
         
         @media (max-width: 768px) {
-            body {
-                padding: 0 20px;
-            }
-            
-            .content-wrapper {
-                padding: 0;
-            }
-            
             .title {
                 font-size: 42px;
             }
-
+            
             .recommendation {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
-            }
-            
-            nav {
-                margin-right: 0;
             }
             
             nav a {
@@ -302,47 +260,18 @@
             .title {
                 font-size: 32px;
             }
-
+            
             .photo-grid {
                 grid-template-columns: 1fr;
             }
         }
-        
-        /* Social media icons inline SVG */
-        .social-icon {
-            width: 16px;
-            height: 16px;
-            display: inline-block;
-            margin-right: 5px;
-        }
     </style>
     
-    <!-- Preload critical fonts -->
-    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
-    
-    <!-- Defer non-critical CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Deferred non-critical styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <!-- Add cache control headers -->
+    <!-- Cache control headers -->
     <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
-
-    <!-- Defer Google Analytics -->
-    <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                var script = document.createElement('script');
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2';
-                script.async = true;
-                document.head.appendChild(script);
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-DQXH7NP5Z2');
-            }, 3000); // 3 second delay
-        });
-    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -361,7 +290,6 @@
         <!-- About section -->
         <section class="about-section">
             <div class="about-container">
-                <!-- Optimized hero image with width and height attributes -->
                 <img 
                     src="manish.webp" 
                     alt="Manish" 
@@ -402,14 +330,15 @@
             <h2 class="lucida-typewriter">Recommendations</h2>
             
             <div class="recommendations">
-                <!-- Recommendation 1 with optimized image -->
+                <!-- Recommendation 1 -->
                 <div class="recommendation">
                     <img 
                         src="kushal.png" 
                         alt="Kushal Kaushik" 
                         class="recommender-img"
                         width="80"
-                        height="80">
+                        height="80"
+                        loading="lazy">
                     <div class="recommendation-content">
                         <p class="recommender-name">Kushal Kaushik</p>
                         <p class="recommender-title">Chief Executive Officer at Correlate AS</p>
@@ -417,14 +346,15 @@
                     </div>
                 </div>
 
-                <!-- Recommendation 2 with optimized image -->
+                <!-- Recommendation 2 -->
                 <div class="recommendation">
                     <img 
                         src="ole.png" 
                         alt="Ole Goethe" 
                         class="recommender-img"
                         width="80"
-                        height="80">
+                        height="80"
+                        loading="lazy">
                     <div class="recommendation-content">
                         <p class="recommender-name">Ole Goethe</p>
                         <p class="recommender-title">Chief Design Officer at Correlate AS</p>
@@ -434,19 +364,19 @@
             </div>
         </section>
 
-        <!-- Photography section with optimized images -->
+        <!-- Photography section -->
         <section class="photography-section">
             <h2 class="lucida-typewriter">Photography</h2>
             
             <div class="photo-grid">
-                <!-- Optimize all photos with width/height and loading="lazy" -->
                 <div class="photo-item">
                     <img 
                         src="8.webp" 
                         alt="Photography 1" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -454,7 +384,8 @@
                         alt="Photography 2" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -462,7 +393,8 @@
                         alt="Photography 3" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -470,7 +402,8 @@
                         alt="Photography 4" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -478,7 +411,8 @@
                         alt="Photography 5" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -486,7 +420,8 @@
                         alt="Photography 6" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -494,7 +429,8 @@
                         alt="Photography 7" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -502,7 +438,8 @@
                         alt="Photography 8" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
                 <div class="photo-item">
                     <img 
@@ -510,7 +447,8 @@
                         alt="Photography 9" 
                         loading="lazy"
                         width="400"
-                        height="400">
+                        height="400"
+                        decoding="async">
                 </div>
             </div>
         </section>
@@ -521,10 +459,13 @@
         </footer>
     </div>
 
-    <!-- Intersection Observer for scroll animations - moved to end of body -->
+    <!-- Optimized Intersection Observer script -->
     <script>
-        // Intersection Observer for scroll animations
-        document.addEventListener('DOMContentLoaded', function() {
+        // Use requestIdleCallback for non-critical script execution
+        const runOnIdle = window.requestIdleCallback || 
+            function(cb) {setTimeout(() => cb({timeRemaining: () => 50}), 1);};
+            
+        runOnIdle(() => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -534,34 +475,28 @@
                 });
             }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
 
-            // Observe recommendations and photo grid
-            document.querySelectorAll('.recommendation').forEach(recommendation => {
-                observer.observe(recommendation);
-            });
-
-            document.querySelectorAll('.photo-grid').forEach(grid => {
-                observer.observe(grid);
-            });
-
-            document.querySelectorAll('.approach-section h2, .approach-content').forEach(item => {
-                observer.observe(item);
-            });
-
-            document.addEventListener('DOMContentLoaded', function() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.animation = 'fadeUp 0.6s forwards';
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
-
-                // Observe recommendations and photo grid
-                document.querySelectorAll('.recommendation, .photo-grid, .approach-container').forEach(item => {
-                    observer.observe(item);
-                });
-            });
+            // Group all selections for a single DOM traversal
+            const elements = [
+                ...document.querySelectorAll('.recommendation'),
+                ...document.querySelectorAll('.photo-grid'),
+                ...document.querySelectorAll('.approach-content')
+            ];
+            
+            elements.forEach(el => observer.observe(el));
+        });
+        
+        // Deferred analytics loading
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const script = document.createElement('script');
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2';
+                script.async = true;
+                document.head.appendChild(script);
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-DQXH7NP5Z2');
+            }, 3000);
         });
     </script>
 </body>
