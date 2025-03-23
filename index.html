@@ -4,15 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Favicon - Preload critical icons -->
+    <link rel="preload" href="icon/favicon-32x32.png" as="image" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
     <link rel="manifest" href="icon/site.webmanifest">
 
-    <meta name="description" content="Manish Varrier | UX Designer & Researcher combining technical expertise with 
-    human-centered design. Portfolio showcasing user research, digital product design, and engineering-informed UX solutions.">
+    <meta name="description" content="Manish Varrier | UX Designer & Researcher combining technical expertise with human-centered design. Portfolio showcasing user research, digital product design, and engineering-informed UX solutions.">
 
     <title>Manish - UX Designer & Researcher</title>
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Preload critical fonts with font-display:swap -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Preload hero images -->
+    <link rel="preload" as="image" href="zenodo.png">
     
     <!-- Inline critical CSS -->
     <style>
@@ -112,12 +124,12 @@
 
         .disabled-link {
             display: inline-block;
-            color: #888; /* Lighter color to indicate disabled state */
+            color: #888;
             text-decoration: none;
             cursor: not-allowed;
-            opacity: 0.7; /* Slightly faded appearance */
-            pointer-events: none; /* Prevents clicks */
-            font-weight: 500; /* Match the weight of the active link */
+            opacity: 0.7;
+            pointer-events: none;
+            font-weight: 500;
         }
 
         /* Work section */
@@ -151,6 +163,8 @@
             height: 300px;
             background-color: #ddd;
             flex-shrink: 0;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
         
         .case-study-img img {
@@ -158,6 +172,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 15px;
+            transition: transform 0.6s ease;
         }
 
         .case-study-content {
@@ -184,20 +199,6 @@
             text-decoration: underline;
             font-size: 16px;
             font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Add this to your CSS in index.html */
-
-        /* Link hover effect */
-        .case-study-content a {
             position: relative;
             transition: all 0.3s ease;
             padding-right: 25px;
@@ -221,16 +222,6 @@
             transform: translateX(0);
         }
 
-        /* Add a subtle background effect to the case study image on hover */
-        .case-study-img {
-            overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .case-study-img img {
-            transition: transform 0.6s ease;
-        }
-
         .case-study:hover .case-study-img {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -238,6 +229,14 @@
 
         .case-study:hover .case-study-img img {
             transform: scale(1.03);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+            color: #666;
         }
 
         .manual-page-transition-overlay {
@@ -318,31 +317,166 @@
             }
         }
         
-        /* Font awesome minimal icons used in the page */
-        .fa-linkedin-in:before { content: "\f0e1"; }
-        .fa-envelope:before { content: "\f0e0"; }
-        .fa-instagram:before { content: "\f16d"; }
+        /* Minimal Font Awesome icons */
+        .fab, .far {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+        }
+        .fab.fa-linkedin-in:before { content: "\f0e1"; }
+        .far.fa-envelope:before { content: "\f0e0"; }
+        .fab.fa-instagram:before { content: "\f16d"; }
     </style>
     
-    <!-- Preload critical fonts -->
-    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
-    
-    <!-- Preload hero image -->
-    <link rel="preload" as="image" href="case_study1.webp">
-    
-    <!-- Defer non-critical CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Load non-critical CSS with low priority -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    
-    <!-- Minimal Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
     
     <!-- Add cache control headers -->
     <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
     
-    <!-- Defer Google Analytics -->
+    <!-- Inline critical Font Awesome icons instead of loading the entire library -->
+    <style>
+        @font-face {
+            font-family: 'FontAwesome';
+            font-display: swap;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .fab {
+            font-family: 'FontAwesome';
+        }
+        @font-face {
+            font-family: 'FontAwesomeRegular';
+            font-display: swap;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-regular-400.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .far {
+            font-family: 'FontAwesomeRegular';
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about_me/about.html">About</a>
+        <a href="resume.html">Resume</a>
+    </nav>
+    
+    <div class="content-wrapper">
+        <!-- Header section -->
+        <header id="home">
+            <h1 class="title lucida-typewriter">Hi</h1>
+            <h1 class="title lucida-typewriter">I'm Manish</h1>
+            <p class="subtitle">I am a UX Designer with the unique ability to translate business requirements into elegant solutions that developers love to build.</p>
+            
+            <!-- Social links -->
+            <div class="social-links">
+                <a href="https://linkedin.com/in/manish-varrier" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:manishvarrier@gmail.com" title="Email"><i class="far fa-envelope"></i></a>
+                <a href="https://instagram.com/_manishr_" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </header>
+
+        <!-- Work section -->
+        <section class="work-section">
+            <h2 class="lucida-typewriter">I've worked on</h2>
+            
+            <div class="case-studies">
+                <!-- Case study 1 - First visible case study with optimized loading -->
+                <div class="case-study">
+                    <a class="case-study-img">
+                        <img src="zenodo.png" alt="Zenodo" width="500" height="300">
+                    </a>
+                    <div class="case-study-content">
+                        <h3>Zenodo</h3>
+                        <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
+                        <a class="disabled-link" aria-disabled="true">Coming Soon</a>
+                    </div>
+                </div>
+
+                <!-- Case study 2 - With optimized loading -->
+                <div class="case-study">
+                    <a href="case-study-1/case-study-1.html" class="case-study-img">
+                        <img src="empathly.png" alt="Empath.ly" width="500" height="300" loading="lazy" decoding="async">
+                    </a>
+                    <div class="case-study-content">
+                        <h3>Empath.ly</h3>
+                        <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
+                        <a href="case-study-1/case-study-1.html">View Case Study</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Manish. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Page transition overlay -->
+    <div id="manual-page-transition-overlay" class="manual-page-transition-overlay"></div>
+
+    <!-- Optimized and consolidated JS - no additional file loading -->
     <script>
+        // Intersection Observer for scroll animations - inline and optimized
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup page transition
+            const viewCaseStudyLinks = document.querySelectorAll('.case-study-content a[href*="case-study"]');
+            const caseStudyImageLinks = document.querySelectorAll('a.case-study-img[href*="case-study"]');
+            const overlay = document.getElementById('manual-page-transition-overlay');
+            
+            // Function to handle transition
+            function handleTransition(e) {
+                e.preventDefault();
+                const targetUrl = this.getAttribute('href');
+                sessionStorage.setItem('isDirectTransitioning', 'true');
+                overlay.classList.add('active');
+                setTimeout(function() {
+                    window.location.href = targetUrl;
+                }, 500);
+            }
+            
+            // Apply transition event listeners
+            viewCaseStudyLinks.forEach(link => link.addEventListener('click', handleTransition));
+            caseStudyImageLinks.forEach(link => link.addEventListener('click', handleTransition));
+            
+            // Intersection Observer for animations - delayed for initial render priority
+            setTimeout(function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeUp 0.6s forwards';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+
+                document.querySelectorAll('.case-study').forEach(caseStudy => {
+                    observer.observe(caseStudy);
+                });
+            }, 100);
+            
+            // Check if we're coming from another page
+            if (sessionStorage.getItem('isDirectTransitioning') === 'true') {
+                sessionStorage.removeItem('isDirectTransitioning');
+                overlay.style.transform = 'translateY(0)';
+                overlay.style.opacity = '1';
+                
+                setTimeout(function() {
+                    overlay.style.transform = 'translateY(-100%)';
+                    overlay.style.opacity = '0';
+                }, 100);
+            }
+        });
+        
+        // Deferred analytics - only load after everything else
         window.addEventListener('load', function() {
             setTimeout(function() {
                 var script = document.createElement('script');
@@ -353,146 +487,8 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-DQXH7NP5Z2');
-            }, 3000); // 3 second delay
+            }, 3000);
         });
     </script>
-</head>
-    <body>
-        <!-- Navigation -->
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about_me/about.html">About</a>
-            <a href="resume.html">Resume</a>
-        </nav>
-        
-        <div class="content-wrapper">
-            <!-- Header section -->
-            <header id="home">
-                <h1 class="title lucida-typewriter">Hi</h1>
-                <h1 class="title lucida-typewriter">I'm Manish</h1>
-                <p class="subtitle">I am a UX Designer with the unique ability to translate business requirements into elegant solutions that developers love to build.</p>
-                
-                <!-- Social links -->
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/manish-varrier" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:manishvarrier@gmail.com" title="Email"><i class="far fa-envelope"></i></a>
-                    <a href="https://instagram.com/_manishr_" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </header>
-
-            <!-- Work section -->
-            <section class="work-section">
-                <h2 class="lucida-typewriter">I've worked on</h2>
-                
-                <div class="case-studies">
-                    <!-- Case study 1 - First visible case study should NOT be lazily loaded -->
-                    <div class="case-study">
-                        <a class="case-study-img">
-                            <img src="zenodo.png" alt="Zenodo">
-                        </a>
-                        <div class="case-study-content">
-                            <h3>Zenodo</h3>
-                            <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
-                            <a class="disabled-link" aria-disabled="true">Coming Soon</a>
-                        </div>
-                    </div>
-
-                    <!-- Case study 2 - Below the fold, can be lazily loaded -->
-                    <div class="case-study">
-                        <a href="case-study-1/case-study-1.html" class="case-study-img">
-                            <img src="empathly.png" alt="Second Project" loading="lazy">
-                        </a>
-                        <div class="case-study-content">
-                            <h3>Empath.ly</h3>
-                            <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                            <a href="case-study-1/case-study-1.html">View Case Study</a>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer>
-                <p>&copy; 2025 Manish. All rights reserved.</p>
-            </footer>
-        </div>
-
-        <script>
-            // Intersection Observer for scroll animations - defer execution
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.style.animation = 'fadeUp 0.6s forwards';
-                                observer.unobserve(entry.target);
-                            }
-                        });
-                    }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
-
-                    // Observe all case studies
-                    document.querySelectorAll('.case-study').forEach(caseStudy => {
-                        observer.observe(caseStudy);
-                    });
-                }, 100);
-            });
-        </script>
-
-        <script src="transitions.js"></script>
-
-        <script>
-            // Direct implementation for transitions
-            document.addEventListener('DOMContentLoaded', function() {
-                console.log('Direct implementation initialized');
-                
-                // Get both case study links and image links
-                const viewCaseStudyLinks = document.querySelectorAll('.case-study-content a[href*="case-study"]');
-                const caseStudyImageLinks = document.querySelectorAll('a.case-study-img[href*="case-study"]');
-                const overlay = document.getElementById('manual-page-transition-overlay');
-                
-                if (!overlay) {
-                    console.error('Manual overlay element not found!');
-                    return;
-                }
-                
-                console.log('Found view case study links:', viewCaseStudyLinks.length);
-                console.log('Found case study image links:', caseStudyImageLinks.length);
-                
-                // Function to handle transition
-                function handleTransition(e) {
-                    console.log('Link clicked for transition');
-                    e.preventDefault();
-                    
-                    const targetUrl = this.getAttribute('href');
-                    console.log('Target URL:', targetUrl);
-                    
-                    // Store that we're transitioning in session storage
-                    sessionStorage.setItem('isDirectTransitioning', 'true');
-                    
-                    // Show overlay
-                    overlay.classList.add('active');
-                    
-                    // Navigate after animation
-                    setTimeout(function() {
-                        window.location.href = targetUrl;
-                    }, 500);
-                }
-                
-                // Apply event listener to text links
-                viewCaseStudyLinks.forEach(link => {
-                    link.addEventListener('click', handleTransition);
-                });
-                
-                // Apply event listener to image links
-                caseStudyImageLinks.forEach(link => {
-                    link.addEventListener('click', handleTransition);
-                });
-            });
-        </script>
-
-        <!-- Page transition overlay -->
-        <div id="manual-page-transition-overlay" class="manual-page-transition-overlay"></div>
-
-    </body>
+</body>
 </html>
