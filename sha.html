@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Hash Generator</title>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Password Hash Generator</h1>
+    <p>This tool generates a SHA-256 hash of your password that you can use in your website code.</p>
+    
+    <div class="container">
+        <label for="password">Enter your password:</label>
+        <input type="password" id="password" placeholder="Type your password here">
+        <button id="generate">Generate Hash</button>
+        
+        <div class="result" id="result">
+            Your hash will appear here
+        </div>
+        
+        <div class="note">
+            <p><strong>Important:</strong> This tool runs entirely in your browser. Your password is never sent to any server.</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to convert a string to SHA-256 hash
+        async function sha256(message) {
+            // Encode the string as UTF-8
+            const msgBuffer = new TextEncoder().encode(message);
+            
+            // Hash the message using SubtleCrypto
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            
+            // Convert the hash to a hex string
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            
+            return hashHex;
+        }
+
+        // Handle button click
+        document.getElementById('generate').addEventListener('click', async function() {
+            const password = document.getElementById('password').value;
+            
+            if (!password) {
+                document.getElementById('result').textContent = 'Please enter a password first';
+                return;
+            }
+            
+            const hash = await sha256(password);
+            document.getElementById('result').textContent = hash;
+        });
+
+        // Also handle Enter key
+        document.getElementById('password').addEventListener('keydown', async function(e) {
+            if (e.key === 'Enter') {
+                const password = document.getElementById('password').value;
+                
+                if (!password) {
+                    document.getElementById('result').textContent = 'Please enter a password first';
+                    return;
+                }
+                
+                const hash = await sha256(password);
+                document.getElementById('result').textContent = hash;
+            }
+        });
+    </script>
+</body>
+</html>

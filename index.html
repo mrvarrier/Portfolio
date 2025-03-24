@@ -248,9 +248,10 @@
             position: relative;
             transition: all 0.3s ease;
             padding-right: 25px;
+            display: inline-block;
         }
 
-        .case-study-content a::after {
+        .case-study-content a.with-arrow::after {
             content: "→";
             position: absolute;
             right: 0;
@@ -259,11 +260,11 @@
             transition: all 0.3s ease;
         }
 
-        .case-study-content a:hover {
+        .case-study-content a.with-arrow:hover {
             padding-right: 30px;
         }
 
-        .case-study-content a:hover::after {
+        .case-study-content a.with-arrow:hover::after {
             opacity: 1;
             transform: translateX(0);
         }
@@ -323,31 +324,6 @@
             transform: translateY(0);
         }
         
-        /* Mouse follower dot - subtle interactive element */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease, transform 0.1s ease;
-        }
-        
-        .cursor-dot.active {
-            opacity: 1;
-        }
-        
-        .cursor-dot.hover {
-            transform: translate(-50%, -50%) scale(2);
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Removed glitch effect */
-
         /* Enhanced Animations */
         @keyframes revealFromBottom {
             0% {
@@ -439,11 +415,6 @@
             nav a {
                 margin-left: 30px;
             }
-            
-            /* Disable mouse cursor effect on mobile */
-            .cursor-dot {
-                display: none;
-            }
         }
         
         @media (max-width: 576px) {
@@ -471,6 +442,187 @@
         .fab.fa-linkedin-in:before { content: "\f0e1"; }
         .far.fa-envelope:before { content: "\f0e0"; }
         .fab.fa-instagram:before { content: "\f16d"; }
+        
+        /* Password protection styles */
+        .lock-icon {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            color: #000;
+            text-decoration: underline;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding-right: 25px;
+        }
+
+        .lock-icon::after {
+            content: "🔒";
+            position: absolute;
+            right: 0;
+            opacity: 1;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-field {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            max-width: 300px;
+            background-color: #fff;
+            z-index: 5;
+        }
+
+        .password-field.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .password-field input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .password-field input:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+        }
+
+        .password-field button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: -40px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .password-field button:hover {
+            transform: translateX(3px);
+        }
+
+        .arrow-icon {
+            font-size: 20px;
+            color: #000;
+        }
+
+        .password-trigger {
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .password-trigger.hide {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+
+        /* Error feedback animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .password-field.error input {
+            border-color: #ff3860;
+            animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        /* Success animation */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .password-field.success input {
+            border-color: #48c774;
+            animation: successPulse 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Password toggle visibility button */
+        .password-toggle {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            z-index: 10;
+            transition: none !important;
+            padding: 0;
+            margin: 0;
+        }
+
+        .password-toggle:hover,
+        .password-toggle:active,
+        .password-toggle:focus {
+            transform: translateY(-50%) !important;
+            right: 40px !important;
+            outline: none;
+            transition: none !important;
+        }
+
+        /* Eye icons */
+        .eye-icon, .eye-slash-icon {
+            width: 20px;
+            height: 20px;
+            stroke: #666;
+            stroke-width: 2;
+            fill: none;
+            transition: none !important;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .password-toggle:hover .eye-icon,
+        .password-toggle:hover .eye-slash-icon {
+            transform: translate(-50%, -50%) !important;
+        }
+
+        /* Cursor styles */
+        .interactive {
+            cursor: pointer;
+        }
+
+        /* Password field container */
+        #zenodo-img {
+            cursor: pointer;
+        }
     </style>
     
     <!-- Load non-critical CSS with low priority -->
@@ -504,9 +656,8 @@
     </style>
 </head>
 <body>
-    <!-- Cursor dot for interactive element -->
     <!-- Navigation -->
-    <nav>
+    <nav id="main-nav">
         <a href="index.html">Home</a>
         <a href="about_me/about.html">About</a>
         <a href="resume.html">Resume</a>
@@ -532,15 +683,33 @@
             <h2 class="lucida-typewriter">I've worked on</h2>
             
             <div class="case-studies">
-                <!-- Case study 1 - First visible case study with optimized loading -->
+                <!-- Case study 1 - Zenodo with password protection -->
                 <div class="case-study">
-                    <a class="case-study-img">
+                    <a class="case-study-img" id="zenodo-img">
                         <img src="zenodo.webp" alt="Zenodo" width="500" height="300">
                     </a>
                     <div class="case-study-content">
                         <h3>Zenodo</h3>
                         <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
-                        <a class="disabled-link" aria-disabled="true">Coming Soon</a>
+                        <div class="password-container">
+                            <a id="password-trigger" class="interactive lock-icon">View Case Study</a>
+                            <div class="password-field">
+                                <input type="password" id="zenodo-password" placeholder="Enter password" autocomplete="off">
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <svg class="eye-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <svg class="eye-slash-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                                    </svg>
+                                </button>
+                                <button id="submit-password" aria-label="Submit password">
+                                    <span class="arrow-icon">→</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -552,7 +721,7 @@
                     <div class="case-study-content">
                         <h3>Empath.ly</h3>
                         <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                        <a href="case-study-1/case-study-1.html" class="interactive">View Case Study</a>
+                        <a href="case-study-1/case-study-1.html" class="interactive with-arrow">View Case Study</a>
                     </div>
                 </div>
             </div>
@@ -574,9 +743,7 @@
             const viewCaseStudyLinks = document.querySelectorAll('.case-study-content a[href*="case-study"]');
             const caseStudyImageLinks = document.querySelectorAll('a.case-study-img[href*="case-study"]');
             const overlay = document.getElementById('manual-page-transition-overlay');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const cursorDot = document.querySelector('.cursor-dot');
-            const interactive = document.querySelectorAll('.interactive');
+            const navLinks = document.querySelectorAll('nav a');
             
             // Function to handle transition with smoother animation
             function handleTransition(e) {
@@ -640,55 +807,6 @@
                 caseObserver.observe(caseStudy);
             });
             
-            // Create parallax effect for case study images
-            const parallaxElements = document.querySelectorAll('.parallax');
-            let mouseX = 0;
-            let mouseY = 0;
-            
-            document.addEventListener('mousemove', function(e) {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                
-                // Update cursor dot position
-                if (window.innerWidth > 768) {
-                    cursorDot.style.left = mouseX + 'px';
-                    cursorDot.style.top = mouseY + 'px';
-                    
-                    if (!cursorDot.classList.contains('active')) {
-                        setTimeout(() => {
-                            cursorDot.classList.add('active');
-                        }, 100);
-                    }
-                }
-                
-                // Apply parallax effect to elements
-                parallaxElements.forEach(element => {
-                    const speed = element.getAttribute('data-speed') || 0.03;
-                    const rect = element.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    
-                    const distanceX = mouseX - centerX;
-                    const distanceY = mouseY - centerY;
-                    
-                    // Only apply if element is in viewport
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        element.style.transform = `translate(${distanceX * speed * -1}px, ${distanceY * speed * -1}px)`;
-                    }
-                });
-            });
-            
-            // Enhanced interactive element handling
-            interactive.forEach(element => {
-                element.addEventListener('mouseenter', function() {
-                    cursorDot.classList.add('hover');
-                });
-                
-                element.addEventListener('mouseleave', function() {
-                    cursorDot.classList.remove('hover');
-                });
-            });
-            
             // Check if we're coming from another page for smooth transition back
             if (sessionStorage.getItem('isDirectTransitioning') === 'true') {
                 sessionStorage.removeItem('isDirectTransitioning');
@@ -716,6 +834,129 @@
             }
             
             preloadImages();
+            
+            // Password protection for Zenodo case study
+            const passwordTrigger = document.getElementById('password-trigger');
+            const passwordField = document.querySelector('.password-field');
+            const zenodoPassword = document.getElementById('zenodo-password');
+            const submitPassword = document.getElementById('submit-password');
+            const zenodoImg = document.getElementById('zenodo-img');
+            const passwordToggle = document.querySelector('.password-toggle');
+            const eyeIcon = document.querySelector('.eye-icon');
+            const eyeSlashIcon = document.querySelector('.eye-slash-icon');
+
+            // Store the SHA-256 hash of the password instead of the plaintext
+            // Replace this with your actual password hash generated using the tool
+            const PASSWORD_HASH = "852af2050a0b2e0cdc61a6b624d1b20fb0a895d6704cc70a08533c166483f2a5"; // Hash for "test"
+
+            // Function to convert a string to SHA-256 hash
+            async function sha256(message) {
+                // Encode the string as UTF-8
+                const msgBuffer = new TextEncoder().encode(message);
+                
+                // Hash the message using SubtleCrypto
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                
+                // Convert the hash to a hex string
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                
+                return hashHex;
+            }
+
+            // Function to handle password verification
+            async function verifyPassword() {
+                const enteredPassword = zenodoPassword.value;
+                
+                // Don't process empty passwords
+                if (!enteredPassword.trim()) {
+                    passwordField.classList.add('error');
+                    zenodoPassword.placeholder = 'Please enter a password';
+                    
+                    setTimeout(() => {
+                        passwordField.classList.remove('error');
+                        zenodoPassword.placeholder = 'Enter password';
+                    }, 1000);
+                    return;
+                }
+                
+                // Hash the entered password
+                const enteredHash = await sha256(enteredPassword);
+                
+                if (enteredHash === PASSWORD_HASH) {
+                    // Success state
+                    passwordField.classList.add('success');
+                    
+                    // Show success message and redirect (using sessionStorage for one-time access)
+                    setTimeout(() => {
+                        // Create a one-time token that will be verified and immediately removed
+                        sessionStorage.setItem('zenodoOneTimeAccess', Date.now().toString());
+                        
+                        // Redirect to zenodo case study
+                        const overlay = document.getElementById('manual-page-transition-overlay');
+                        overlay.classList.add('active');
+                        setTimeout(() => {
+                            window.location.href = 'zenodo/zenodo.html';
+                        }, 600);
+                    }, 800);
+                } else {
+                    // Error state
+                    passwordField.classList.add('error');
+                    zenodoPassword.value = '';
+                    zenodoPassword.placeholder = 'Incorrect password';
+                    
+                    // Remove error class after animation completes
+                    setTimeout(() => {
+                        passwordField.classList.remove('error');
+                        zenodoPassword.placeholder = 'Enter password';
+                    }, 1000);
+                }
+            }
+
+            // Toggle password field when clicking the link
+            passwordTrigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                passwordTrigger.classList.add('hide');
+                passwordField.classList.add('active');
+                zenodoPassword.focus();
+            });
+
+            // Handle submission
+            submitPassword.addEventListener('click', verifyPassword);
+            zenodoPassword.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    verifyPassword();
+                }
+            });
+
+            // Also make the image clickable to open password field
+            zenodoImg.addEventListener('click', function(e) {
+                e.preventDefault();
+                passwordTrigger.classList.add('hide');
+                passwordField.classList.add('active');
+                zenodoPassword.focus();
+            });
+            
+            // Toggle password visibility
+            passwordToggle.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent any default behavior
+                
+                if (zenodoPassword.type === 'password') {
+                    zenodoPassword.type = 'text';
+                    eyeIcon.style.display = 'none';
+                    eyeSlashIcon.style.display = 'block';
+                } else {
+                    zenodoPassword.type = 'password';
+                    eyeIcon.style.display = 'block';
+                    eyeSlashIcon.style.display = 'none';
+                }
+                
+                // Refocus on password field to maintain focus
+                setTimeout(() => zenodoPassword.focus(), 0);
+            });
+            
+            // Clear any existing tokens on page load to ensure fresh verification
+            sessionStorage.removeItem('zenodoOneTimeAccess');
             
             // Deferred analytics - only load after everything else
             window.addEventListener('load', function() {
