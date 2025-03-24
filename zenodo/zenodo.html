@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="../icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
-    <link rel="manifest" href="../icon/site.webmanifest">
-
-    <meta name="description" content="UX Case Studies by Manish Varrier - Explore my user research methodologies, design process, 
-    and solutions for real-world problems. See how I create intuitive digital experiences through research-driven design.">
-
-    <title>Zenodo Intergration - UX Case Study</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="description" content="UX Case Studies by Manish Varrier - Explore my user research methodologies, design process, and solutions for real-world problems.">
+    <title>Empath.ly - UX Case Study</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="1.png" as="image" fetchpriority="high">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
+    
+    <!-- Critical CSS inline (above the fold) -->
     <style>
         @import url('https://fonts.cdnfonts.com/css/lucida-sans-typewriter-std');
         
@@ -25,16 +27,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
         
-        /* Typewriter font class */
-        .lucida-typewriter {
-            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
-            font-weight: normal;
-        }
-
         body {
+            font-family: 'Inter', sans-serif;
             width: 100%;
             max-width: 1440px;
             margin: 0 auto;
@@ -42,71 +38,21 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
         
         .content-wrapper {
             padding: 0 40px;
             max-width: 1200px;
             margin: 0 auto;
-            overflow-x: hidden;
             width: 100%;
         }
-
-        .pdf-left, .column-right .pdf-left {
-            background-color: transparent;
-            box-shadow: none;
-            padding: 0;
-        }
         
-        .pdf-left img, .column-right .pdf-left img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 0;
-            box-shadow: none;
-            background-color: transparent;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 0;
-            }
-            
-            .content-wrapper {
-                padding: 0 20px;
-            }
-            
-            /* Add these new styles */
-            .pdf-layout .pdf-left,
-            .two-column .column-right,
-            .two-column .column-left,
-            .pdf-layout .pdf-right {
-                width: 100%;
-                max-width: 100%;
-                padding-left: 0;
-                padding-right: 0;
-            }
-            
-            .highlight-box, .highlight-box2 {
-                padding: 25px 15px;
-            }
-            
-            .two-column, .pdf-layout {
-                padding: 0;
-            }
-        }
-
         /* Header section */
-        header {
-            margin-top: 70px;
-            margin-bottom: 40px;
-        }
-        
         nav {
             display: flex;
             justify-content: flex-end;
-            padding: 30px 30px 10px 0;
-            background-color: transparent;
+            padding: 30px 90px 10px 0;
         }
 
         nav a {
@@ -116,30 +62,81 @@
             font-size: 16px;
             font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
             font-weight: normal;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -3px;
+            left: 0;
+            background-color: #000;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s ease;
+        }
+        
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
 
-        .case-study-header {
-            margin-bottom: 30px;
+        header {
+            margin-top: 70px;
+            margin-bottom: 40px;
         }
-
+        
         .case-study-title {
             font-size: 56px;
             line-height: 1.2;
             margin-bottom: 30px;
+            font-weight: normal;
+            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.8s forwards;
-            font-weight: normal;
+        }
+        
+        /* Back to home link animation - Apple-inspired */
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 40px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1); /* Apple-like easing */
+            padding-left: 0;
         }
 
-        /* Case study content */
+        .back-home i {
+            margin-right: 8px;
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); /* Apple-like easing */
+        }
+
+        .back-home:hover {
+            padding-left: 5px; /* Slight shift to indicate backward movement */
+        }
+
+        .back-home:hover i {
+            transform: translateX(-4px); /* Arrow moves left on hover */
+        }
+
+        /* Add subtle scale effect for tap/click feedback */
+        .back-home:active {
+            transform: scale(0.98);
+        }
+        
+        /* Main content styles */
         .case-study-section {
             margin-bottom: 60px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.8s forwards 0.3s;
         }
-
+        
         .section-title {
             font-size: 16px;
             margin-bottom: 20px;
@@ -148,60 +145,76 @@
             text-decoration: underline;
             color: #333;
         }
-
-        .section-subtitle {
-            font-size: 22px;
-            margin-bottom: 15px;
-            font-weight: 500;
-            margin-top: 30px;
-        }
-
+        
         .case-study-content p {
             font-size: 16px;
             line-height: 1.8;
             margin-bottom: 20px;
         }
-
-        .image-container {
-            box-shadow: none;
-            background-color: transparent;
-            margin: 40px 0;
-        }
-
-        .image-container img {
+        
+        .section-divider {
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 60px;
             width: 100%;
-            height: auto;
-            border-radius: none;
-            box-shadow: none;
-        }
-
-        .insight-box {
-            background-color: transparent;
-            padding: 25px 30px;
-            border-left: 4px solid #000;
-            margin: 15px 0;
-        }
-
-        .insight-box h4 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .insight-box p {
-            margin-bottom: 0;
         }
         
-        /* PDF Layout Styles */
+        /* Animation for fade in */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 0 20px;
+            }
+            
+            .case-study-title {
+                font-size: 42px;
+            }
+            
+            nav a {
+                margin-left: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav {
+                justify-content: center;
+            }
+            
+            .case-study-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+    
+    <!-- Non-critical CSS (loaded asynchronously) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for browsers that don't support JS loading -->
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    
+    <!-- Additional styles loaded after initial render -->
+    <style>
+        /* Layout components */
         .pdf-layout {
             display: flex;
             gap: 40px;
             margin: 40px 0;
             align-items: center;
+            opacity: 0;
         }
 
         .pdf-layout .pdf-left {
-            flex: 0 0 45%; /* Fixed width ratio */
+            flex: 0 0 45%;
             width: 45%;
             max-width: 45%;
         }
@@ -221,73 +234,119 @@
         .pdf-left img {
             width: 100%;
             height: auto;
-            max-height: 350px;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
+        /* MODIFIED: Full-width highlight boxes */
         .highlight-box {
             background-color: #3C3C3C;
             color: #F5F5F5;
-            padding: 80px;
+            padding: 80px 0;
             margin: 50px 0;
             text-align: center;
-            width: 100vw; /* This makes it viewport width */
-            margin-left: 50%;
-            transform: translateX(-50%);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
             box-sizing: border-box;
+            opacity: 0;
         }
 
-        .highlight-box h3{
+        .highlight-box h3 {
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 40px;
             letter-spacing: 1px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 40px;
         }
 
         .highlight-box p {
             font-size: 18px;
             line-height: 1.4;
             font-style: italic;
-            margin: 0;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0 40px;
         }
 
+        /* MODIFIED: Full-width highlight box 2 */
         .highlight-box2 {
             background-color: #E6E7E6;
             color: #353635;
-            padding: 80px;
+            padding: 80px 0;
             margin: 50px 0;
             text-align: center;
-            width: 100vw; /* This makes it viewport width */
-            margin-left: 50%;
-            transform: translateX(-50%);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
             box-sizing: border-box;
+            opacity: 0;
         }
 
-        .highlight-box2 h3{
+        .highlight-box2 h3 {
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 40px;
         }
 
         .highlight-box2 p {
             font-size: 18px;
             line-height: 1.4;
             font-style: italic;
-            margin: 0;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0 40px;
         }
         
+        .two-column {
+            display: flex;
+            gap: 60px;
+            margin: 40px 0;
+            align-items: center;
+            opacity: 0;
+        }
+
+        .two-column .column-left {
+            flex: 1;
+            padding-right: 20px;
+            max-width: 45%;
+        }
+
+        .two-column .column-right {
+            flex: 0 0 45%;
+            width: 45%;
+            max-width: 45%;
+        }
+        
+        /* MODIFIED: Updated research grid to accommodate fade-in animation for each row */
         .research-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .research-row {
             display: grid;
             grid-template-columns: 1fr 1.8fr;
             gap: 60px;
-            margin-bottom: 40px;
-            align-items: start;
-        }
-        
-        .research-item {
-            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            width: 100%;
         }
         
         .research-item h3 {
@@ -296,105 +355,27 @@
             line-height: 1.4;
         }
         
-        .research-desc {
-            line-height: 1.6;
+        .insight-box {
+            background-color: transparent;
+            padding: 25px 30px;
+            border-left: 4px solid #000;
+            margin: 15px 0;
+            opacity: 0;
+        }
+
+        .insight-box h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
         
-        .insights-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            font-size: 14px;
-            color: #666;
-            margin-top: auto;
-        }
-
-        /* Back to home button */
-        .back-home {
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 40px;
-            text-decoration: none;
-            color: #000;
-            font-weight: 500;
-            transition: transform 0.3s;
-        }
-
-        .back-home:hover {
-            transform: translateX(-5px);
-        }
-
-        .back-home i {
-            margin-right: 8px;
-        }
-        
-        /* Two column layout */
-        .two-column {
-            display: flex;
-            gap: 60px;
-            margin: 40px 0;
-            align-items: center;
-        }
-
-        .two-column .column-left {
-            flex: 1;
-            padding-right: 20px;
-            max-width: 45%; /* Match the top left image width */
-        }
-
-        .two-column .column-right {
-            flex: 0 0 45%; /* Fixed width ratio */
-            width: 45%;
-            max-width: 45%;
-        }
-
-        /* Adjust content in the bottom portion */
-        .two-column .column-right .pdf-left {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        .column-right p {
-            margin-top: 0;
-        }
-
-        .section-divider {
-            border-bottom: 1px solid #e0e0e0; /* Light grey color */
-            margin-bottom: 60px;
-            width: 100%; /* Full width */
-        }
-
-        /* Ensure images fit properly */
-        .pdf-left img, 
-        .column-right .pdf-left img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        /* Fix for the highlight boxes */
-        .highlight-box, .highlight-box2 {
-            width: 100%; /* Change from 100vw */
-            margin-left: 0;
-            transform: none;
-            padding: 40px 20px; /* Reduced padding for mobile */
-        }
-
-        /* Make iframe responsive */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
+            opacity: 0;
         }
 
         .video-container iframe {
@@ -404,108 +385,23 @@
             width: 100%;
             height: 100%;
         }
-
-        /* Add this to your style section */
-        .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container {
+        
+        /* Added: Result paragraph and context elements fade-in animation */
+        .result-paragraph,
+        .context-subtitle,
+        .context-paragraph {
             opacity: 0;
             transform: translateY(20px);
         }
-                
-        /* Media queries for responsive layout */
-        @media (max-width: 768px) {
-            .pdf-layout, .two-column {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .pdf-left {
-                margin-bottom: 20px;
-            }
-            
-            .research-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+            color: #666;
+            margin-top: auto;
         }
         
-        /* Responsive styling */
-        @media (max-width: 768px) {
-            .case-study-title {
-                font-size: 42px;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .section-subtitle {
-                font-size: 20px;
-            }
-            
-            nav {
-                margin-right: 0;
-            }
-            
-            nav a {
-                margin-left: 30px;
-            }
-            
-            .overview-box {
-                flex-direction: column;
-            }
-            
-            .overview-text {
-                padding-right: 0;
-                margin-bottom: 20px;
-            }
-            
-            .research-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .two-column {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            nav {
-                justify-content: center;
-            }
-            
-            .case-study-title {
-                font-size: 32px;
-            }
-            
-            .section-title {
-                font-size: 22px;
-            }
-            
-            .highlight-box {
-                padding: 25px;
-            }
-            
-            .highlight-box p {
-                font-size: 18px;
-            }
-
-            .highlight-box2 {
-                padding: 25px;
-            }
-            
-            .highlight-box2 p {
-                font-size: 18px;
-            }
-        }
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .pdf-layout, .two-column {
@@ -519,8 +415,25 @@
                 width: 100%;
                 max-width: 100%;
             }
+            
+            .research-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .highlight-box h3, .highlight-box p,
+            .highlight-box2 h3, .highlight-box2 p {
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .highlight-box, .highlight-box2 {
+                padding: 40px 0;
+            }
         }
     </style>
+    
     <!-- Defer Google Analytics -->
     <script>
         window.addEventListener('load', function() {
@@ -533,7 +446,7 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-DQXH7NP5Z2');
-            }, 3000); // 3 second delay
+            }, 5000); // 5 second delay for GA to prioritize content loading
         });
     </script>
 </head>
@@ -551,7 +464,7 @@
         
         <!-- Case Study Header -->
         <header class="case-study-header">
-            <h1 class="case-study-title lucida-typewriter">UX Case Study - Zenodo Integration for Correlate</h1>
+            <h1 class="case-study-title">UX Case Study - Zenodo Integration for Correlate</h1>
         </header>
         
         <!-- Case Study Content -->
@@ -570,10 +483,9 @@
 
             <!-- Overview Section -->
             <section class="case-study-section">
-                
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="1.png" alt="Project overview image" width="400" height="350">
+                        <img src="1.png" alt="Project overview image" width="400" height="350" loading="eager">
                     </div>
                     <div class="pdf-right">
                         <h2 class="section-title">OVERVIEW</h2>
@@ -588,37 +500,42 @@
             <!-- Context Section -->
             <section class="case-study-section">
                 <h2 class="section-title">CONTEXT</h2>
-                <h3 class="pdf-subtitle">EU-funded research projects require long-term archiving solutions for sustainability and compliance.</h3>
-                <p>Correlate serves as a collaboration platform for several EU Horizon 2020 projects, with a commitment to deliver data archiving functionality by April 2024. While Correlate excels at facilitating real-time collaboration, the platform doesn't inherently support long-term data preservation—a critical requirement for EU-funded research. EU project partners must store their research outputs in approved open-source repositories like Zenodo at the end of their projects to ensure public accessibility and compliance with open science principles. This integration represents both a contractual obligation and a strategic opportunity for Correlate to provide added value for academic and research users.</p>
-                
+                <h3 class="pdf-subtitle context-subtitle">EU-funded research projects require long-term archiving solutions for sustainability and compliance.</h3>
+                <p class="context-paragraph">Correlate serves as a collaboration platform for several EU Horizon 2020 projects, with a commitment to deliver data archiving functionality by April 2024. While Correlate excels at facilitating real-time collaboration, the platform doesn't inherently support long-term data preservation—a critical requirement for EU-funded research. EU project partners must store their research outputs in approved open-source repositories like Zenodo at the end of their projects to ensure public accessibility and compliance with open science principles. This integration represents both a contractual obligation and a strategic opportunity for Correlate to provide added value for academic and research users.</p>
             </section>
 
             <div class="section-divider"></div>
             
-            <!-- Research Section -->
+            <!-- Research Section - MODIFIED to have individual row animations -->
             <section class="case-study-section">
                 <h2 class="section-title">RESEARCH</h2>
                 
                 <div class="research-grid">
-                    <div class="research-item">
-                        <h3>Technical exploration of Zenodo API capabilities</h3>
-                    </div>
-                    <div class="research-desc">
-                        <p>Before diving into user requirements, I worked with our development team to thoroughly explore the Zenodo API documentation and understand its technical capabilities and limitations. We needed to establish what was technically possible before defining our integration approach. This research determined key metadata requirements, authentication processes, and file handling constraints that would influence our design decisions.</p>
-                    </div>
-                    
-                    <div class="research-item">
-                        <h3>User interviews with EU project stakeholders</h3>
-                    </div>
-                    <div class="research-desc">
-                        <p>I conducted interviews with Work Package Leaders and Task Leaders from our two key EU project partners to understand their specific archiving needs, current workflows, and expectations for the integration. These conversations were crucial in identifying that many researchers were unfamiliar with archiving processes and would need clear guidance through the metadata creation steps.</p>
+                    <div class="research-row">
+                        <div class="research-item">
+                            <h3>Technical exploration of Zenodo API capabilities</h3>
+                        </div>
+                        <div class="research-desc">
+                            <p>Before diving into user requirements, I worked with our development team to thoroughly explore the Zenodo API documentation and understand its technical capabilities and limitations. We needed to establish what was technically possible before defining our integration approach. This research determined key metadata requirements, authentication processes, and file handling constraints that would influence our design decisions.</p>
+                        </div>
                     </div>
                     
-                    <div class="research-item">
-                        <h3>Competitive analysis of existing archiving solutions</h3>
+                    <div class="research-row">
+                        <div class="research-item">
+                            <h3>User interviews with EU project stakeholders</h3>
+                        </div>
+                        <div class="research-desc">
+                            <p>I conducted interviews with Work Package Leaders and Task Leaders from our two key EU project partners to understand their specific archiving needs, current workflows, and expectations for the integration. These conversations were crucial in identifying that many researchers were unfamiliar with archiving processes and would need clear guidance through the metadata creation steps.</p>
+                        </div>
                     </div>
-                    <div class="research-desc">
-                        <p>I examined how other platforms approach archiving workflows and integrations with repositories. This revealed that most solutions either required users to navigate away from their primary platform or provided overly complex interfaces with too many options, creating confusion and abandonment of the archiving process.</p>
+                    
+                    <div class="research-row">
+                        <div class="research-item">
+                            <h3>Competitive analysis of existing archiving solutions</h3>
+                        </div>
+                        <div class="research-desc">
+                            <p>I examined how other platforms approach archiving workflows and integrations with repositories. This revealed that most solutions either required users to navigate away from their primary platform or provided overly complex interfaces with too many options, creating confusion and abandonment of the archiving process.</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -654,7 +571,7 @@
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="2.png" alt="Design 1">
+                        <img src="2.png" alt="Design 1" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Two Competing Approaches to Archiving</h3>
@@ -669,14 +586,14 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="3.png" alt="Design 2">
+                            <img src="3.png" alt="Design 2" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="4.png" alt="Design 1">
+                        <img src="4.png" alt="Design 3" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Metadata Collection: Finding the Balance</h3>
@@ -691,7 +608,7 @@
 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="5.png" alt="Design 1">
+                        <img src="5.png" alt="Design 4" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Streamlined User Flow</h3>
@@ -706,26 +623,23 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="6.png" alt="Design 2">
+                            <img src="6.png" alt="Design 5" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
+            </section>
             
             <div class="section-divider"></div>
 
-            <!-- Results and Future Work Section -->
+            <!-- Results and Future Work Section - MODIFIED to have individual paragraph animations -->
             <section class="case-study-section">
                 <h2 class="section-title">RESULTS AND FUTURE WORK</h2>
-                <p>Our project earned significant recognition, winning first place overall and the "Best Life Hack" award at HackHarvard. Additionally, Empath.ly was selected as one of the top 80 startups among more than 1,500 competitors in India, validating our innovative approach to solving remote communication challenges.</p>
+                <p class="result-paragraph">Our project earned significant recognition, winning first place overall and the "Best Life Hack" award at HackHarvard. Additionally, Empath.ly was selected as one of the top 80 startups among more than 1,500 competitors in India, validating our innovative approach to solving remote communication challenges.</p>
             
-                <p>This intensive hackathon experience greatly advanced my skills as a UX designer. I gained valuable expertise in data visualization techniques and deepened my understanding of how different user contexts impact design decisions. Working under the extreme time constraint of 36 hours taught me how to prioritize effectively and deliver high-quality work under pressure.</p>    
+                <p class="result-paragraph">This intensive hackathon experience greatly advanced my skills as a UX designer. I gained valuable expertise in data visualization techniques and deepened my understanding of how different user contexts impact design decisions. Working under the extreme time constraint of 36 hours taught me how to prioritize effectively and deliver high-quality work under pressure.</p>    
                 
-                <p>Our key insight for future development is that creating a standalone application isn't optimal. Users already have established workflows with platforms like Zoom and Google Meet. Rather than asking them to adopt an entirely new tool, our next step is to develop Empath.ly as a plugin for existing platforms, starting with Zoom. This approach will allow us to deliver our emotional analytics capabilities within the tools users already rely on daily.</p>
-                
-                <div class="section-divider" style="margin-top: 60px;"></div>
-
-                <h2 class="section-title">Presentation of the project</h2>
-
+                <p class="result-paragraph">Our key insight for future development is that creating a standalone application isn't optimal. Users already have established workflows with platforms like Zoom and Google Meet. Rather than asking them to adopt an entirely new tool, our next step is to develop Empath.ly as a plugin for existing platforms, starting with Zoom. This approach will allow us to deliver our emotional analytics capabilities within the tools users already rely on daily.</p>
+            
             </section>
         </div>
     </div>
@@ -735,30 +649,35 @@
         <p>&copy; 2025 Manish. All rights reserved.</p>
     </footer>
 
+    <!-- Optimized intersection observer script - MODIFIED to observe research rows and result paragraphs -->
     <script>
-        // Intersection Observer for scroll animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Add initial styles to all elements we want to animate
-            document.querySelectorAll('.case-study-section, .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container, .research-grid, .research-item, .research-desc').forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(20px)';
-            });
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeUp 0.6s forwards';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-    
-            // Start observing with slight delay
-            setTimeout(() => {
-                document.querySelectorAll('.case-study-section, .pdf-layout, .two-column, .insight-box, .highlight-box, .highlight-box2, .video-container, .research-grid, .research-item, .research-desc').forEach(element => {
+            // Use requestIdleCallback for non-critical initialization
+            (window.requestIdleCallback || window.setTimeout)(function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeUp 0.6s forwards';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+                // Observe elements in batches to avoid layout thrashing
+                const observeElements = [
+                    '.pdf-layout', '.two-column', '.insight-box', 
+                    '.highlight-box', '.highlight-box2', '.video-container', 
+                    '.research-row', '.result-paragraph', '.context-subtitle', '.context-paragraph'  // Added context elements
+                ].flatMap(selector => 
+                    Array.from(document.querySelectorAll(selector))
+                );
+                
+                observeElements.forEach(element => {
+                    element.style.opacity = 0;
+                    element.style.transform = 'translateY(20px)';
                     observer.observe(element);
                 });
-            }, 100);
+            }, { timeout: 500 });
         });
     </script>
 </body>
