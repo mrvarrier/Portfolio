@@ -62,6 +62,25 @@
             font-size: 16px;
             font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
             font-weight: normal;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -3px;
+            left: 0;
+            background-color: #000;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s ease;
+        }
+        
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
 
         header {
@@ -80,6 +99,7 @@
             animation: fadeUp 0.8s forwards;
         }
         
+        /* Back to home link animation - Apple-inspired */
         .back-home {
             display: inline-flex;
             align-items: center;
@@ -87,11 +107,26 @@
             text-decoration: none;
             color: #000;
             font-weight: 500;
-            transition: transform 0.3s;
+            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1); /* Apple-like easing */
+            padding-left: 0;
         }
-        
+
         .back-home i {
             margin-right: 8px;
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); /* Apple-like easing */
+        }
+
+        .back-home:hover {
+            padding-left: 5px; /* Slight shift to indicate backward movement */
+        }
+
+        .back-home:hover i {
+            transform: translateX(-4px); /* Arrow moves left on hover */
+        }
+
+        /* Add subtle scale effect for tap/click feedback */
+        .back-home:active {
+            transform: scale(0.98);
         }
         
         /* Main content styles */
@@ -297,17 +332,21 @@
             max-width: 45%;
         }
         
+        /* MODIFIED: Updated research grid to accommodate fade-in animation for each row */
         .research-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .research-row {
             display: grid;
             grid-template-columns: 1fr 1.8fr;
             gap: 60px;
-            margin-bottom: 40px;
-            align-items: start;
             opacity: 0;
-        }
-        
-        .research-item {
-            margin-bottom: 40px;
+            transform: translateY(20px);
+            width: 100%;
         }
         
         .research-item h3 {
@@ -347,6 +386,14 @@
             height: 100%;
         }
         
+        /* Added: Result paragraph and context elements fade-in animation */
+        .result-paragraph,
+        .context-subtitle,
+        .context-paragraph {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
         footer {
             text-align: center;
             padding: 30px 0;
@@ -369,9 +416,9 @@
                 max-width: 100%;
             }
             
-            .research-grid {
+            .research-row {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 20px;
             }
             
             .highlight-box h3, .highlight-box p,
@@ -456,36 +503,42 @@
             <!-- Context Section -->
             <section class="case-study-section">
                 <h2 class="section-title">CONTEXT</h2>
-                <h3 class="pdf-subtitle">Remote work has created an emotional disconnect in how we communicate with each other through screens.</h3>
-                <p>COVID-19 changed how we communicate and work by making remote interactions normal. However, this shift created a major emotional gap - humans weren't designed to connect emotionally through screens. As video calls become standard, marketers and managers struggle with the missing emotional cues and engagement that come naturally in person. People with sensory challenges face even greater barriers. This situation calls for better tools to understand the feelings expressed during online meetings.</p>
+                <h3 class="pdf-subtitle context-subtitle">Remote work has created an emotional disconnect in how we communicate with each other through screens.</h3>
+                <p class="context-paragraph">COVID-19 changed how we communicate and work by making remote interactions normal. However, this shift created a major emotional gap - humans weren't designed to connect emotionally through screens. As video calls become standard, marketers and managers struggle with the missing emotional cues and engagement that come naturally in person. People with sensory challenges face even greater barriers. This situation calls for better tools to understand the feelings expressed during online meetings.</p>
             </section>
 
             <div class="section-divider"></div>
             
-            <!-- Research Section -->
+            <!-- Research Section - MODIFIED to have individual row animations -->
             <section class="case-study-section">
                 <h2 class="section-title">RESEARCH</h2>
                 
                 <div class="research-grid">
-                    <div class="research-item">
-                        <h3>Conducted desk research</h3>
-                    </div>
-                    <div class="research-desc">
-                        <p>Our business analyst and I researched to understand both the problem and the market better. We investigated why people prefer remote jobs and why certain video platforms succeed while others fail. This helped us identify opportunities for our solution.</p>
-                    </div>
-                    
-                    <div class="research-item">
-                        <h3>Talked with users of popular video calling platforms</h3>
-                    </div>
-                    <div class="research-desc">
-                        <p>I spoke with people who regularly use Google Meet and Zoom to understand their experiences. Since these platforms are already widely used, we wanted to build something that wouldn't force users to change their habits. These conversations during the hackathon gave us valuable insights into user expectations.</p>
+                    <div class="research-row">
+                        <div class="research-item">
+                            <h3>Conducted desk research</h3>
+                        </div>
+                        <div class="research-desc">
+                            <p>Our business analyst and I researched to understand both the problem and the market better. We investigated why people prefer remote jobs and why certain video platforms succeed while others fail. This helped us identify opportunities for our solution.</p>
+                        </div>
                     </div>
                     
-                    <div class="research-item">
-                        <h3>Interviewed potential users across different roles</h3>
+                    <div class="research-row">
+                        <div class="research-item">
+                            <h3>Talked with users of popular video calling platforms</h3>
+                        </div>
+                        <div class="research-desc">
+                            <p>I spoke with people who regularly use Google Meet and Zoom to understand their experiences. Since these platforms are already widely used, we wanted to build something that wouldn't force users to change their habits. These conversations during the hackathon gave us valuable insights into user expectations.</p>
+                        </div>
                     </div>
-                    <div class="research-desc">
-                        <p>I interviewed people with various job titles from different companies to pinpoint exactly who would benefit most from our solution. These conversations helped us define our target audience more clearly.</p>
+                    
+                    <div class="research-row">
+                        <div class="research-item">
+                            <h3>Interviewed potential users across different roles</h3>
+                        </div>
+                        <div class="research-desc">
+                            <p>I interviewed people with various job titles from different companies to pinpoint exactly who would benefit most from our solution. These conversations helped us define our target audience more clearly.</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -577,17 +630,18 @@
                         </div>
                     </div>
                 </div>
+            </section>
             
             <div class="section-divider"></div>
 
-            <!-- Results and Future Work Section -->
+            <!-- Results and Future Work Section - MODIFIED to have individual paragraph animations -->
             <section class="case-study-section">
                 <h2 class="section-title">RESULTS AND FUTURE WORK</h2>
-                <p>Our project earned significant recognition, winning first place overall and the "Best Life Hack" award at HackHarvard. Additionally, Empath.ly was selected as one of the top 80 startups among more than 1,500 competitors in India, validating our innovative approach to solving remote communication challenges.</p>
+                <p class="result-paragraph">Our project earned significant recognition, winning first place overall and the "Best Life Hack" award at HackHarvard. Additionally, Empath.ly was selected as one of the top 80 startups among more than 1,500 competitors in India, validating our innovative approach to solving remote communication challenges.</p>
             
-                <p>This intensive hackathon experience greatly advanced my skills as a UX designer. I gained valuable expertise in data visualization techniques and deepened my understanding of how different user contexts impact design decisions. Working under the extreme time constraint of 36 hours taught me how to prioritize effectively and deliver high-quality work under pressure.</p>    
+                <p class="result-paragraph">This intensive hackathon experience greatly advanced my skills as a UX designer. I gained valuable expertise in data visualization techniques and deepened my understanding of how different user contexts impact design decisions. Working under the extreme time constraint of 36 hours taught me how to prioritize effectively and deliver high-quality work under pressure.</p>    
                 
-                <p>Our key insight for future development is that creating a standalone application isn't optimal. Users already have established workflows with platforms like Zoom and Google Meet. Rather than asking them to adopt an entirely new tool, our next step is to develop Empath.ly as a plugin for existing platforms, starting with Zoom. This approach will allow us to deliver our emotional analytics capabilities within the tools users already rely on daily.</p>
+                <p class="result-paragraph">Our key insight for future development is that creating a standalone application isn't optimal. Users already have established workflows with platforms like Zoom and Google Meet. Rather than asking them to adopt an entirely new tool, our next step is to develop Empath.ly as a plugin for existing platforms, starting with Zoom. This approach will allow us to deliver our emotional analytics capabilities within the tools users already rely on daily.</p>
                 
                 <div class="section-divider" style="margin-top: 60px;"></div>
 
@@ -609,7 +663,7 @@
         <p>&copy; 2025 Manish. All rights reserved.</p>
     </footer>
 
-    <!-- Optimized intersection observer script -->
+    <!-- Optimized intersection observer script - MODIFIED to observe research rows and result paragraphs -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Use requestIdleCallback for non-critical initialization
@@ -627,7 +681,7 @@
                 const observeElements = [
                     '.pdf-layout', '.two-column', '.insight-box', 
                     '.highlight-box', '.highlight-box2', '.video-container', 
-                    '.research-grid'
+                    '.research-row', '.result-paragraph', '.context-subtitle', '.context-paragraph'  // Added context elements
                 ].flatMap(selector => 
                     Array.from(document.querySelectorAll(selector))
                 );
