@@ -1,0 +1,394 @@
+@import url('https://fonts.cdnfonts.com/css/lucida-sans-typewriter-std');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.content-wrapper {
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Header section */
+nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px 90px 10px 0;
+}
+
+nav a {
+    margin-left: 50px;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
+    font-weight: normal;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -3px;
+    left: 0;
+    background-color: #000;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.4s ease;
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+header {
+    margin-top: 70px;
+    margin-bottom: 40px;
+}
+
+.case-study-title {
+    font-size: 56px;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    font-weight: normal;
+    font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+}
+
+/* Back to home link animation - Apple-inspired */
+.back-home {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 40px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    padding-left: 0;
+}
+
+.back-home i {
+    margin-right: 8px;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.back-home:hover {
+    padding-left: 5px;
+}
+
+.back-home:hover i {
+    transform: translateX(-4px);
+}
+
+.back-home:active {
+    transform: scale(0.98);
+}
+
+/* Main content styles */
+.case-study-section {
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards 0.3s;
+}
+
+.section-title {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: #333;
+}
+
+.case-study-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.section-divider {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+/* Layout components */
+.pdf-layout {
+    display: flex;
+    gap: 40px;
+    margin: 40px 0;
+    align-items: center;
+    opacity: 0;
+}
+
+.pdf-layout .pdf-left {
+    flex: 0 0 45%;
+    width: 45%;
+    max-width: 45%;
+}
+
+.pdf-layout .pdf-right {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.pdf-subtitle {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.pdf-left img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Full-width highlight boxes */
+.highlight-box {
+    background-color: #3C3C3C;
+    color: #F5F5F5;
+    padding: 80px 0;
+    margin: 50px 0;
+    text-align: center;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    opacity: 0;
+}
+
+.highlight-box h3 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+}
+
+.highlight-box p {
+    font-size: 18px;
+    line-height: 1.4;
+    font-style: italic;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+/* Full-width highlight box 2 */
+.highlight-box2 {
+    background-color: #E6E7E6;
+    color: #353635;
+    padding: 80px 0;
+    margin: 50px 0;
+    text-align: center;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    opacity: 0;
+}
+
+.highlight-box2 h3 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+}
+
+.highlight-box2 p {
+    font-size: 18px;
+    line-height: 1.4;
+    font-style: italic;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+.two-column {
+    display: flex;
+    gap: 60px;
+    margin: 40px 0;
+    align-items: center;
+    opacity: 0;
+}
+
+.two-column .column-left {
+    flex: 1;
+    padding-right: 20px;
+    max-width: 45%;
+}
+
+.two-column .column-right {
+    flex: 0 0 45%;
+    width: 45%;
+    max-width: 45%;
+}
+
+/* Research grid */
+.research-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.research-row {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    width: 100%;
+}
+
+.research-item h3 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.insight-box {
+    background-color: transparent;
+    padding: 25px 30px;
+    border-left: 4px solid #000;
+    margin: 15px 0;
+    opacity: 0;
+}
+
+.insight-box h4 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    opacity: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Result paragraph and context elements fade-in animation */
+.result-paragraph,
+.context-subtitle,
+.context-paragraph {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+footer {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 14px;
+    color: #666;
+    margin-top: auto;
+}
+
+/* Animation for fade in */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 0 20px;
+    }
+    
+    .case-study-title {
+        font-size: 42px;
+    }
+    
+    nav a {
+        margin-left: 30px;
+    }
+    
+    .pdf-layout, .two-column {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .pdf-layout .pdf-left,
+    .two-column .column-right,
+    .two-column .column-left {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .research-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .highlight-box h3, .highlight-box p,
+    .highlight-box2 h3, .highlight-box2 p {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    nav {
+        justify-content: center;
+    }
+    
+    .case-study-title {
+        font-size: 32px;
+    }
+    
+    .highlight-box, .highlight-box2 {
+        padding: 40px 0;
+    }
+}

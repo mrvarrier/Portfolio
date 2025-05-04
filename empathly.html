@@ -7,8 +7,7 @@
     <title>Empath.ly - UX Case Study</title>
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="1.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="images/empathly/1.webp" as="image" fetchpriority="high">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -17,422 +16,16 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
-    
-    <!-- Critical CSS inline (above the fold) -->
-    <style>
-        @import url('https://fonts.cdnfonts.com/css/lucida-sans-typewriter-std');
-        
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            width: 100%;
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-        }
-        
-        .content-wrapper {
-            padding: 0 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        /* Header section */
-        nav {
-            display: flex;
-            justify-content: flex-end;
-            padding: 30px 90px 10px 0;
-        }
 
-        nav a {
-            margin-left: 50px;
-            text-decoration: none;
-            color: #000;
-            font-size: 16px;
-            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
-            font-weight: normal;
-            position: relative;
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            bottom: -3px;
-            left: 0;
-            background-color: #000;
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.4s ease;
-        }
-        
-        nav a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        header {
-            margin-top: 70px;
-            margin-bottom: 40px;
-        }
-        
-        .case-study-title {
-            font-size: 56px;
-            line-height: 1.2;
-            margin-bottom: 30px;
-            font-weight: normal;
-            font-family: 'Lucida Sans Typewriter Std', 'Lucida Sans Typewriter', 'Courier New', monospace;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards;
-        }
-        
-        /* Back to home link animation - Apple-inspired */
-        .back-home {
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 40px;
-            text-decoration: none;
-            color: #000;
-            font-weight: 500;
-            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1); /* Apple-like easing */
-            padding-left: 0;
-        }
-
-        .back-home i {
-            margin-right: 8px;
-            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); /* Apple-like easing */
-        }
-
-        .back-home:hover {
-            padding-left: 5px; /* Slight shift to indicate backward movement */
-        }
-
-        .back-home:hover i {
-            transform: translateX(-4px); /* Arrow moves left on hover */
-        }
-
-        /* Add subtle scale effect for tap/click feedback */
-        .back-home:active {
-            transform: scale(0.98);
-        }
-        
-        /* Main content styles */
-        .case-study-section {
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.3s;
-        }
-        
-        .section-title {
-            font-size: 16px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-            text-decoration: underline;
-            color: #333;
-        }
-        
-        .case-study-content p {
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        .section-divider {
-            border-bottom: 1px solid #e0e0e0;
-            margin-bottom: 60px;
-            width: 100%;
-        }
-        
-        /* Animation for fade in */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .content-wrapper {
-                padding: 0 20px;
-            }
-            
-            .case-study-title {
-                font-size: 42px;
-            }
-            
-            nav a {
-                margin-left: 30px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            nav {
-                justify-content: center;
-            }
-            
-            .case-study-title {
-                font-size: 32px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/empathly.css">
     
     <!-- Non-critical CSS (loaded asynchronously) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <!-- Fallback for browsers that don't support JS loading -->
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     </noscript>
-    
-    <!-- Additional styles loaded after initial render -->
-    <style>
-        /* Layout components */
-        .pdf-layout {
-            display: flex;
-            gap: 40px;
-            margin: 40px 0;
-            align-items: center;
-            opacity: 0;
-        }
-
-        .pdf-layout .pdf-left {
-            flex: 0 0 45%;
-            width: 45%;
-            max-width: 45%;
-        }
-
-        .pdf-layout .pdf-right {
-            flex: 1;
-            padding-left: 20px;
-        }
-        
-        .pdf-subtitle {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        
-        .pdf-left img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        /* MODIFIED: Full-width highlight boxes */
-        .highlight-box {
-            background-color: #3C3C3C;
-            color: #F5F5F5;
-            padding: 80px 0;
-            margin: 50px 0;
-            text-align: center;
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            box-sizing: border-box;
-            opacity: 0;
-        }
-
-        .highlight-box h3 {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 40px;
-            letter-spacing: 1px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 40px;
-        }
-
-        .highlight-box p {
-            font-size: 18px;
-            line-height: 1.4;
-            font-style: italic;
-            margin: 0 auto;
-            max-width: 1200px;
-            padding: 0 40px;
-        }
-
-        /* MODIFIED: Full-width highlight box 2 */
-        .highlight-box2 {
-            background-color: #E6E7E6;
-            color: #353635;
-            padding: 80px 0;
-            margin: 50px 0;
-            text-align: center;
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            box-sizing: border-box;
-            opacity: 0;
-        }
-
-        .highlight-box2 h3 {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 40px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 40px;
-        }
-
-        .highlight-box2 p {
-            font-size: 18px;
-            line-height: 1.4;
-            font-style: italic;
-            margin: 0 auto;
-            max-width: 1200px;
-            padding: 0 40px;
-        }
-        
-        .two-column {
-            display: flex;
-            gap: 60px;
-            margin: 40px 0;
-            align-items: center;
-            opacity: 0;
-        }
-
-        .two-column .column-left {
-            flex: 1;
-            padding-right: 20px;
-            max-width: 45%;
-        }
-
-        .two-column .column-right {
-            flex: 0 0 45%;
-            width: 45%;
-            max-width: 45%;
-        }
-        
-        /* MODIFIED: Updated research grid to accommodate fade-in animation for each row */
-        .research-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-        
-        .research-row {
-            display: grid;
-            grid-template-columns: 1fr 1.8fr;
-            gap: 60px;
-            opacity: 0;
-            transform: translateY(20px);
-            width: 100%;
-        }
-        
-        .research-item h3 {
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 1.4;
-        }
-        
-        .insight-box {
-            background-color: transparent;
-            padding: 25px 30px;
-            border-left: 4px solid #000;
-            margin: 15px 0;
-            opacity: 0;
-        }
-
-        .insight-box h4 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            opacity: 0;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Added: Result paragraph and context elements fade-in animation */
-        .result-paragraph,
-        .context-subtitle,
-        .context-paragraph {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            font-size: 14px;
-            color: #666;
-            margin-top: auto;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .pdf-layout, .two-column {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .pdf-layout .pdf-left,
-            .two-column .column-right,
-            .two-column .column-left {
-                width: 100%;
-                max-width: 100%;
-            }
-            
-            .research-row {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .highlight-box h3, .highlight-box p,
-            .highlight-box2 h3, .highlight-box2 p {
-                padding: 0 20px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .highlight-box, .highlight-box2 {
-                padding: 40px 0;
-            }
-        }
-    </style>
     
     <!-- Defer Google Analytics -->
     <script>
@@ -446,21 +39,21 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-DQXH7NP5Z2');
-            }, 5000); // 5 second delay for GA to prioritize content loading
+            }, 5000);
         });
     </script>
 </head>
 <body>
     <!-- Navigation -->
     <nav>
-        <a href="../index.html">Home</a>
-        <a href="../about_me/about.html">About</a>
-        <a href="../resume.html">Resume</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
     </nav>
     
     <div class="content-wrapper">
         <!-- Back to home -->
-        <a href="../index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to home</a>
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to home</a>
         
         <!-- Case Study Header -->
         <header class="case-study-header">
@@ -488,7 +81,7 @@
             <section class="case-study-section">
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="1.webp" alt="Project overview image" width="400" height="350" loading="eager">
+                        <img src="images/empathly/1.webp" alt="Project overview image" width="400" height="350" loading="eager">
                     </div>
                     <div class="pdf-right">
                         <h2 class="section-title">OVERVIEW</h2>
@@ -509,7 +102,7 @@
 
             <div class="section-divider"></div>
             
-            <!-- Research Section - MODIFIED to have individual row animations -->
+            <!-- Research Section -->
             <section class="case-study-section">
                 <h2 class="section-title">RESEARCH</h2>
                 
@@ -574,7 +167,7 @@
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="2.webp" alt="Design 1" width="400" height="300" loading="lazy">
+                        <img src="images/empathly/2.webp" alt="Design 1" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Designing for usability</h3>
@@ -589,14 +182,14 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="3.webp" alt="Design 2" width="400" height="300" loading="lazy">
+                            <img src="images/empathly/3.webp" alt="Design 2" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="4.webp" alt="Design 3" width="400" height="300" loading="lazy">
+                        <img src="images/empathly/4.webp" alt="Design 3" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Biggest Challenge: Effective Data Visualization</h3>
@@ -611,7 +204,7 @@
 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="5.webp" alt="Design 4" width="400" height="300" loading="lazy">
+                        <img src="images/empathly/5.webp" alt="Design 4" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Respecting Users' Time Constraints</h3>
@@ -626,7 +219,7 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="6.webp" alt="Design 5" width="400" height="300" loading="lazy">
+                            <img src="images/empathly/6.webp" alt="Design 5" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -634,7 +227,7 @@
             
             <div class="section-divider"></div>
 
-            <!-- Results and Future Work Section - MODIFIED to have individual paragraph animations -->
+            <!-- Results and Future Work Section -->
             <section class="case-study-section">
                 <h2 class="section-title">RESULTS AND FUTURE WORK</h2>
                 <p class="result-paragraph">Our project earned significant recognition, winning first place overall and the "Best Life Hack" award at HackHarvard. Additionally, Empath.ly was selected as one of the top 80 startups among more than 1,500 competitors in India, validating our innovative approach to solving remote communication challenges.</p>
@@ -663,36 +256,7 @@
         <p>&copy; 2025 Manish. All rights reserved.</p>
     </footer>
 
-    <!-- Optimized intersection observer script - MODIFIED to observe research rows and result paragraphs -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Use requestIdleCallback for non-critical initialization
-            (window.requestIdleCallback || window.setTimeout)(function() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.animation = 'fadeUp 0.6s forwards';
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-        
-                // Observe elements in batches to avoid layout thrashing
-                const observeElements = [
-                    '.pdf-layout', '.two-column', '.insight-box', 
-                    '.highlight-box', '.highlight-box2', '.video-container', 
-                    '.research-row', '.result-paragraph', '.context-subtitle', '.context-paragraph'  // Added context elements
-                ].flatMap(selector => 
-                    Array.from(document.querySelectorAll(selector))
-                );
-                
-                observeElements.forEach(element => {
-                    element.style.opacity = 0;
-                    element.style.transform = 'translateY(20px)';
-                    observer.observe(element);
-                });
-            }, { timeout: 500 });
-        });
-    </script>
+    <!-- Optimized intersection observer script -->
+    <script src="javascript/empathly.js"></script>
 </body>
 </html>
