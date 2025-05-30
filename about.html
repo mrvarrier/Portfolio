@@ -3,197 +3,868 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About Manish Varrier - UX Designer bridging technical expertise with human-centered design. Learn about my background in computer science, experience at Correlate AS, and design philosophy.">
+    <meta name="description" content="About Manish Varrier - UX Designer bridging technical expertise with human-centered design.">
     <title>About Manish</title>
     
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
-    <link rel="manifest" href="../icon/site.webmanifest">
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" as="image" href="images/about/manish.webp">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/about.css">
-    
-    <!-- Deferred non-critical styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    </noscript>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .lucida-typewriter {
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+        }
+        
+        body {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .content-wrapper {
+            padding: 0 5px 0 100px;
+            position: relative;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 30px 30px 10px 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            max-width: 1280px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        nav a {
+            margin-left: 50px;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -3px;
+            left: 0;
+            background-color: #000;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s ease;
+        }
+        
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        
+        /* Header */
+        header {
+            margin-top: 140px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards;
+            font-weight: normal;
+        }
+        
+        .value-proposition {
+            font-size: 20px;
+            line-height: 1.4;
+            color: #333;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.2s;
+            max-width: 700px;
+        }
+        
+        /* Key Metrics */
+        .key-metrics {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.4s;
+        }
+        
+        .metric {
+            text-align: left;
+        }
+        
+        .metric-number {
+            font-size: 32px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+            margin-bottom: 5px;
+            display: block;
+            color: #000;
+        }
+        
+        .metric-label {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+        
+        .metric-highlight {
+            background: linear-gradient(120deg, #e0f2fe 0%, #b3e5fc 100%);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+            color: #0d47a1;
+        }
+        
+        /* About Content */
+        .about-main {
+            display: flex;
+            gap: 80px;
+            margin-bottom: 120px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.6s;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 2;
+            max-width: 600px;
+        }
+        
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        
+        .strength-callout {
+            font-size: 18px;
+            line-height: 1.6;
+            font-weight: 500;
+            margin: 30px 0;
+            color: #000;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .strength-callout::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(135deg, #000 0%, #424242 100%);
+        }
+        
+        .about-image {
+            flex: 1;
+            max-width: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .profile-image {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 4/5;
+            border-radius: 4px;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Section Styles */
+        .section {
+            margin-bottom: 120px;
+        }
+        
+        .section-header {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+        
+        .section-subtitle {
+            font-size: 16px;
+            color: #424242;
+            max-width: 600px;
+        }
+        
+        /* Journey Timeline */
+        .journey-timeline {
+            max-width: 980px;
+        }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .timeline-year {
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-size: 14px;
+            color: #424242;
+            margin-bottom: 10px;
+            background: linear-gradient(120deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        .timeline-marker {
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .timeline-item:not(:last-child) .timeline-marker::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: #bdbdbd;
+        }
+        
+        .timeline-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        
+        .timeline-content p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #424242;
+        }
+        
+        /* Skills & Impact */
+        .skills-impact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 980px;
+            margin-bottom: 120px;
+        }
+        
+        .skills-column h3,
+        .impact-column h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+        }
+        
+        .skill-category {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .skill-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .skill-category h4 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #424242;
+            margin-bottom: 8px;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(120deg, #e1f5fe 0%, #b3e5fc 100%);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #0d47a1;
+            border: 1px solid #4fc3f7;
+        }
+        
+        .impact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .impact-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .impact-item:hover {
+            border-left-color: #2e7d32;
+            background: linear-gradient(120deg, #f1f8e9 0%, #dcedc8 100%);
+        }
+        
+        .impact-metric {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-right: 15px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            min-width: 60px;
+        }
+        
+        .impact-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #212121;
+        }
+        
+        /* Recommendations */
+        .recommendations-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 980px;
+        }
+        
+        .recommendation {
+            opacity: 0;
+            transform: translateY(20px);
+            background: linear-gradient(120deg, #fafafa 0%, #f5f5f5 100%);
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .recommendation.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .recommendation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .recommendation-header {
+            background: linear-gradient(120deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .recommender-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #000;
+        }
+        
+        .recommender-info h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .recommender-info p {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .recommendation-text {
+            padding: 30px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #374151;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .recommendation-text::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 40px;
+            color: #d1d5db;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        /* Photography */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            max-width: 980px;
+        }
+        
+        .photo-grid.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .photo-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px;
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 14px;
+            color: #666;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 100px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 1s;
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-wrapper {
+                padding: 0 40px;
+            }
+            
+            .about-main {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .about-image {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .skills-impact {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .key-metrics {
+                flex-wrap: wrap;
+                gap: 40px;
+            }
+            
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .timeline-marker::after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 0 20px;
+            }
+            
+            nav {
+                padding: 20px 20px 10px 0;
+            }
+            
+            nav a {
+                margin-left: 30px;
+            }
+            
+            .title {
+                font-size: 42px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .value-proposition {
+                font-size: 18px;
+            }
+            
+            .key-metrics {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .recommender-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .recommendation-text {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav {
+                justify-content: center;
+            }
+            
+            .title {
+                font-size: 32px;
+            }
+            
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-tags {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
+        <a href="https://drive.google.com/file/d/1Pl2JjSYH7AoyVf-QXi9xhVaqILJyMfJk/view?usp=sharing" target="_blank">Resume</a>
     </nav>
     
     <div class="content-wrapper">
-        <!-- Header section -->
-        <header id="about">
+        <!-- Header -->
+        <header>
             <h1 class="title lucida-typewriter">About me</h1>
+            <p class="value-proposition">
+                Translating complex technical challenges into elegant human experiences through research-driven design and engineering precision.
+            </p>
         </header>
 
-        <!-- About section -->
-        <section class="about-section">
-            <div class="about-container">
-                <img 
-                    src="images/about/manish.webp" 
-                    alt="Manish Varrier - UX Designer" 
-                    class="profile-image" 
-                    width="400" 
-                    height="600"
-                    fetchpriority="high">
-                <div class="about-content">
-                    <p>I'm Manish, a UX Designer and Researcher who transforms complex technical challenges into elegant human experiences. My journey began in Computer Science and Engineering, where I developed a deep understanding of technology's inner workings before discovering my true passion in the human experience of interacting with it.</p>
-               
-                    <p>At Correlate AS, I've worn both Project Manager and UX Designer hats—giving me a rare 360° view of product development and the ability to translate between technical and user needs, finding the balance where innovation meets usability. What sets me apart is my analytical mindset paired with creative intuition. I naturally look for unexpected connections and hidden patterns in user behavior—insights that often lead to breakthrough solutions. My perspective is enriched by photography and travel, which serve as training grounds for empathy and observation, teaching me to see the world through different lenses.</p>
-
-                    <p>I bring this unique combination of technical knowledge, business understanding, and cultural curiosity to every project—creating digital experiences that genuinely enhance how people interact with technology.</p>
-                </div>
+        <!-- Key Metrics -->
+        <section class="key-metrics">
+            <div class="metric">
+                <span class="metric-number counter" data-count="2">0</span>
+                <span class="metric-label">Years Full-time<br>Experience</span>
+            </div>
+            <div class="metric">
+                <span class="metric-number counter" data-count="5">0</span>
+                <span class="metric-label">Cross-functional<br>Projects Led</span>
             </div>
         </section>
 
-        <!-- My Approach section -->
-        <section class="approach-section">
-            <h2 class="lucida-typewriter">My Approach</h2>
+        <!-- About Main Content -->
+        <section class="about-main">
+            <div class="about-text">
+                <p>At Correlate AS, I've worn both Project Manager and UX Designer hats—giving me a rare 360° view of product development and the ability to translate between technical and user needs.</p>
+                
+                <p class="strength-callout">
+                    What sets me apart is my analytical mindset paired with creative intuition. I naturally look for unexpected connections and hidden patterns in user behavior.
+                </p>
+                
+                <p>My perspective is enriched by photography and travel, which serve as training grounds for empathy and observation, teaching me to see the world through different lenses. I bring this unique combination of technical knowledge, business understanding, and cultural curiosity to every project.</p>
+            </div>
             
-            <div class="approach-content">
-                <p>I believe effective UX design begins with understanding the complete picture. Before sketching a single wireframe, I immerse myself in the business landscape—analyzing the product's lifecycle stage, identifying key performance indicators, and mapping available resources and constraints.</p>
-                
-                <p>My research methodology extends beyond surface-level user feedback. I dig deep to uncover the underlying pain points that users themselves might not articulate, explore diverse usage scenarios, and examine alternative solutions that might not be immediately obvious. Market analysis, for me, isn't just competitive benchmarking—it's about recognizing successful patterns while identifying opportunities to differentiate and innovate.</p>
-                
-                <p>I'm a firm believer in hypothesis-driven design. Each design decision emerges from a testable assumption about user behavior or business impact, allowing for rapid validation and refinement. This approach keeps projects focused and evidence-based rather than driven by subjective preferences.</p>
-                
-                <p>When challenges arise—as they inevitably do—I turn to the data for guidance. Whether a solution falls short in communicating value, presents unexpected complexity, or creates navigation hurdles, I see these not as failures but as valuable learning opportunities. My iterative process is deliberate and strategic, with each revision carefully tested against key metrics to ensure meaningful improvement.</p>
-                
-                <p>This methodical yet flexible approach helps me bridge the gap between business objectives and user needs, creating digital experiences that are both strategically sound and intuitively satisfying.</p>
+            <div class="about-image">
+                <img src="images/about/manish.webp" 
+                     alt="Manish Varrier" 
+                     class="profile-image">
             </div>
         </section>
 
-        <!-- Recommendations section -->
-        <section class="recommendations-section">
-            <h2 class="lucida-typewriter">Recommendations</h2>
+        <!-- Journey Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title lucida-typewriter">My Journey</h2>
+                <p class="section-subtitle">From engineering foundations to human-centered design leadership</p>
+            </div>
             
-            <div class="recommendations">
-                <!-- Recommendation 1 -->
-                <div class="recommendation">
-                    <img 
-                        src="images/about/kushal.webp" 
-                        alt="Kushal Kaushik" 
-                        class="recommender-img"
-                        width="80"
-                        height="80"
-                        loading="lazy">
-                    <div class="recommendation-content">
-                        <p class="recommender-name">Kushal Kaushik</p>
-                        <p class="recommender-title">Chief Executive Officer at Correlate AS</p>
-                        <p class="recommendation-text">"I had the pleasure of working with Manish, and he consistently proved to be an invaluable asset to our team. His versatility and intelligence are truly remarkable, akin to a Swiss Army knife. Time and again, Manish has gone above and beyond his designated role, tackling pivotal tasks and solving complex problems that extended beyond his initial responsibilities. His proactive and dedicated approach made a significant impact on our success. Without hesitation, I would choose to work with Manish in any organization I am part of or create in the future."</p>
+            <div class="journey-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-year">2020-2024</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Computer Science Foundation</h3>
+                        <p>Earned B.Tech in Computer Science & Engineering with Information Security specialization. Built deep understanding of system architecture, algorithms, and security principles that now inform my design decisions.</p>
                     </div>
                 </div>
-
-                <!-- Recommendation 2 -->
-                <div class="recommendation">
-                    <img 
-                        src="images/about/ole.webp" 
-                        alt="Ole Goethe" 
-                        class="recommender-img"
-                        width="80"
-                        height="80"
-                        loading="lazy">
-                    <div class="recommendation-content">
-                        <p class="recommender-name">Ole Goethe</p>
-                        <p class="recommender-title">Chief Design Officer at Correlate AS</p>
-                        <p class="recommendation-text">"I've known Manish Varrier for more than three months as a talented Total eXperience Designer Intern at Correlate AS, where I am the Chief Design Officer. Manish's character has proven to be of the highest quality. In the time he was part of the organization, his sincerity and dedication to learning and growing was always evident. The process of defining and refining the user experience were often challenging, but he never settled for anything less than what was needed to deploy the new practices. Given what I know of his diligence, skill, knowledge and energy, I believe he will succeed at whatever he undertakes in the area of total experience design and life."</p>
+                
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-year">2022-2023</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>UX Discovery & Growth</h3>
+                        <p>Transitioned into UX through internships and freelance projects. Discovered passion for user research, conducted comprehensive studies with 200+ participants, and won first place at HackHarvard 2022.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-year">2023-Present</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Full-Stack UX Leadership</h3>
+                        <p>Project Manager & UX Designer at Correlate AS. Leading cross-functional teams, streamlining AI design processes, and delivering measurable improvements in user satisfaction and system efficiency.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Photography section -->
-        <section class="photography-section">
-            <h2 class="lucida-typewriter">Photography</h2>
+        <!-- Skills & Impact Section -->
+        <section class="skills-impact">
+            <div class="skills-column">
+                <h3>Core Competencies</h3>
+                
+                <div class="skill-category">
+                    <h4>Research & Strategy</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">User Research</span>
+                        <span class="skill-tag">A/B Testing</span>
+                        <span class="skill-tag">Market Analysis</span>
+                        <span class="skill-tag">TAM Calculations</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Design & Prototyping</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Adobe Suite</span>
+                        <span class="skill-tag">High-fidelity Prototypes</span>
+                        <span class="skill-tag">Design Systems</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Technical Implementation</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                        <span class="skill-tag">Accessibility (WCAG)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="impact-column">
+                <h3>Key Achievements</h3>
+                
+                <div class="impact-item">
+                    <div class="impact-metric">36%</div>
+                    <div class="impact-description">User satisfaction increase through AI workflow optimization at Correlate</div>
+                </div>
+                
+                <div class="impact-item">
+                    <div class="impact-metric">61%</div>
+                    <div class="impact-description">Token usage reduction via vectorization database implementation</div>
+                </div>
+                
+                <div class="impact-item">
+                    <div class="impact-metric">41%</div>
+                    <div class="impact-description">Onboarding time reduction through template redesign</div>
+                </div>
+                
+                <div class="impact-item">
+                    <div class="impact-metric">23%</div>
+                    <div class="impact-description">Project delivery acceleration via improved team communication</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title lucida-typewriter">What Leaders Say</h2>
+                <p class="section-subtitle">Testimonials from executives I've collaborated with</p>
+            </div>
+            
+            <div class="recommendations-grid">
+                <div class="recommendation">
+                    <div class="recommendation-header">
+                        <img src="images/about/kushal.webp" 
+                             alt="Kushal Kaushik" 
+                             class="recommender-img">
+                        <div class="recommender-info">
+                            <h4>Kushal Kaushik</h4>
+                            <p>Chief Executive Officer at Correlate AS</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-text">
+                        I had the pleasure of working with Manish, and he consistently proved to be an invaluable asset to our team. His versatility and intelligence are truly remarkable, akin to a Swiss Army knife. Time and again, Manish has gone above and beyond his designated role, tackling pivotal tasks and solving complex problems that extended beyond his initial responsibilities. His proactive and dedicated approach made a significant impact on our success. Without hesitation, I would choose to work with Manish in any organization I am part of or create in the future.    
+                    </div>
+                </div>
+                
+                <div class="recommendation">
+                    <div class="recommendation-header">
+                        <img src="images/about/ole.webp" 
+                             alt="Ole Goethe" 
+                             class="recommender-img">
+                        <div class="recommender-info">
+                            <h4>Ole Goethe</h4>
+                            <p>Chief Design Officer at Correlate AS</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-text">
+                        I've known Manish Varrier for more than three months as a talented Total eXperience Designer Intern at Correlate AS, where I am the Chief Design Officer. Manish's character has proven to be of the highest quality. In the time he was part of the organization, his sincerity and dedication to learning and growing was always evident. The process of defining and refining the user experience were often challenging, but he never settled for anything less than what was needed to deploy the new practices. Given what I know of his diligence, skill, knowledge and energy, I believe he will succeed at whatever he undertakes in the area of total experience design and life.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photography Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title lucida-typewriter">Through My Lens</h2>
+                <p class="section-subtitle">Photography as a training ground for empathy and observation</p>
+            </div>
             
             <div class="photo-grid">
                 <div class="photo-item">
-                    <img 
-                        src="images/about/8.webp" 
-                        alt="Photography 1" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/8.webp" alt="Photography 1" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/9.webp" 
-                        alt="Photography 2" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/9.webp" alt="Photography 2" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/1.webp" 
-                        alt="Photography 3" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/1.webp" alt="Photography 3" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/2.webp" 
-                        alt="Photography 4" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/2.webp" alt="Photography 4" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/3.webp" 
-                        alt="Photography 5" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/3.webp" alt="Photography 5" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/4.webp" 
-                        alt="Photography 6" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/4.webp" alt="Photography 6" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/5.webp" 
-                        alt="Photography 7" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/5.webp" alt="Photography 7" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/6.webp" 
-                        alt="Photography 8" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/6.webp" alt="Photography 8" loading="lazy">
                 </div>
                 <div class="photo-item">
-                    <img 
-                        src="images/about/7.webp" 
-                        alt="Photography 9" 
-                        loading="lazy"
-                        width="400"
-                        height="400">
+                    <img src="images/about/7.webp" alt="Photography 9" loading="lazy">
                 </div>
             </div>
         </section>
@@ -204,7 +875,77 @@
         </footer>
     </div>
 
-    <!-- Scripts -->
-    <script src="javascript/about.js"></script>
+    <script>
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const increment = target / 30;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger counter animation when metrics come into view
+                    if (entry.target.classList.contains('key-metrics')) {
+                        setTimeout(animateCounters, 300);
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe elements for animation
+        const elementsToObserve = [
+            '.timeline-item',
+            '.skill-category', 
+            '.impact-item',
+            '.recommendation',
+            '.photo-grid',
+            '.key-metrics'
+        ];
+        
+        elementsToObserve.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Navigation scroll effect
+        let lastScrollTop = 0;
+        const nav = document.getElementById('nav');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, { passive: true });
+    </script>
 </body>
 </html>

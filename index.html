@@ -27,9 +27,6 @@
     <!-- Preload hero images -->
     <link rel="preload" as="image" href="zenodo.webp">
     
-    <!-- Link to external CSS file -->
-    <link rel="stylesheet" href="css/index.css">
-    
     <!-- Load non-critical CSS with low priority -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
@@ -58,6 +55,419 @@
         .far {
             font-family: 'FontAwesomeRegular';
         }
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Typewriter font class */
+        .lucida-typewriter {
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+        }
+
+        body {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .content-wrapper {
+            padding: 0 5px 0 100px;
+            position: relative;
+        }
+
+        /* Header section */
+        header {
+            margin-top: 165px;
+            margin-bottom: 140px;
+            position: relative;
+        }
+
+        /* Navigation - sticky with backdrop */
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 30px 30px 10px 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            max-width: 1280px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        nav a {
+            margin-left: 50px;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -3px;
+            left: 0;
+            background-color: #000;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s ease;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Title with subtle reveal animation - maintaining original appearance */
+        .title {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards;
+            font-weight: normal;
+        }
+
+        .title:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        /* Subtitle with subtle animation */
+        .subtitle {
+            margin-top: 20px;
+            max-width: 600px;
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.6s;
+        }
+
+        /* Social links */
+        .social-links {
+            display: flex;
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.6s;
+        }
+
+        .social-links a {
+            width: 24px;
+            height: 24px;
+            background-color: #000;
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background-color: #333;
+        }
+
+        .disabled-link {
+            display: inline-block;
+            color: #888;
+            text-decoration: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+            pointer-events: none;
+            font-weight: 500;
+        }
+
+        /* Work section */
+        .work-section h2 {
+            font-size: 42px;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.8s;
+            font-weight: normal;
+        }
+
+        /* Enhanced case studies with more sophisticated interactions */
+        .case-studies {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            margin-bottom: 140px;
+        }
+
+        .case-study {
+            display: flex;
+            gap: 70px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .case-study.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .case-study-img {
+            border-radius: 15px;
+            width: 500px;
+            height: 300px;
+            background-color: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            display: block;
+        }
+
+        .case-study-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.6s ease;
+        }
+
+        .case-study-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .case-study-content h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .case-study-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 460px;
+        }
+
+        .case-study-content a {
+            color: #000;
+            text-decoration: underline;
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding-right: 25px;
+            display: inline-block;
+        }
+
+        .case-study-content a.with-arrow::after {
+            content: "→";
+            position: absolute;
+            right: 0;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .case-study-content a.with-arrow:hover {
+            padding-right: 30px;
+        }
+
+        .case-study-content a.with-arrow:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .case-study-content a.disabled-link::after {
+            content: "";
+        }
+
+        .case-study.visible .case-study-content h3,
+        .case-study.visible .case-study-content p,
+        .case-study.visible .case-study-content a {
+            opacity: 1;
+        }
+
+        .case-study:hover .case-study-img {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+        }
+
+        .case-study:hover .case-study-img img {
+            transform: scale(1.05);
+        }
+
+        .case-study:hover .case-study-img::before {
+            background: rgba(0,0,0,0.02);
+        }
+
+        /* Enhanced Footer */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 14px;
+            color: #666;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+        }
+
+        /* Enhanced Animations */
+        @keyframes revealFromBottom {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes lineDrawIn {
+            0% {
+                transform: scaleX(0);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Parallax effect for case study elements */
+        .parallax {
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Subtle text reveal animation for case studies */
+        @keyframes textReveal {
+            0% {
+                clip-path: inset(0 100% 0 0);
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        /* Cursor styles */
+        .interactive {
+            cursor: pointer;
+        }
+
+        /* Enhanced responsive styling */
+        @media (max-width: 992px) {
+            .case-study {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .case-study-img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 16/9;
+            }
+            
+            .content-wrapper {
+                padding: 0 20px 0 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0 20px;
+            }
+            
+            .content-wrapper {
+                padding: 0 10px;
+            }
+            
+            .title {
+                font-size: 42px;
+            }
+            
+            .work-section h2 {
+                font-size: 32px;
+                margin-bottom: 50px;
+            }
+            
+            nav {
+                margin-right: 0;
+                padding: 20px 20px 10px 0;
+            }
+            
+            nav a {
+                margin-left: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav {
+                justify-content: center;
+            }
+            
+            .title {
+                font-size: 32px;
+            }
+            
+            .case-studies {
+                gap: 60px;
+            }
+        }
+
+        /* Minimal Font Awesome icons */
+        .fab, .far {
+            display: inline-block;
+            font-style: normal !important;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+        }
+        .fab.fa-linkedin-in:before { content: "\f0e1"; }
+        .far.fa-envelope:before { content: "\f0e0"; }
+        .fab.fa-instagram:before { content: "\f16d"; }
     </style>
 </head>
 <body>
@@ -65,7 +475,7 @@
     <nav id="main-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
+        <a href="https://drive.google.com/file/d/1Pl2JjSYH7AoyVf-QXi9xhVaqILJyMfJk/view?usp=sharing" target="_blank">Resume</a>
     </nav>
     
     <div class="content-wrapper">
@@ -88,33 +498,15 @@
             <h2 class="lucida-typewriter">I've worked on</h2>
             
             <div class="case-studies">
-                <!-- Case study 1 - Zenodo with password protection -->
+                <!-- Case study 1 - Zenodo -->
                 <div class="case-study">
-                    <a class="case-study-img" id="zenodo-img">
+                    <a href="zenodo/zenodo.html" class="case-study-img">
                         <img src="images/index/zenodo.webp" alt="Zenodo" width="500" height="300">
                     </a>
                     <div class="case-study-content">
                         <h3>Zenodo</h3>
                         <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
-                        <div class="password-container">
-                            <a id="password-trigger" class="interactive lock-icon">View Case Study</a>
-                            <div class="password-field">
-                                <input type="password" id="zenodo-password" placeholder="Enter password" autocomplete="off">
-                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                                    <svg class="eye-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                    <svg class="eye-slash-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none;">
-                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                        <line x1="1" y1="1" x2="23" y2="23"></line>
-                                    </svg>
-                                </button>
-                                <button id="submit-password" aria-label="Submit password">
-                                    <span class="arrow-icon">→</span>
-                                </button>
-                            </div>
-                        </div>
+                        <a href="zenodo/zenodo.html" class="interactive with-arrow">View Case Study</a>
                     </div>
                 </div>
 
@@ -138,10 +530,80 @@
         </footer>
     </div>
 
-    <!-- Page transition overlay -->
-    <div id="manual-page-transition-overlay" class="manual-page-transition-overlay"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize scroll position for navigation effects
+            let lastScrollTop = 0;
+            const nav = document.getElementById('main-nav');
+            
+            // Enhanced scroll handling for nav appearance/disappearance
+            window.addEventListener('scroll', function() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Control nav visibility based on scroll direction
+                if (st > 100) {
+                    nav.classList.add('scrolled');
+                    if (st > lastScrollTop && st > 300) {
+                        // Scrolling down
+                        nav.classList.add('hidden');
+                    } else {
+                        // Scrolling up
+                        nav.classList.remove('hidden');
+                    }
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                lastScrollTop = st <= 0 ? 0 : st;
+            }, false);
+            
+            // Intersection Observer for case study animations with enhanced options
+            const caseObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Staggered animation of child elements happens via CSS transitions
+                    }
+                });
+            }, { 
+                threshold: 0.1, 
+                rootMargin: "0px 0px -100px 0px" 
+            });
 
-    <!-- Link to external JavaScript file -->
-    <script src="javascript/index.js"></script>
+            document.querySelectorAll('.case-study').forEach(caseStudy => {
+                caseObserver.observe(caseStudy);
+            });
+            
+            // Preload images for smoother transitions
+            function preloadImages() {
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    if (img.getAttribute('loading') !== 'lazy') {
+                        const src = img.getAttribute('src');
+                        if (src) {
+                            const imageObj = new Image();
+                            imageObj.src = src;
+                        }
+                    }
+                });
+            }
+            
+            preloadImages();
+            
+            // Deferred analytics - only load after everything else
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    var script = document.createElement('script');
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DQXH7NP5Z2';
+                    script.async = true;
+                    document.head.appendChild(script);
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-DQXH7NP5Z2');
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>
