@@ -9,16 +9,16 @@
     <script defer src="https://umami-indol-ten.vercel.app/script.js" data-website-id="1101799b-f4e5-4838-9061-95221239a590"></script>
 
     <script>
-    // Safe visitor ID tracking with error handling
+    // Simplified visitor ID tracking - works with your Umami/Supabase setup
     (function() {
         'use strict';
         
-        // Generate or retrieve persistent visitor ID
         function getOrCreateVisitorId() {
             try {
                 let visitorId = localStorage.getItem('portfolio_visitor_id');
                 
                 if (!visitorId) {
+                    // Create unique visitor ID
                     visitorId = 'pv_' + Date.now().toString(36) + '_' + 
                             Math.random().toString(36).substr(2, 8);
                     localStorage.setItem('portfolio_visitor_id', visitorId);
@@ -27,42 +27,45 @@
                 
                 return visitorId;
             } catch (e) {
-                console.warn('Visitor ID storage failed:', e);
+                // Fallback if localStorage fails
                 return 'temp_' + Date.now().toString(36);
             }
         }
         
-        // Safe initialization with error handling
         function initTracking() {
-            try {
-                // Wait longer for Umami to fully load
-                if (typeof window.umami !== 'undefined' && window.umami.identify) {
-                    const visitorId = getOrCreateVisitorId();
-                    
-                    // Only identify if Umami is fully ready
-                    window.umami.identify({
-                        userId: visitorId
+            if (typeof window.umami !== 'undefined') {
+                const visitorId = getOrCreateVisitorId();
+                const createdDate = localStorage.getItem('portfolio_visitor_created');
+                const isReturning = createdDate && 
+                                (Date.now() - new Date(createdDate).getTime()) > (24 * 60 * 60 * 1000);
+                
+                try {
+                    // Track visitor with custom event - this creates the data you saw
+                    window.umami.track('visitor_id', {
+                        visitor_id: visitorId,
+                        returning: isReturning,
+                        page: window.location.pathname
                     });
                     
-                    console.log('Umami visitor tracking initialized:', visitorId);
+                    console.log('Visitor tracking active:', visitorId);
                     
-                } else {
-                    // Retry with longer delay
-                    setTimeout(initTracking, 200);
+                } catch (e) {
+                    console.warn('Visitor tracking failed:', e);
                 }
-            } catch (e) {
-                console.warn('Umami tracking initialization failed:', e);
-                // Continue without visitor ID tracking if there's an error
+                
+            } else {
+                // Retry if Umami hasn't loaded
+                setTimeout(initTracking, 100);
             }
         }
         
-        // Initialize with delay to ensure Umami loads first
+        // Initialize when page loads
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(initTracking, 300);
+                setTimeout(initTracking, 200);
             });
         } else {
-            setTimeout(initTracking, 300);
+            setTimeout(initTracking, 200);
         }
     })();
     </script>
