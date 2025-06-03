@@ -9,42 +9,42 @@
     <script defer src="https://umami-indol-ten.vercel.app/script.js" data-website-id="1101799b-f4e5-4838-9061-95221239a590"></script>
 
     <script>
-    // Simple persistent visitor ID - no custom events
+    // Correct persistent visitor ID implementation
     (function() {
         'use strict';
         
-        function getOrCreatePersistentId() {
+        function getOrCreatePersistentVisitorId() {
             try {
                 let persistentId = localStorage.getItem('umami_persistent_visitor');
                 
                 if (!persistentId) {
-                    // Generate a persistent visitor ID
+                    // Generate a unique persistent visitor ID
                     persistentId = 'visitor_' + Date.now().toString(36) + '_' + 
                                 Math.random().toString(36).substr(2, 9);
                     localStorage.setItem('umami_persistent_visitor', persistentId);
+                    console.log('Created new persistent visitor ID:', persistentId);
+                } else {
+                    console.log('Using existing persistent visitor ID:', persistentId);
                 }
                 
                 return persistentId;
             } catch (e) {
-                // Fallback if localStorage fails
-                return 'temp_' + Date.now().toString(36);
+                // Fallback ID if localStorage fails
+                return 'temp_visitor_' + Date.now().toString(36);
             }
         }
         
         function setPersistentVisitorId() {
             if (typeof window.umami !== 'undefined' && typeof window.umami.identify === 'function') {
-                const persistentId = getOrCreatePersistentId();
+                const persistentId = getOrCreatePersistentVisitorId();
                 
                 try {
-                    // Set the persistent visitor ID in Umami
-                    window.umami.identify({
-                        userId: persistentId
-                    });
-                    
-                    console.log('Persistent visitor ID set:', persistentId);
+                    // Use the correct syntax: pass string directly to identify()
+                    window.umami.identify(persistentId);
+                    console.log('✅ Successfully set distinct ID:', persistentId);
                     
                 } catch (e) {
-                    console.warn('Failed to set visitor ID:', e);
+                    console.warn('❌ Failed to set distinct ID:', e);
                 }
                 
             } else {
@@ -56,10 +56,10 @@
         // Initialize when page loads
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(setPersistentVisitorId, 200);
+                setTimeout(setPersistentVisitorId, 300);
             });
         } else {
-            setTimeout(setPersistentVisitorId, 200);
+            setTimeout(setPersistentVisitorId, 300);
         }
     })();
     </script>
