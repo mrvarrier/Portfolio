@@ -9,63 +9,57 @@
     <script defer src="https://umami-indol-ten.vercel.app/script.js" data-website-id="1101799b-f4e5-4838-9061-95221239a590"></script>
 
     <script>
-    // Simplified visitor ID tracking - works with your Umami/Supabase setup
+    // Simple persistent visitor ID - no custom events
     (function() {
         'use strict';
         
-        function getOrCreateVisitorId() {
+        function getOrCreatePersistentId() {
             try {
-                let visitorId = localStorage.getItem('portfolio_visitor_id');
+                let persistentId = localStorage.getItem('umami_persistent_visitor');
                 
-                if (!visitorId) {
-                    // Create unique visitor ID
-                    visitorId = 'pv_' + Date.now().toString(36) + '_' + 
-                            Math.random().toString(36).substr(2, 8);
-                    localStorage.setItem('portfolio_visitor_id', visitorId);
-                    localStorage.setItem('portfolio_visitor_created', new Date().toISOString());
+                if (!persistentId) {
+                    // Generate a persistent visitor ID
+                    persistentId = 'visitor_' + Date.now().toString(36) + '_' + 
+                                Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('umami_persistent_visitor', persistentId);
                 }
                 
-                return visitorId;
+                return persistentId;
             } catch (e) {
                 // Fallback if localStorage fails
                 return 'temp_' + Date.now().toString(36);
             }
         }
         
-        function initTracking() {
-            if (typeof window.umami !== 'undefined') {
-                const visitorId = getOrCreateVisitorId();
-                const createdDate = localStorage.getItem('portfolio_visitor_created');
-                const isReturning = createdDate && 
-                                (Date.now() - new Date(createdDate).getTime()) > (24 * 60 * 60 * 1000);
+        function setPersistentVisitorId() {
+            if (typeof window.umami !== 'undefined' && typeof window.umami.identify === 'function') {
+                const persistentId = getOrCreatePersistentId();
                 
                 try {
-                    // Track visitor with custom event - this creates the data you saw
-                    window.umami.track('visitor_id', {
-                        visitor_id: visitorId,
-                        returning: isReturning,
-                        page: window.location.pathname
+                    // Set the persistent visitor ID in Umami
+                    window.umami.identify({
+                        userId: persistentId
                     });
                     
-                    console.log('Visitor tracking active:', visitorId);
+                    console.log('Persistent visitor ID set:', persistentId);
                     
                 } catch (e) {
-                    console.warn('Visitor tracking failed:', e);
+                    console.warn('Failed to set visitor ID:', e);
                 }
                 
             } else {
-                // Retry if Umami hasn't loaded
-                setTimeout(initTracking, 100);
+                // Retry if Umami hasn't loaded yet
+                setTimeout(setPersistentVisitorId, 100);
             }
         }
         
         // Initialize when page loads
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(initTracking, 200);
+                setTimeout(setPersistentVisitorId, 200);
             });
         } else {
-            setTimeout(initTracking, 200);
+            setTimeout(setPersistentVisitorId, 200);
         }
     })();
     </script>
