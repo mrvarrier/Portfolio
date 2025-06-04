@@ -6,7 +6,7 @@
     <meta name="google-site-verification" content="sWxVOxFb1Bz0dk1wHesjJvt12wcUPQ036TOO1C-N00Y" />
 
     <!-- Umami analytics-->
-    <script defer src="https://umami-indol-ten.vercel.app/script.js" data-website-id="ba19b573-e8c3-405f-8900-09f395349481"></script>
+    <script defer src="https://umami-indol-ten.vercel.app/script.js" data-website-id="d3cc2551-fce3-4cad-af90-4e20b2b74e8a"></script>
     
     <!-- Favicon - Preload critical icons -->
     <link rel="preload" href="icon/favicon-32x32.png" as="image" type="image/png">
@@ -594,5 +594,37 @@
             preloadImages();
         });
     </script>
+
+    <!-- Distinct ID Umami Analytics -->
+    <script>
+        // Minimal Distinct ID for Umami Analytics
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Umami to load
+            if (typeof umami !== 'undefined') {
+                setDistinctId();
+            } else {
+                const checkUmami = setInterval(() => {
+                    if (typeof umami !== 'undefined') {
+                        clearInterval(checkUmami);
+                        setDistinctId();
+                    }
+                }, 100);
+            }
+        });
+
+        function setDistinctId() {
+            // Get or create visitor ID
+            let visitorId = localStorage.getItem('portfolio_visitor_id');
+            
+            if (!visitorId) {
+                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('portfolio_visitor_id', visitorId);
+            }
+            
+            // Set the distinct ID for this visitor
+            umami.identify(visitorId);
+        }
+    </script>
+
 </body>
 </html>
