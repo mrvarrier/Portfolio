@@ -983,6 +983,21 @@
             // Set the distinct ID for this visitor
             umami.identify(visitorId);
         }
+
+        //Tracking time spent on page
+        let pageStartTime = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const timeOnPage = Math.round((Date.now() - pageStartTime) / 1000);
+            const visitorId = localStorage.getItem('portfolio_visitor_id');
+            
+            if (timeOnPage > 1) { 
+                umami.track('time_on_page', {
+                    duration_seconds: timeOnPage,
+                    page_name: 'about_me', 
+                    visitor_id: visitorId
+                });
+            }
+        });
     </script>
 
 </body>
