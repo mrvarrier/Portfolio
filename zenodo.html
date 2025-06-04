@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zenodo Integration UX Case Study by Manish Varrier - Designing archival systems for European research consortiums with technical constraints.">
+    
+    <!-- Umami analytics-->
+    <script defer src="https://umami-indol-ten.vercel.app/script.js" data-website-id="d3cc2551-fce3-4cad-af90-4e20b2b74e8a"></script>
+
+    <title>Zenodo Integration - UX Case Study</title>
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .lucida-typewriter {
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+        }
+        
+        body {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .content-wrapper {
+            padding: 0 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 30px 10px 30px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+        }
+        
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        nav a {
+            margin-left: 50px;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
+            font-weight: normal;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -3px;
+            left: 0;
+            background-color: #000;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s ease;
+        }
+        
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        
+        /* Improved Back to Home Button */
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            font-size: 15px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: rgba(249, 250, 251, 0.8);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            backdrop-filter: blur(8px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .back-home:hover::before {
+            left: 100%;
+        }
+        
+        .back-home i {
+            margin-right: 8px;
+            font-size: 13px;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .back-home:hover {
+            background: rgba(243, 244, 246, 0.9);
+            border-color: rgba(209, 213, 219, 0.9);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .back-home:hover i {
+            transform: translateX(-2px);
+        }
+        
+        .back-home:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Focus states for accessibility */
+        nav a:focus,
+        .back-home:focus {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        
+        /* Ensure sufficient color contrast */
+        .project-subtitle {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.3s;
+        }
+        
+        .section-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        
+        /* Improved readability for smaller text */
+        .project-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.1s;
+        }
+        
+        /* Header */
+        header {
+            margin-top: 140px;
+            margin-bottom: 120px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .project-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.1s;
+        }
+        
+        .case-study-title {
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.2s;
+            font-weight: 800;
+            color: #000;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .project-subtitle {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 0.3s;
+        }
+        
+        /* Section styling */
+        .case-study-section {
+            margin-bottom: 120px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .case-study-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .section-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: #000;
+            line-height: 1.1;
+        }
+        
+        .section-subtitle {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #000;
+            line-height: 1.3;
+        }
+        
+        .section-description {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #2d3748;
+            margin-bottom: 25px;
+        }
+        
+        /* Layout components */
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin: 50px 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .two-column-layout.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .content-column h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        
+        .content-column p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .content-column ul {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #2d3748;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .content-column li {
+            margin-bottom: 8px;
+        }
+        
+        .visual-column {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .visual-placeholder {
+            width: 100%;
+            height: 350px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        /* Challenge/Solution combined styling */
+        .overview-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2d3748;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+        
+        /* Research grid */
+        .research-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin: 60px 0;
+        }
+        
+        .research-item {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            padding: 40px 0;
+            border-bottom: 1px solid #f0f0f0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .research-item:last-child {
+            border-bottom: none;
+        }
+        
+        .research-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .research-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.3;
+        }
+        
+        .research-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        
+        /* Insights styling */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .insight-card {
+            background: #f8f9fa;
+            padding: 35px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+        
+        .insight-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .insight-number {
+            font-size: 12px;
+            font-weight: 700;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+        
+        .insight-content {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+        
+        /* Challenge/Solution blocks */
+        .challenge-solution {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px;
+            border-radius: 16px;
+            margin: 60px 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .challenge-solution.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .challenge-solution h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #000;
+        }
+        
+        .challenge-solution p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        
+        /* Technical challenge styling - fixed spacing */
+        .technical-challenge {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border: 2px solid #fc8181;
+            border-radius: 16px;
+            padding: 50px;
+            margin: 60px 0 40px 0;  /* Reduced bottom margin */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .technical-challenge.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .challenge-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .challenge-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #c53030;
+        }
+        
+        .challenge-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+        
+        .solution-box {
+            background: white;
+            border-left: 4px solid #38a169;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .solution-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #38a169;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+        
+        .solution-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+        
+        /* Process steps */
+        .process-container {
+            margin: 80px 0;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .process-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .process-step:hover .step-number {
+            transform: scale(1.05);
+        }
+        
+        .step-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+        
+        .step-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .step-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        
+        /* Results section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .result-card {
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            text-align: center;
+        }
+        
+        .result-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        .result-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .result-description {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #2d3748;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 80px 0 60px;
+            font-size: 14px;
+            color: #666;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 120px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards 1s;
+        }
+        
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 2000;
+            border-radius: 4px;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Focus states for interactive elements */
+        .insight-card:focus-within,
+        .result-card:focus-within,
+        .research-item:focus-within {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        
+        /* Ensure proper contrast for all text */
+        .research-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.3;
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .insight-card,
+            .result-card,
+            .technical-challenge,
+            .challenge-solution {
+                border: 2px solid #000;
+            }
+            
+            .visual-placeholder {
+                border: 2px solid #000;
+            }
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                padding: 0 40px;
+            }
+            
+            .case-study-title {
+                font-size: 52px;
+            }
+            
+            .section-title {
+                font-size: 40px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .content-wrapper {
+                padding: 0 30px;
+            }
+            
+            .two-column-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .research-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .case-study-title {
+                font-size: 44px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 0 20px;
+            }
+            
+            nav {
+                padding: 20px;
+            }
+            
+            nav a {
+                margin-left: 30px;
+            }
+            
+            .case-study-title {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .process-step {
+                gap: 20px;
+            }
+            
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+            
+            .challenge-solution,
+            .technical-challenge {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav {
+                justify-content: center;
+            }
+            
+            .case-study-title {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="https://drive.google.com/file/d/1Pl2JjSYH7AoyVf-QXi9xhVaqILJyMfJk/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+        </div>
+    </nav>
+    
+    <div class="content-wrapper">        
+        <!-- Case Study Header -->
+        <header>
+            <div class="project-label">UX DESIGN & RESEARCH</div>
+            <h1 class="case-study-title">Zenodo Integration</h1>
+            <p class="project-subtitle">Bridging European research compliance with seamless archival workflows through technical innovation and user-centered design.</p>
+        </header>
+        
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Overview Section -->
+            <section class="case-study-section" aria-labelledby="overview-heading">
+                <div class="section-number">01. OVERVIEW</div>
+                <h2 class="section-title" id="overview-heading">Archival Integration for Research Compliance</h2>
+                
+                <div class="two-column-layout">
+                    <div class="content-column">
+                        <div class="overview-description">
+                            European consortium partners (FeMaLe and Cities2030) faced strict EU Horizon 2020 compliance requirements to archive research data in approved repositories like Zenodo—but lacked seamless integration with their existing Correlate workflows. Our solution was a comprehensive archival integration that allows users to seamlessly transfer collaborative work from Correlate to Zenodo while meeting regulatory requirements and minimizing workflow disruption.
+                        </div>
+                    </div>
+                    <div class="visual-column">
+                        <div class="visual-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" role="img" aria-label="Zenodo Integration Overview diagram showing the connection between Correlate and Zenodo platforms">
+                            [Zenodo Integration Overview]
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+        <!-- Role Section -->
+        <section class="case-study-section">
+            <div class="section-number">02. ROLE</div>
+            <h2 class="section-title">Technical UX Leadership</h2>
+            
+            <div class="two-column-layout">
+                <div class="content-column">
+                    <h3>My Responsibilities</h3>
+                    <p><strong>UX Designer & Technical Researcher</strong> — Led end-to-end design and research while bridging technical constraints with user needs.</p>
+                    
+                    <div style="margin: 30px 0;">
+                        <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 10px; color: #667eea;">Core Activities</h4>
+                        <p style="font-size: 14px; line-height: 1.5; color: #666;">
+                            • API Research & Technical Documentation<br>
+                            • User Research Coordination<br>
+                            • Cross-functional Collaboration<br>
+                            • Design Strategy & Execution<br>
+                            • Stakeholder Management
+                        </p>
+                    </div>
+                    
+                    <p><strong>Timeline:</strong> 8 weeks (MVP design and development)<br>
+                    <strong>Team:</strong> UX Designer (me), Chief Design Officer, UX Researcher</p>
+                </div>
+                <div class="visual-column">
+                    <div class="visual-placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        [Role Framework Diagram]
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Research Section -->
+        <section class="case-study-section">
+            <div class="section-number">03. RESEARCH & DISCOVERY</div>
+            <h2 class="section-title">Technical Constraints Meet User Needs</h2>
+            
+            <div class="research-grid">
+                <div class="research-item">
+                    <div class="research-title">API Technical Investigation</div>
+                    <div class="research-description">With our development team fully occupied, I leveraged my computer science background to personally test Zenodo's API capabilities. I set up integration endpoints, documented mandatory fields, and identified technical limitations—creating comprehensive documentation that informed our design constraints.</div>
+                </div>
+                
+                <div class="research-item">
+                    <div class="research-title">User Research with Consortium Members</div>
+                    <div class="research-description">Our UX researcher conducted interviews with FeMaLe and Cities2030 consortium members to understand archival workflows, compliance requirements, and pain points. We identified opportunities to reduce administrative overhead while ensuring regulatory compliance.</div>
+                </div>
+                
+                <div class="research-item">
+                    <div class="research-title">Competitive Analysis & Systems Research</div>
+                    <div class="research-description">I researched existing archival integrations and Zenodo's interface patterns to understand user expectations. This revealed that most solutions required users to completely reconstruct their work in new platforms—highlighting our opportunity for seamless data transfer.</div>
+                </div>
+            </div>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-number">INSIGHT 01</div>
+                    <div class="insight-content">Zenodo's API supports both draft and direct publication modes with different metadata requirements. This technical constraint needed careful balance with user workflow preferences to avoid overwhelming researchers.</div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-number">INSIGHT 02</div>
+                    <div class="insight-content">Consortium members preferred bulk archival for project deliverables rather than individual files, needing to archive entire project phases while maintaining organizational structure.</div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-number">INSIGHT 03</div>
+                    <div class="insight-content">The biggest pain point was data recreation—researchers spent hours manually uploading files and re-entering metadata that already existed in Correlate, creating resistance to compliance requirements.</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technical Challenge -->
+        <section class="case-study-section">
+            <div class="technical-challenge">
+                <div class="challenge-header">
+                    <div class="challenge-icon">⚠️</div>
+                    <div class="challenge-title">Critical Technical Discovery</div>
+                </div>
+                <div class="challenge-description">
+                    During my API research, I uncovered a fundamental architecture challenge: Correlate doesn't store files locally—all documents exist as links to users' external integrations (Google Drive, etc.). This meant we couldn't directly transfer files to Zenodo using standard methods.
+                </div>
+                
+                <div class="solution-box">
+                    <div class="solution-label">SOLUTION APPROACH</div>
+                    <div class="solution-text">I proposed leveraging our existing server infrastructure to temporarily download files from users' Google Drive, transfer them to Zenodo via API, then immediately delete them from our servers. This solution maintained our architecture principles while enabling seamless archival functionality.</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Problem Statement -->
+        <section class="case-study-section">
+            <div class="challenge-solution">
+                <h3>Problem Statement</h3>
+                <p>"How might we enable European research consortium members to seamlessly archive their collaborative work from Correlate to Zenodo while meeting strict compliance requirements and minimizing workflow disruption?"</p>
+            </div>
+        </section>
+        
+        <!-- Design Process -->
+        <section class="case-study-section">
+            <div class="section-number">04. DESIGN PROCESS</div>
+            <h2 class="section-title">Systematic Problem Solving</h2>
+            
+            <div class="process-container">
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Technical Documentation & Team Alignment</h3>
+                            <p class="step-description">After completing API research, I created comprehensive technical documentation outlining integration possibilities, constraints, and recommended approaches. This documentation served as the foundation for design decisions and development planning.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">User Flow Mapping</h3>
+                            <p class="step-description">I collaborated with the UX researcher to map detailed user journeys, identifying two primary scenarios: individual file archival and bulk project archival. These flows incorporated both technical constraints and user preferences discovered during research.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Low-Fidelity Prototyping</h3>
+                            <p class="step-description">I created initial wireframes focusing on the archival workflow, metadata input forms, and integration authentication. These prototypes prioritized ease of use while ensuring all mandatory Zenodo fields were captured efficiently.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Stakeholder Review & Iteration</h3>
+                            <p class="step-description">I presented initial designs to the full Correlate team, incorporating feedback on technical feasibility, user experience, and business requirements. Multiple review cycles ensured alignment between design vision and implementation reality.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Design Handoff & Collaboration</h3>
+                            <p class="step-description">Our Chief Design Officer took over visual design refinement while I continued collaborating on interaction design and user flow optimization. This collaborative approach ensured design consistency while meeting our tight timeline.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Design Solutions -->
+        <section class="case-study-section">
+            <div class="section-number">05. KEY DESIGN DECISIONS</div>
+            <h2 class="section-title">Solutions That Bridge Constraints</h2>
+            
+            <div class="two-column-layout">
+                <div class="content-column">
+                    <h3>Simplified Integration Authentication</h3>
+                    <p>Designed a streamlined OAuth setup flow that allows users to connect their Zenodo accounts without leaving Correlate. The interface clearly communicates permissions and provides helpful guidance for first-time Zenodo users.</p>
+                    
+                    <h3>Smart Metadata Pre-population</h3>
+                    <p>Leveraged existing Correlate data to automatically populate Zenodo's mandatory fields where possible. Document titles, creation dates, and author information are extracted from Correlate, reducing form completion time by an estimated 60%.</p>
+                </div>
+                <div class="visual-column">
+                    <div class="visual-placeholder" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                        [Integration Setup Flow]
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin: 80px 0;"></div>
+            
+            <div class="two-column-layout">
+                <div class="visual-column">
+                    <div class="visual-placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        [Archive Interface Design]
+                    </div>
+                </div>
+                <div class="content-column">
+                    <h3>Flexible Archival Options</h3>
+                    <p>Created two distinct archival pathways: individual file archival for quick uploads and bulk project archival for comprehensive deliverable packages.</p>
+                    
+                    <h3>Draft vs. Publish Workflow</h3>
+                    <p>Users can save drafts for later completion or publish immediately, accommodating different workflow preferences and compliance timelines while clearly communicating the permanence of published archives.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Results -->
+        <section class="case-study-section">
+            <div class="section-number">06. RESULTS & IMPACT</div>
+            <h2 class="section-title">Measurable Success</h2>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-title">8-Week Delivery</div>
+                    <div class="result-description">Successfully delivered MVP within tight deadline, enabling compliance for two major European consortiums</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-title">5-10 Minute Process</div>
+                    <div class="result-description">Reduced archival time from manual multi-hour process to seamless workflow within Correlate</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-title">Enhanced Platform Value</div>
+                    <div class="result-description">Positioned Correlate as attractive platform for European research consortiums with compliance capabilities</div>
+                </div>
+            </div>
+            
+            <div style="margin: 80px 0;"></div>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-number">LEARNING 01</div>
+                    <div class="insight-content"><strong>Technical Research is Crucial:</strong> Conducting hands-on API research early prevented design decisions that would have been technically impossible to implement. This technical foundation informed every subsequent design choice.</div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-number">LEARNING 02</div>
+                    <div class="insight-content"><strong>Constraint-Driven Design:</strong> Working within multiple constraint layers—regulatory, technical, and user—required creative problem-solving. The most elegant solutions emerged from embracing constraints rather than fighting them.</div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-number">LEARNING 03</div>
+                    <div class="insight-content"><strong>Collaboration Under Pressure:</strong> Tight deadlines demand clear communication and defined ownership. Strategic division of responsibilities can accelerate delivery without compromising quality.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Manish. All rights reserved. | <a href="../privacy.html" style="color: #666; text-decoration: underline;">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        let lastScrollTop = 0;
+        const nav = document.getElementById('nav');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, { passive: true });
+
+        // Intersection Observer for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            (window.requestIdleCallback || window.setTimeout)(function() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { 
+                    threshold: 0.1, 
+                    rootMargin: "0px 0px -50px 0px" 
+                });
+                
+                const observeElements = [
+                    '.case-study-section',
+                    '.two-column-layout', 
+                    '.insight-card', 
+                    '.research-item', 
+                    '.technical-challenge',
+                    '.process-step',
+                    '.result-card'
+                ].flatMap(selector => 
+                    Array.from(document.querySelectorAll(selector))
+                );
+                
+                observeElements.forEach(element => {
+                    observer.observe(element);
+                });
+            }, { timeout: 500 });
+        });
+    </script>
+
+    <!-- Distinct ID Umami Analytics -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof umami !== 'undefined') {
+                setDistinctId();
+            } else {
+                const checkUmami = setInterval(() => {
+                    if (typeof umami !== 'undefined') {
+                        clearInterval(checkUmami);
+                        setDistinctId();
+                    }
+                }, 100);
+            }
+        });
+
+        function setDistinctId() {
+            let visitorId = localStorage.getItem('portfolio_visitor_id');
+            
+            if (!visitorId) {
+                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('portfolio_visitor_id', visitorId);
+            }
+            
+            umami.identify(visitorId);
+        }
+    </script>
+
+</body>
+</html>
