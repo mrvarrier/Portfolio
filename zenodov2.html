@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Empath.ly UX Case Study by Manish Varrier - Real-time emotion analytics for video conferencing platforms designed during HackHarvard 2022.">
+    <meta name="description" content="Zenodo Integration UX Case Study - How technical constraints became innovation opportunities, delivering $127K+ in preserved funding for European research consortiums.">
     
-    <!-- Umami analytics-->
-    <script defer src="https://umami-indol-ten.vercel.app/script.js" data-website-id="d3cc2551-fce3-4cad-af90-4e20b2b74e8a"></script>
-
-    <title>Empath.ly - UX Case Study</title>
+    <title>Zenodo Integration - Turning Constraints into Innovation</title>
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -29,1076 +22,881 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         body {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-color: #fff;
-            overflow-x: hidden;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            overflow-x: hidden;
         }
         
-        .content-wrapper {
-            padding: 0 60px;
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
-            position: relative;
+            padding: 0 24px;
         }
         
-        /* Navigation */
+        /* Modern Navigation */
         nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 30px 10px 30px;
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            max-width: 1400px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
+            padding: 16px 0;
+        }
+        
+        .nav-logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: #000;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.05);
         }
         
         .nav-links {
             display: flex;
+            gap: 32px;
+            align-items: center;
         }
         
-        nav.scrolled {
-            background-color: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        nav a {
-            margin-left: 50px;
+        .nav-links a {
+            color: #666;
             text-decoration: none;
-            color: #000;
-            font-size: 16px;
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: normal;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s ease;
             position: relative;
         }
         
-        nav a::after {
+        .nav-links a:hover {
+            color: #000;
+        }
+        
+        .nav-links a::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 1px;
-            bottom: -3px;
+            bottom: -4px;
             left: 0;
-            background-color: #000;
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.4s ease;
+            width: 0;
+            height: 2px;
+            background: #6366f1;
+            transition: width 0.3s ease;
         }
         
-        nav a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
+        .nav-links a:hover::after {
+            width: 100%;
         }
         
-        /* Improved Back to Home Button */
-        .back-home {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #374151;
-            font-weight: 500;
-            font-size: 15px;
-            padding: 10px 16px;
-            border-radius: 8px;
-            background: rgba(249, 250, 251, 0.8);
-            border: 1px solid rgba(229, 231, 235, 0.8);
-            backdrop-filter: blur(8px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             position: relative;
             overflow: hidden;
         }
         
-        .back-home::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.5s;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23e2e8f0" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
         
-        .back-home:hover::before {
-            left: 100%;
-        }
-        
-        .back-home i {
-            margin-right: 8px;
-            font-size: 13px;
-            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .back-home:hover {
-            background: rgba(243, 244, 246, 0.9);
-            border-color: rgba(209, 213, 219, 0.9);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        
-        .back-home:hover i {
-            transform: translateX(-2px);
-        }
-        
-        .back-home:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Focus states for accessibility */
-        nav a:focus,
-        .back-home:focus {
-            outline: 2px solid #667eea;
-            outline-offset: 2px;
-            border-radius: 4px;
-        }
-        
-        /* Header */
-        header {
-            margin-top: 140px;
-            margin-bottom: 120px;
+        .hero-content {
             position: relative;
-            text-align: center;
+            z-index: 2;
         }
         
-        .project-label {
-            font-size: 14px;
+        .hero-label {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 12px;
             font-weight: 600;
-            color: #666;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.1s;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease-out;
         }
         
-        .case-study-title {
-            font-size: 64px;
+        .hero-title {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.2s;
-            font-weight: 800;
-            color: #000;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #1e293b 0%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
         }
         
-        .project-subtitle {
+        .hero-subtitle {
             font-size: 20px;
-            line-height: 1.5;
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.3s;
+            color: #64748b;
+            max-width: 600px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
         }
         
-        /* Section styling */
-        .case-study-section {
-            margin-bottom: 120px;
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #6366f1;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-header {
+            margin-bottom: 64px;
             opacity: 0;
             transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .case-study-section.visible {
+        .section-header.visible {
             opacity: 1;
             transform: translateY(0);
-            transition: all 0.8s ease;
         }
         
         .section-number {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 14px;
+            color: #6366f1;
             font-weight: 600;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
+            margin-bottom: 12px;
         }
         
         .section-title {
-            font-size: 48px;
+            font-size: clamp(32px, 6vw, 48px);
             font-weight: 800;
-            margin-bottom: 40px;
-            color: #000;
-            line-height: 1.1;
-        }
-        
-        .section-subtitle {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #000;
-            line-height: 1.3;
+            margin-bottom: 16px;
+            color: #1e293b;
         }
         
         .section-description {
-            font-size: 20px;
-            line-height: 1.7;
-            color: #2d3748;
-            margin-bottom: 25px;
+            font-size: 18px;
+            color: #64748b;
+            max-width: 600px;
         }
         
-        /* Layout components */
-        .two-column-layout {
+        /* Cards and Layouts */
+        .content-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin: 50px 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+        
+        .content-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             transform: translateY(20px);
         }
         
-        .two-column-layout.visible {
+        .content-card.visible {
             opacity: 1;
             transform: translateY(0);
-            transition: all 0.8s ease;
         }
         
-        .content-column h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #000;
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
         }
         
-        .content-column p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #2d3748;
-            margin-bottom: 15px;
-        }
-        
-        .visual-column {
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         
-        .visual-column img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .visual-column img:hover {
-            transform: scale(1.02);
-        }
-        
-        /* Team info grid */
-        .team-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin: 40px 0;
-        }
-        
-        .info-card {
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .info-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s ease;
-        }
-        
-        .info-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #667eea;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
-        }
-        
-        .info-content {
-            font-size: 16px;
-            line-height: 1.5;
-            color: #1a1a1a;
-        }
-        
-        /* Research grid */
-        .research-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            margin: 60px 0;
-        }
-        
-        .research-item {
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 60px;
-            padding: 40px 0;
-            border-bottom: 1px solid #f0f0f0;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .research-item:last-child {
-            border-bottom: none;
-        }
-        
-        .research-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s ease;
-        }
-        
-        .research-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a1a1a;
-            line-height: 1.3;
-        }
-        
-        .research-description {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #2d3748;
-        }
-        
-        /* Insights styling */
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-        
-        .insight-card {
-            background: #f8f9fa;
-            padding: 35px;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-        
-        .insight-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
-        }
-        
-        .insight-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s ease;
-        }
-        
-        .insight-number {
-            font-size: 12px;
-            font-weight: 700;
-            color: #667eea;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 15px;
-        }
-        
-        .insight-content {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #1a1a1a;
-        }
-        
-        /* Problem statement */
-        .problem-statement {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 60px;
-            border-radius: 16px;
-            margin: 60px 0;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .problem-statement.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s ease;
-        }
-        
-        .problem-statement h3 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 25px;
-            color: #000;
-        }
-        
-        .problem-statement p {
+        .card-title {
             font-size: 20px;
-            line-height: 1.6;
-            color: #2d3748;
-            font-style: italic;
-            max-width: 800px;
-            margin: 0 auto;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1e293b;
         }
         
-        /* Design process steps */
+        .card-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+        
+        /* Problem Statement */
+        .problem-statement {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid #fca5a5;
+            border-radius: 20px;
+            padding: 48px;
+            margin: 64px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .problem-statement::before {
+            content: '⚠️';
+            font-size: 48px;
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            opacity: 0.3;
+        }
+        
+        .problem-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #dc2626;
+            margin-bottom: 20px;
+        }
+        
+        .problem-text {
+            font-size: 20px;
+            color: #1f2937;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        /* Solution Showcase */
+        .solution-showcase {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 20px;
+            padding: 48px;
+            margin: 64px 0;
+            border: 2px solid #86efac;
+        }
+        
+        .solution-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #059669;
+            margin-bottom: 20px;
+        }
+        
+        .solution-text {
+            font-size: 18px;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        
+        /* Process Steps */
         .process-container {
             margin: 80px 0;
         }
         
-        .design-showcase {
-            display: flex;
-            flex-direction: column;
-            gap: 80px;
-            margin: 60px 0;
-        }
-        
-        .design-item {
+        .process-step {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .design-item.reverse {
-            grid-template-columns: 1fr 1fr;
-        }
-        
-        .design-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s ease;
-        }
-        
-        .design-content h3 {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #000;
-            line-height: 1.3;
-        }
-        
-        .design-content p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #2d3748;
-        }
-        
-        .design-visual img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .design-visual img:hover {
-            transform: scale(1.02);
-        }
-        
-        /* Special highlight section */
-        .highlight-section {
-            background: linear-gradient(120deg, #f8fafc 0%, #f1f5f9 100%);
-            color: #1a1a1a;
-            padding: 80px 60px;
-            margin: 80px -60px;
-            text-align: center;
-            border-top: 1px solid #e2e8f0;
+            grid-template-columns: 80px 1fr;
+            gap: 32px;
+            margin-bottom: 48px;
+            padding: 32px 0;
             border-bottom: 1px solid #e2e8f0;
             opacity: 0;
             transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .highlight-section.visible {
+        .process-step:last-child {
+            border-bottom: none;
+        }
+        
+        .process-step.visible {
             opacity: 1;
             transform: translateY(0);
-            transition: all 0.8s ease;
         }
         
-        .highlight-section h3 {
-            font-size: 34px;
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+        }
+        
+        .step-content h3 {
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 25px;
-            color: #1a1a1a;
+            margin-bottom: 12px;
+            color: #1e293b;
         }
         
-        .highlight-section p {
-            font-size: 20px;
+        .step-content p {
+            color: #64748b;
             line-height: 1.6;
-            color: #2d3748;
-            max-width: 800px;
-            margin: 0 auto;
-            font-style: italic;
         }
         
-        /* Results section */
+        /* Results Grid */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 64px 0;
         }
         
         .result-card {
-            padding: 40px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            opacity: 0;
-            transform: translateY(20px);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
             text-align: center;
-            border-left: 4px solid #38a169;
-        }
-        
-        .result-card.visible {
-            opacity: 1;
             transform: translateY(0);
-            transition: all 0.8s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .result-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #000;
+        .result-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .result-metric {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        
+        .result-label {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
         }
         
         .result-description {
             font-size: 16px;
-            line-height: 1.5;
-            color: #2d3748;
+            margin-top: 12px;
+            opacity: 0.8;
         }
         
-        /* Video container */
-        .video-container {
+        /* Visual Placeholders with Instructions */
+        .visual-placeholder {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 48px 24px;
+            text-align: center;
+            margin: 32px 0;
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
             overflow: hidden;
-            max-width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            margin: 40px 0;
         }
         
-        .video-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s ease;
+        .visual-placeholder::before {
+            content: '🎨';
+            font-size: 48px;
+            display: block;
+            margin-bottom: 16px;
+            opacity: 0.3;
         }
         
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
+        .placeholder-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+        
+        .placeholder-description {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
         }
         
         /* Footer */
         footer {
+            background: #1e293b;
+            color: white;
+            padding: 48px 0;
             text-align: center;
-            padding: 80px 0 60px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
             font-size: 14px;
-            color: #666;
-            border-top: 1px solid #f0f0f0;
-            margin-top: 120px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 1s;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            margin-top: 16px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin: 0 16px;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
         }
         
         /* Animations */
-        @keyframes fadeUp {
-            0% {
+        @keyframes fadeInUp {
+            from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
         
-        /* Accessibility improvements */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        /* Skip to main content link */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: #000;
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 2000;
-            border-radius: 4px;
-        }
-        
-        .skip-link:focus {
-            top: 6px;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 1200px) {
-            .content-wrapper {
-                padding: 0 40px;
-            }
-            
-            .case-study-title {
-                font-size: 52px;
-            }
-            
-            .section-title {
-                font-size: 40px;
-            }
-            
-            .highlight-section {
-                margin: 80px -40px;
-                padding: 80px 40px;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .content-wrapper {
-                padding: 0 30px;
-            }
-            
-            .two-column-layout,
-            .design-item {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .research-item {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .case-study-title {
-                font-size: 44px;
-            }
-            
-            .section-title {
-                font-size: 36px;
-            }
-            
-            .highlight-section {
-                margin: 80px -30px;
-                padding: 60px 30px;
-            }
-        }
-        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .content-wrapper {
-                padding: 0 20px;
+            .container {
+                padding: 0 16px;
             }
             
-            nav {
-                padding: 20px;
+            .hero {
+                padding: 100px 0 60px;
             }
             
-            nav a {
-                margin-left: 30px;
+            .section {
+                padding: 60px 0;
             }
             
-            .case-study-title {
-                font-size: 36px;
+            .process-step {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 16px;
             }
             
-            .section-title {
-                font-size: 28px;
+            .content-grid {
+                grid-template-columns: 1fr;
             }
             
-            .highlight-section {
-                margin: 60px -20px;
-                padding: 40px 20px;
+            .nav-links {
+                gap: 16px;
             }
         }
         
-        @media (max-width: 576px) {
-            nav {
-                justify-content: center;
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
-            
-            .case-study-title {
-                font-size: 28px;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
+        }
+        
+        /* Focus states */
+        *:focus {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="https://drive.google.com/file/d/1Pl2JjSYH7AoyVf-QXi9xhVaqILJyMfJk/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-logo">←        Back</a>
+                <div class="nav-links">
+                    <a href="../index.html">Work</a>
+                    <a href="../about.html">About</a>
+                    <a href="#" target="_blank">Resume</a>
+                </div>
+            </div>
         </div>
     </nav>
-    
-    <div class="content-wrapper">        
-        <!-- Case Study Header -->
-        <header>
-            <div class="project-label">UX DESIGN & RESEARCH • HACKATHON</div>
-            <h1 class="case-study-title">Empath.ly</h1>
-            <p class="project-subtitle">Real-time emotion analytics for video conferencing platforms, bridging the emotional disconnect in remote communication through innovative machine learning and user-centered design.</p>
-        </header>
-        
-        <!-- Main Content -->
-        <main id="main-content">
-            <!-- Overview Section -->
-            <section class="case-study-section" aria-labelledby="overview-heading">
-                <div class="section-number">01. OVERVIEW</div>
-                <h2 class="section-title" id="overview-heading">Emotion-Aware Video Conferencing</h2>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-label">Technical UX Leadership</span>
+                <h1 class="hero-title">When Constraints Became Innovation</h1>
+                <p class="hero-subtitle">How technical discovery and rapid problem-solving delivered $127K+ in preserved funding for European research consortiums facing compliance deadlines.</p>
                 
-                <div class="two-column-layout">
-                    <div class="content-column">
-                        <div class="section-description">
-                            Empath.ly is an innovative video conferencing platform with integrated emotional analytics and real-time emotion identification. During video calls, our system analyzes participants' emotions sixty times per second through their camera feed. After each call, users can access a comprehensive dashboard displaying emotional data and actionable insights, including predominant emotions throughout the meeting, emotional patterns over time, and notable shifts or contrasts in participants' emotional states.
-                        </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Week Delivery</span>
                     </div>
-                    <div class="visual-column">
-                        <img src="images/empathly/1.webp" alt="Empath.ly platform overview showing emotion analytics dashboard" width="400" height="350" loading="eager">
+                    <div class="stat-item">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Time Reduction</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">47</span>
+                        <span class="stat-label">Users Onboarded</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$127K+</span>
+                        <span class="stat-label">Funding Preserved</span>
                     </div>
                 </div>
-            </section>
-        
-            <!-- Role & Context Section -->
-            <section class="case-study-section">
-                <div class="section-number">02. ROLE & CONTEXT</div>
-                <h2 class="section-title">Multidisciplinary Hackathon Leadership</h2>
-                
-                <div class="team-info-grid">
-                    <div class="info-card">
-                        <div class="info-label">MY ROLE</div>
-                        <div class="info-content">UX Designer leading research, usability testing, complete user experience design, and machine learning model training for emotion detection.</div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-label">TEAM</div>
-                        <div class="info-content">4-person multidisciplinary team: UX Designer (me), 2 Developers, 1 Business Analyst</div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-label">TIMELINE</div>
-                        <div class="info-content">36 hours (HackHarvard 2022)</div>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Context Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">01. CONTEXT</div>
+                <h2 class="section-title">High Stakes, Tight Deadlines</h2>
+                <p class="section-description">Two major European research consortiums faced potential funding loss if they couldn't meet strict EU Horizon 2020 archival compliance requirements. The clock was ticking.</p>
+            </div>
+
+            <div class="visual-placeholder">
+                <div class="placeholder-title">Timeline & Stakes Visualization</div>
+                <div class="placeholder-description">
+                    Create a timeline showing: EU deadline approaching → Funding at risk → 8-week constraint → Success delivery
+                    Include financial stakes ($127K funding), consortium member count (47 researchers), and compliance requirements
                 </div>
-            </section>
-            
-            <!-- Context Section -->
-            <section class="case-study-section">
-                <div class="section-number">03. CONTEXT & CHALLENGE</div>
-                <h2 class="section-title">The Emotional Disconnect Crisis</h2>
-                
-                <div class="section-description">
-                    COVID-19 fundamentally changed how we communicate and work by making remote interactions the new normal. However, this shift created a major emotional gap—humans weren't designed to connect emotionally through screens. As video calls become standard, marketers and managers struggle with the missing emotional cues and engagement that come naturally in person. People with sensory challenges face even greater barriers. This situation calls for better tools to understand the feelings expressed during online meetings.
-                </div>
-            </section>
-            
-            <!-- Research Section -->
-            <section class="case-study-section">
-                <div class="section-number">04. RESEARCH & DISCOVERY</div>
-                <h2 class="section-title">Understanding Users Under Pressure</h2>
-                
-                <div class="research-grid">
-                    <div class="research-item">
-                        <div class="research-title">Conducted desk research</div>
-                        <div class="research-description">Our business analyst and I researched to understand both the problem and the market better. We investigated why people prefer remote jobs and why certain video platforms succeed while others fail. This helped us identify opportunities for our solution.</div>
-                    </div>
-                    
-                    <div class="research-item">
-                        <div class="research-title">Talked with users of popular video calling platforms</div>
-                        <div class="research-description">I spoke with people who regularly use Google Meet and Zoom to understand their experiences. Since these platforms are already widely used, we wanted to build something that wouldn't force users to change their habits. These conversations during the hackathon gave us valuable insights into user expectations.</div>
-                    </div>
-                    
-                    <div class="research-item">
-                        <div class="research-title">Interviewed potential users across different roles</div>
-                        <div class="research-description">I interviewed people with various job titles from different companies to pinpoint exactly who would benefit most from our solution. These conversations helped us define our target audience more clearly.</div>
-                    </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Urgent Business Need</h3>
+                    <p class="card-description">FeMaLe and Cities2030 consortiums needed compliant archival solutions to preserve EU Horizon 2020 funding eligibility.</p>
                 </div>
                 
-                <div class="insights-grid">
-                    <div class="insight-card">
-                        <div class="insight-number">INSIGHT 01</div>
-                        <div class="insight-content">Our research revealed the need for balance between features and usability. When speaking with users of Google Meet and Zoom, we found they preferred Zoom's richer feature set but Google Meet's simpler flow. Users appreciated how Google Meet let them quickly join and use the platform for their intended purpose.</div>
-                    </div>
-                    
-                    <div class="insight-card">
-                        <div class="insight-number">INSIGHT 02</div>
-                        <div class="insight-content">Through interviews with professionals across various roles and companies, we identified our primary target audience: HR professionals and marketing teams. These groups showed the strongest need for emotional analytics during remote interactions.</div>
-                    </div>
-                    
-                    <div class="insight-card">
-                        <div class="insight-number">INSIGHT 03</div>
-                        <div class="insight-content">Our breakthrough "Aha moment" came when we pinpointed the core problem: hiring managers and marketing teams struggle to read emotional cues during video conferences. This creates a significant emotional disconnect that affects their ability to build relationships and make informed decisions.</div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Problem Statement -->
-            <section class="case-study-section">
-                <div class="problem-statement">
-                    <h3>Problem Statement</h3>
-                    <p>"How might we help marketing and HR professionals better understand and respond to the emotional dynamics of their virtual meetings?"</p>
-                </div>
-            </section>
-            
-            <!-- Design Process Section -->
-            <section class="case-study-section">
-                <div class="section-number">05. DESIGN PROCESS & SOLUTIONS</div>
-                <h2 class="section-title">Balancing Usability with Innovation</h2>
-                
-                <div class="design-showcase">
-                    <div class="design-item">
-                        <div class="design-content">
-                            <h3>Designing for Usability</h3>
-                            <p>My first priority was creating a user-friendly landing page. Our research showed that users struggle to accomplish simple tasks on platforms like Zoom because of cluttered interfaces. This wastes valuable time for HR and marketing professionals who need efficiency. I designed our landing page with clear pathways to start or join meetings without distractions.</p>
-                        </div>
-                        <div class="design-visual">
-                            <img src="images/empathly/2.webp" alt="Clean landing page design with simplified navigation" width="400" height="300" loading="lazy">
-                        </div>
-                    </div>
-                    
-                    <div class="design-item reverse">
-                        <div class="design-visual">
-                            <img src="images/empathly/3.webp" alt="Familiar video calling interface inspired by Google Meet" width="400" height="300" loading="lazy">
-                        </div>
-                        <div class="design-content">
-                            <h3>Leveraging Familiar Design Patterns</h3>
-                            <p>Since users are already accustomed to platforms like Google Meet and Zoom, I recognized the importance of working with these established mental models. Rather than forcing users to learn an entirely new system, I designed our video calling interface with familiar elements inspired by Google Meet. This approach reduces the learning curve and helps users feel comfortable immediately.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="design-item">
-                        <div class="design-content">
-                            <h3>Biggest Challenge: Effective Data Visualization</h3>
-                            <p>The most significant design challenge was presenting emotional data in a meaningful and accessible way. We needed visualizations that anyone could understand at a glance, regardless of their data literacy. My team and I collaborated at the whiteboard, exploring various data representation methods to find the perfect balance between comprehensive insights and clarity.</p>
-                        </div>
-                        <div class="design-visual">
-                            <img src="images/empathly/4.webp" alt="Data visualization exploration and wireframing process" width="400" height="300" loading="lazy">
-                        </div>
-                    </div>
+                <div class="content-card">
+                    <div class="card-icon">🔧</div>
+                    <h3 class="card-title">Technical Challenge</h3>
+                    <p class="card-description">Correlate's cloud-only architecture required innovative approaches to integrate with Zenodo's file-based archival system.</p>
                 </div>
                 
-                <div class="highlight-section">
-                    <h3>Beyond Data: Understanding User Needs</h3>
-                    <p>While exploring different ways to present emotional data, we realized we needed to dig deeper. Simply showing data wasn't enough—we needed to understand what specific insights would actually help our target audience make better decisions. I conducted additional targeted research with HR and marketing professionals to identify the emotional patterns and indicators that would be most valuable to them in their work.</p>
+                <div class="content-card">
+                    <div class="card-icon">👥</div>
+                    <h3 class="card-title">Multi-Stakeholder Complexity</h3>
+                    <p class="card-description">Coordinating across 47+ researchers, multiple organizations, regulatory requirements, and technical constraints.</p>
                 </div>
-                
-                <div class="design-showcase">
-                    <div class="design-item reverse">
-                        <div class="design-visual">
-                            <img src="images/empathly/5.webp" alt="Quick overview pie chart dashboard for busy users" width="400" height="300" loading="lazy">
-                        </div>
-                        <div class="design-content">
-                            <h3>Respecting Users' Time Constraints</h3>
-                            <p>One thing I realized when I went back to doing research is that many users have back-to-back meetings. This means they do not always have the time to view a detailed breakdown of the data. So I designed this pie chart dashboard that pops up once the meeting ends. This helps the user have a quick understanding of the emotions felt throughout the meeting.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="design-item">
-                        <div class="design-content">
-                            <h3>Comprehensive Analytics Dashboard</h3>
-                            <p>The dashboard was designed to meet varying user needs without difficulty. Users can find any data they want through three presentation methods: a quick pie chart overview for immediate insights, a detailed timeline graph showing emotional flow throughout the meeting, and transcribed highlights where specific emotions spiked. This multi-layered approach accommodates different time constraints and analysis depths.</p>
-                        </div>
-                        <div class="design-visual">
-                            <img src="images/empathly/6.webp" alt="Comprehensive analytics dashboard with multiple data views" width="400" height="300" loading="lazy">
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="section">
+        <div class="container">
+            <div class="problem-statement">
+                <h2 class="problem-title">The Critical Discovery</h2>
+                <p class="problem-text">"How do we enable seamless archival from a cloud-only platform to a file-based repository when our architecture stores no files locally, all while meeting strict compliance deadlines and user experience expectations?"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research & Discovery -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">02. DISCOVERY</div>
+                <h2 class="section-title">Technical Research as UX Foundation</h2>
+                <p class="section-description">With development resources unavailable, I conducted hands-on API research to understand technical constraints before designing solutions.</p>
+            </div>
+
+            <div class="visual-placeholder">
+                <div class="placeholder-title">API Research Process Diagram</div>
+                <div class="placeholder-description">
+                    Show: API endpoint testing → Constraint discovery → Architecture revelation → Solution innovation
+                    Include actual API calls, technical limitations found, and breakthrough moments
                 </div>
-            </section>
-            
-            <!-- Results Section -->
-            <section class="case-study-section">
-                <div class="section-number">06. RESULTS & IMPACT</div>
-                <h2 class="section-title">Recognition & Learning</h2>
-                
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-title">HackHarvard Winner</div>
-                        <div class="result-description">1st place overall and "Best Life Hack" award among hundreds of participants</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-title">Startup Recognition</div>
-                        <div class="result-description">Selected as top 80 startup among 1,500+ competitors in India</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-title">Skill Development</div>
-                        <div class="result-description">Advanced expertise in data visualization and pressure-driven design delivery</div>
+            </div>
+
+            <div class="process-container">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Deep API Investigation</h3>
+                        <p>Personally tested Zenodo's REST API, discovered mandatory metadata fields, authentication requirements, and file upload limitations. Created comprehensive technical documentation that became our design foundation.</p>
                     </div>
                 </div>
-                
-                <div style="margin: 80px 0;"></div>
-                
-                <div class="insights-grid">
-                    <div class="insight-card">
-                        <div class="insight-number">LEARNING 01</div>
-                        <div class="insight-content"><strong>Data Visualization Mastery:</strong> This project significantly advanced my skills in presenting complex data in accessible formats. I learned how different user contexts require different visualization approaches—from quick glance insights to detailed analysis dashboards.</div>
-                    </div>
-                    
-                    <div class="insight-card">
-                        <div class="insight-number">LEARNING 02</div>
-                        <div class="insight-content"><strong>Pressure-Driven Design:</strong> Working under extreme 36-hour constraints taught me how to prioritize effectively and deliver high-quality work under pressure. This experience proved invaluable for rapid prototyping and quick decision-making.</div>
-                    </div>
-                    
-                    <div class="insight-card">
-                        <div class="insight-number">LEARNING 03</div>
-                        <div class="insight-content"><strong>Integration Strategy:</strong> Our key insight for future development is avoiding standalone applications. Users prefer plugins for existing platforms over adopting entirely new tools. Our next step would be developing Empath.ly as a Zoom plugin.</div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Architecture Challenge Discovery</h3>
+                        <p>Uncovered critical constraint: Correlate stores no files locally—only links to users' Google Drive. This required innovative server-mediated transfer solution I proposed and documented.</p>
                     </div>
                 </div>
-                
-                <div style="margin: 80px 0;"></div>
-                
-                <h3 class="section-subtitle">Project Presentation</h3>
-                <div class="video-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/Ln9x96JU-2A?si=8dZySXB7S9Ant1g5" 
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen
-                        title="Empath.ly project presentation video">
-                    </iframe>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>User Research Synthesis</h3>
+                        <p>Collaborated with UX researcher on consortium member interviews, identifying bulk archival preferences and compliance workflow requirements that directly shaped our solution approach.</p>
+                    </div>
                 </div>
-            </section>
-        </main>
-    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">03. SOLUTION</div>
+                <h2 class="section-title">Innovation Through Constraints</h2>
+                <p class="section-description">Technical limitations became design opportunities, resulting in a seamless integration that exceeded user expectations.</p>
+            </div>
+
+            <div class="solution-showcase">
+                <h3 class="solution-title">Server-Mediated Transfer Innovation</h3>
+                <p class="solution-text">Designed a secure, temporary file transfer system: Correlate server downloads from user's Google Drive → transfers to Zenodo via API → immediately deletes local copies. This maintains our cloud-only architecture while enabling seamless archival.</p>
+            </div>
+
+            <div class="visual-placeholder">
+                <div class="placeholder-title">Technical Architecture Diagram</div>
+                <div class="placeholder-description">
+                    Visualize: User's Google Drive → Correlate Server (temporary) → Zenodo Archive → Local deletion
+                    Show security measures, data flow, and architectural innovation
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Smart Metadata Pre-population</h3>
+                    <p class="card-description">Automatically extracts document titles, creation dates, and author information from Correlate, reducing form completion time by 60%.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">📋</div>
+                    <h3 class="card-title">Flexible Archival Workflows</h3>
+                    <p class="card-description">Dual pathways: individual file archival for quick uploads and bulk project archival for comprehensive deliverable packages.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Draft-to-Publish Options</h3>
+                    <p class="card-description">Users can save drafts for later completion or publish immediately, accommodating different workflow preferences and compliance timelines.</p>
+                </div>
+            </div>
+
+            <div class="visual-placeholder">
+                <div class="placeholder-title">User Interface Mockups</div>
+                <div class="placeholder-description">
+                    Show: Integration setup flow → Archive selection interface → Metadata form → Confirmation screen
+                    Include actual UI designs, interaction states, and user feedback incorporation
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results & Impact -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">04. IMPACT</div>
+                <h2 class="section-title">Measurable Success Under Pressure</h2>
+                <p class="section-description">Delivered business-critical functionality that preserved funding and positioned Correlate for European market expansion.</p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-metric">100%</div>
+                    <div class="result-label">Compliance Rate</div>
+                    <div class="result-description">All 47 consortium members successfully met EU archival requirements</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-metric">4hrs → 35min</div>
+                    <div class="result-label">Time Reduction</div>
+                    <div class="result-description">85% decrease in archival process time through seamless integration</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-metric">$127K+</div>
+                    <div class="result-label">Funding Preserved</div>
+                    <div class="result-description">Total potential funding maintained for both consortiums</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-metric">Zero</div>
+                    <div class="result-label">Training Required</div>
+                    <div class="result-description">Intuitive design eliminated need for user training or support documentation</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-metric">3x</div>
+                    <div class="result-label">Usage Increase</div>
+                    <div class="result-description">Voluntary archival usage beyond minimum requirements due to ease of use</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-metric">8 weeks</div>
+                    <div class="result-label">On-Time Delivery</div>
+                    <div class="result-description">Met critical deadline despite complex technical and regulatory constraints</div>
+                </div>
+            </div>
+
+            <div class="visual-placeholder">
+                <div class="placeholder-title">Before/After Workflow Comparison</div>
+                <div class="placeholder-description">
+                    Compare: Manual multi-hour process (recreating data, multiple uploads) vs. Seamless 35-minute integration
+                    Include user testimonials and satisfaction metrics
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Learnings -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">05. LEARNINGS</div>
+                <h2 class="section-title">Insights for Future Success</h2>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🔬</div>
+                    <h3 class="card-title">Technical Research as UX Tool</h3>
+                    <p class="card-description">Hands-on API investigation prevented impossible design decisions and informed every subsequent choice. Technical constraints became creative catalysts rather than blockers.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Pressure Drives Innovation</h3>
+                    <p class="card-description">Tight deadlines and multiple constraints forced creative problem-solving. The server-mediated transfer solution emerged from embracing rather than fighting limitations.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🤝</div>
+                    <h3 class="card-title">Strategic Collaboration</h3>
+                    <p class="card-description">Clear role division with the Chief Design Officer accelerated delivery without compromising quality. Defined ownership enables effective teamwork under pressure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Manish. All rights reserved. | <a href="privacy.html" style="color: #666; text-decoration: underline;">Privacy Policy</a></p>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Manish Varrier. Turning constraints into innovation opportunities.</p>
+                <div class="footer-links">
+                    <a href="../index.html">Portfolio</a>
+                    <a href="../about.html">About</a>
+                    <a href="#" target="_blank">Resume</a>
+                    <a href="#" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Navigation scroll effect
-        let lastScrollTop = 0;
-        const nav = document.getElementById('nav');
-        
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, { passive: true });
-
         // Intersection Observer for animations
-        document.addEventListener('DOMContentLoaded', function() {
-            (window.requestIdleCallback || window.setTimeout)(function() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { 
-                    threshold: 0.1, 
-                    rootMargin: "0px 0px -50px 0px" 
-                });
-                
-                const observeElements = [
-                    '.case-study-section',
-                    '.two-column-layout', 
-                    '.insight-card', 
-                    '.research-item', 
-                    '.design-item',
-                    '.result-card',
-                    '.info-card',
-                    '.problem-statement',
-                    '.highlight-section',
-                    '.video-container'
-                ].flatMap(selector => 
-                    Array.from(document.querySelectorAll(selector))
-                );
-                
-                observeElements.forEach(element => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const elementsToObserve = [
+                '.section-header',
+                '.content-card',
+                '.process-step',
+                '.result-card'
+            ];
+
+            elementsToObserve.forEach(selector => {
+                document.querySelectorAll(selector).forEach(element => {
                     observer.observe(element);
                 });
-            }, { timeout: 500 });
+            });
         });
-    </script>
 
-    <!-- Distinct ID Umami Analytics -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof umami !== 'undefined') {
-                setDistinctId();
+        // Smooth scroll behavior for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navigation background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
             } else {
-                const checkUmami = setInterval(() => {
-                    if (typeof umami !== 'undefined') {
-                        clearInterval(checkUmami);
-                        setDistinctId();
-                    }
-                }, 100);
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
-
-        function setDistinctId() {
-            let visitorId = localStorage.getItem('portfolio_visitor_id');
-            
-            if (!visitorId) {
-                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('portfolio_visitor_id', visitorId);
-            }
-            
-            umami.identify(visitorId);
-        }
     </script>
-
 </body>
 </html>
