@@ -12,19 +12,42 @@
 
     <title>Empath.ly - UX Case Study</title>
     
+    <!-- Favicon - Preload critical icons -->
+    <link rel="preload" href="icon/favicon-32x32.png" as="image" type="image/png">  
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/site.webmanifest">
+    
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
+    <!-- Preload critical fonts with font-display:swap -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load non-critical CSS with low priority -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add cache control headers -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+    
+    <!-- Inline critical Font Awesome icons instead of loading the entire library -->
+    <style>
+        @font-face {
+            font-family: 'FontAwesome';
+            font-display: swap;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .fab {
+            font-family: 'FontAwesome';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
     
     <style>
         * {
@@ -592,9 +615,32 @@
                 font-size: 32px;
             }
         }
+        
+        /* Skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            z-index: 1001;
+            background: #000;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: top 0.3s ease;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
     </style>
 </head>
 <body>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Navigation -->
     <nav id="nav">
         <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to home</a>
@@ -611,8 +657,10 @@
             <h1 class="case-study-title lucida-typewriter">UX Case Study - Empath.ly</h1>
         </header>
         
-        <!-- Case Study Content -->
-        <div class="case-study-content">
+        <!-- Main content -->
+        <main id="main-content">
+            <!-- Case Study Content -->
+            <div class="case-study-content">
             <!-- Team and Role Section -->
             <section class="case-study-section">
                 <h2 class="section-title" style="margin-bottom: 10px;">TEAM AND ROLE</h2>
@@ -632,7 +680,7 @@
             <section class="case-study-section">
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="images/empathly/1.webp" alt="Project overview image" width="400" height="350" loading="eager">
+                        <img src="images/empathly/1.webp" alt="Empath.ly project overview showing video conferencing interface with emotional analytics dashboard" width="400" height="350" loading="eager">
                     </div>
                     <div class="pdf-right">
                         <h2 class="section-title">OVERVIEW</h2>
@@ -718,7 +766,7 @@
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="images/empathly/2.webp" alt="Design 1" width="400" height="300" loading="lazy">
+                        <img src="images/empathly/2.webp" alt="User research findings showing emotional patterns and meeting dynamics analysis" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Designing for usability</h3>
@@ -736,7 +784,7 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="images/empathly/3.webp" alt="Design 2" width="400" height="300" loading="lazy">
+                            <img src="images/empathly/3.webp" alt="Empath.ly landing page design showing clean interface with clear call-to-action buttons" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -746,7 +794,7 @@
                 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="images/empathly/4.webp" alt="Design 3" width="400" height="300" loading="lazy">
+                        <img src="images/empathly/4.webp" alt="Video calling interface design inspired by Google Meet with familiar controls and layout" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Biggest Challenge: Effective Data Visualization</h3>
@@ -764,7 +812,7 @@
 
                 <div class="pdf-layout">
                     <div class="pdf-left">
-                        <img src="images/empathly/5.webp" alt="Design 4" width="400" height="300" loading="lazy">
+                        <img src="images/empathly/5.webp" alt="Data visualization design process showing whiteboard collaboration and dashboard wireframes" width="400" height="300" loading="lazy">
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Respecting Users' Time Constraints</h3>
@@ -782,7 +830,7 @@
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
-                            <img src="images/empathly/6.webp" alt="Design 5" width="400" height="300" loading="lazy">
+                            <img src="images/empathly/6.webp" alt="Pie chart dashboard design showing emotional analytics summary for quick post-meeting insights" width="400" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -812,6 +860,7 @@
                 </div>
             </section>
         </div>
+        </main>
     </div>
 
     <!-- Footer -->
@@ -820,59 +869,147 @@
     </footer>
 
     <script>
-        // Navigation scroll effect
-        let lastScrollTop = 0;
-        const nav = document.getElementById('nav');
-        
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, { passive: true });
-
-        // Intersection Observer for animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Use requestIdleCallback for non-critical initialization
-            (window.requestIdleCallback || window.setTimeout)(function() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
+            try {
+                // Navigation scroll effect
+                let lastScrollTop = 0;
+                const nav = document.getElementById('nav');
+                
+                if (nav) {
+                    window.addEventListener('scroll', () => {
+                        try {
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            
+                            if (scrollTop > 100) {
+                                nav.classList.add('scrolled');
+                            } else {
+                                nav.classList.remove('scrolled');
+                            }
+                            
+                            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                        } catch (error) {
+                            console.warn('Scroll handler error:', error);
                         }
-                    });
-                }, { 
-                    threshold: 0.1, 
-                    rootMargin: "0px 0px -50px 0px" 
-                });
+                    }, { passive: true });
+                } else {
+                    console.warn('Navigation element not found');
+                }
+
+                // Intersection Observer for animations
+                // Use requestIdleCallback for non-critical initialization
+                const initCallback = window.requestIdleCallback || window.setTimeout;
                 
-                // Observe elements in batches to avoid layout thrashing
-                const observeElements = [
-                    '.case-study-section',
-                    '.pdf-layout', 
-                    '.two-column', 
-                    '.insight-box', 
-                    '.highlight-box', 
-                    '.highlight-box2', 
-                    '.video-container', 
-                    '.research-row', 
-                    '.result-paragraph', 
-                    '.context-subtitle', 
-                    '.context-paragraph'
-                ].flatMap(selector => 
-                    Array.from(document.querySelectorAll(selector))
-                );
-                
-                observeElements.forEach(element => {
-                    observer.observe(element);
-                });
-            }, { timeout: 500 });
+                initCallback(function() {
+                    try {
+                        if ('IntersectionObserver' in window) {
+                            const observer = new IntersectionObserver((entries) => {
+                                try {
+                                    entries.forEach(entry => {
+                                        try {
+                                            if (entry.isIntersecting && entry.target) {
+                                                entry.target.classList.add('visible');
+                                                observer.unobserve(entry.target);
+                                            }
+                                        } catch (error) {
+                                            console.warn('Observer entry error:', error);
+                                        }
+                                    });
+                                } catch (error) {
+                                    console.warn('Observer callback error:', error);
+                                }
+                            }, { 
+                                threshold: 0.1, 
+                                rootMargin: "0px 0px -50px 0px" 
+                            });
+                            
+                            // Observe elements in batches to avoid layout thrashing
+                            const selectors = [
+                                '.case-study-section',
+                                '.pdf-layout', 
+                                '.two-column', 
+                                '.insight-box', 
+                                '.highlight-box', 
+                                '.highlight-box2', 
+                                '.video-container', 
+                                '.research-row', 
+                                '.result-paragraph', 
+                                '.context-subtitle', 
+                                '.context-paragraph'
+                            ];
+                            
+                            let observeElements = [];
+                            
+                            try {
+                                // Use flatMap with fallback for older browsers
+                                if (Array.prototype.flatMap) {
+                                    observeElements = selectors.flatMap(selector => 
+                                        Array.from(document.querySelectorAll(selector))
+                                    );
+                                } else {
+                                    // Fallback for browsers without flatMap
+                                    observeElements = selectors.reduce((acc, selector) => {
+                                        return acc.concat(Array.from(document.querySelectorAll(selector)));
+                                    }, []);
+                                }
+                                
+                                observeElements.forEach(element => {
+                                    if (element) {
+                                        observer.observe(element);
+                                    }
+                                });
+                            } catch (error) {
+                                console.warn('Element selection error:', error);
+                                // Fallback: show all elements immediately
+                                selectors.forEach(selector => {
+                                    try {
+                                        const elements = document.querySelectorAll(selector);
+                                        elements.forEach(el => {
+                                            if (el) {
+                                                el.classList.add('visible');
+                                            }
+                                        });
+                                    } catch (fallbackError) {
+                                        console.warn('Fallback error for ' + selector + ':', fallbackError);
+                                    }
+                                });
+                            }
+                        } else {
+                            // Fallback for browsers without Intersection Observer
+                            console.warn('Intersection Observer not supported, showing all elements');
+                            const selectors = [
+                                '.case-study-section',
+                                '.pdf-layout', 
+                                '.two-column', 
+                                '.insight-box', 
+                                '.highlight-box', 
+                                '.highlight-box2', 
+                                '.video-container', 
+                                '.research-row', 
+                                '.result-paragraph', 
+                                '.context-subtitle', 
+                                '.context-paragraph'
+                            ];
+                            
+                            selectors.forEach(selector => {
+                                try {
+                                    const elements = document.querySelectorAll(selector);
+                                    elements.forEach(el => {
+                                        if (el) {
+                                            el.classList.add('visible');
+                                        }
+                                    });
+                                } catch (error) {
+                                    console.warn('Fallback error for ' + selector + ':', error);
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.warn('Animation initialization error:', error);
+                    }
+                }, { timeout: 500 });
+            } catch (error) {
+                console.warn('Main script initialization error:', error);
+            }
         });
     </script>
 
@@ -880,30 +1017,68 @@
     <script>
         // Minimal Distinct ID for Umami Analytics
         document.addEventListener('DOMContentLoaded', function() {
-            // Wait for Umami to load
-            if (typeof umami !== 'undefined') {
-                setDistinctId();
-            } else {
-                const checkUmami = setInterval(() => {
-                    if (typeof umami !== 'undefined') {
-                        clearInterval(checkUmami);
-                        setDistinctId();
-                    }
-                }, 100);
+            try {
+                // Wait for Umami to load
+                if (typeof umami !== 'undefined') {
+                    setDistinctId();
+                } else {
+                    let checkAttempts = 0;
+                    const maxAttempts = 50; // Max 5 seconds
+                    
+                    const checkUmami = setInterval(() => {
+                        checkAttempts++;
+                        
+                        if (typeof umami !== 'undefined') {
+                            clearInterval(checkUmami);
+                            setDistinctId();
+                        } else if (checkAttempts >= maxAttempts) {
+                            clearInterval(checkUmami);
+                            console.warn('Umami analytics failed to load after 5 seconds');
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.warn('Analytics initialization error:', error);
             }
         });
 
         function setDistinctId() {
-            // Get or create visitor ID
-            let visitorId = localStorage.getItem('portfolio_visitor_id');
-            
-            if (!visitorId) {
-                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('portfolio_visitor_id', visitorId);
+            try {
+                // Check if localStorage is available (privacy mode, etc.)
+                if (typeof Storage === 'undefined') {
+                    console.warn('localStorage not available, skipping visitor ID');
+                    return;
+                }
+                
+                // Get or create visitor ID
+                let visitorId = null;
+                
+                try {
+                    visitorId = localStorage.getItem('portfolio_visitor_id');
+                } catch (error) {
+                    console.warn('Failed to access localStorage:', error);
+                    return;
+                }
+                
+                if (!visitorId) {
+                    try {
+                        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        localStorage.setItem('portfolio_visitor_id', visitorId);
+                    } catch (error) {
+                        console.warn('Failed to set visitor ID:', error);
+                        return;
+                    }
+                }
+                
+                // Set the distinct ID for this visitor
+                if (typeof umami !== 'undefined' && typeof umami.identify === 'function') {
+                    umami.identify(visitorId);
+                } else {
+                    console.warn('Umami identify function not available');
+                }
+            } catch (error) {
+                console.warn('Visitor ID setup error:', error);
             }
-            
-            // Set the distinct ID for this visitor
-            umami.identify(visitorId);
         }
     </script>
 

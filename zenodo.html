@@ -11,19 +11,42 @@
 
     <title>Zenodo Integration - UX Case Study</title>
     
+    <!-- Favicon - Preload critical icons -->
+    <link rel="preload" href="icon/favicon-32x32.png" as="image" type="image/png">  
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/site.webmanifest">
+    
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../icon/favicon-16x16.png">
+    <!-- Preload critical fonts with font-display:swap -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Load non-critical CSS with low priority -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add cache control headers -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+    
+    <!-- Inline critical Font Awesome icons instead of loading the entire library -->
+    <style>
+        @font-face {
+            font-family: 'FontAwesome';
+            font-display: swap;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .fab {
+            font-family: 'FontAwesome';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
     
     <style>
         * {
@@ -1121,81 +1144,204 @@
     </footer>
 
     <script>
-        // Navigation scroll effect
-        let lastScrollTop = 0;
-        const nav = document.getElementById('nav');
-        
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, { passive: true });
-
-        // Intersection Observer for animations
         document.addEventListener('DOMContentLoaded', function() {
-            (window.requestIdleCallback || window.setTimeout)(function() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
+            try {
+                // Navigation scroll effect
+                let lastScrollTop = 0;
+                const nav = document.getElementById('nav');
+                
+                if (nav) {
+                    window.addEventListener('scroll', () => {
+                        try {
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            
+                            if (scrollTop > 100) {
+                                nav.classList.add('scrolled');
+                            } else {
+                                nav.classList.remove('scrolled');
+                            }
+                            
+                            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                        } catch (error) {
+                            console.warn('Scroll handler error:', error);
                         }
-                    });
-                }, { 
-                    threshold: 0.1, 
-                    rootMargin: "0px 0px -50px 0px" 
-                });
+                    }, { passive: true });
+                } else {
+                    console.warn('Navigation element not found');
+                }
+
+                // Intersection Observer for animations
+                const initCallback = window.requestIdleCallback || window.setTimeout;
                 
-                const observeElements = [
-                    '.case-study-section',
-                    '.two-column-layout', 
-                    '.insight-card', 
-                    '.research-item', 
-                    '.technical-challenge',
-                    '.process-step',
-                    '.result-card',
-                    '.challenge-solution'
-                ].flatMap(selector => 
-                    Array.from(document.querySelectorAll(selector))
-                );
-                
-                observeElements.forEach(element => {
-                    observer.observe(element);
-                });
-            }, { timeout: 500 });
+                initCallback(function() {
+                    try {
+                        if ('IntersectionObserver' in window) {
+                            const observer = new IntersectionObserver((entries) => {
+                                try {
+                                    entries.forEach(entry => {
+                                        try {
+                                            if (entry.isIntersecting && entry.target) {
+                                                entry.target.classList.add('visible');
+                                                observer.unobserve(entry.target);
+                                            }
+                                        } catch (error) {
+                                            console.warn('Observer entry error:', error);
+                                        }
+                                    });
+                                } catch (error) {
+                                    console.warn('Observer callback error:', error);
+                                }
+                            }, { 
+                                threshold: 0.1, 
+                                rootMargin: "0px 0px -50px 0px" 
+                            });
+                            
+                            const selectors = [
+                                '.case-study-section',
+                                '.two-column-layout', 
+                                '.insight-card', 
+                                '.research-item', 
+                                '.technical-challenge',
+                                '.process-step',
+                                '.result-card',
+                                '.challenge-solution'
+                            ];
+                            
+                            let observeElements = [];
+                            
+                            try {
+                                // Use flatMap with fallback for older browsers
+                                if (Array.prototype.flatMap) {
+                                    observeElements = selectors.flatMap(selector => 
+                                        Array.from(document.querySelectorAll(selector))
+                                    );
+                                } else {
+                                    // Fallback for browsers without flatMap
+                                    observeElements = selectors.reduce((acc, selector) => {
+                                        return acc.concat(Array.from(document.querySelectorAll(selector)));
+                                    }, []);
+                                }
+                                
+                                observeElements.forEach(element => {
+                                    if (element) {
+                                        observer.observe(element);
+                                    }
+                                });
+                            } catch (error) {
+                                console.warn('Element selection error:', error);
+                                // Fallback: show all elements immediately
+                                selectors.forEach(selector => {
+                                    try {
+                                        const elements = document.querySelectorAll(selector);
+                                        elements.forEach(el => {
+                                            if (el) {
+                                                el.classList.add('visible');
+                                            }
+                                        });
+                                    } catch (fallbackError) {
+                                        console.warn('Fallback error for ' + selector + ':', fallbackError);
+                                    }
+                                });
+                            }
+                        } else {
+                            // Fallback for browsers without Intersection Observer
+                            console.warn('Intersection Observer not supported, showing all elements');
+                            const selectors = [
+                                '.case-study-section',
+                                '.two-column-layout', 
+                                '.insight-card', 
+                                '.research-item', 
+                                '.technical-challenge',
+                                '.process-step',
+                                '.result-card',
+                                '.challenge-solution'
+                            ];
+                            
+                            selectors.forEach(selector => {
+                                try {
+                                    const elements = document.querySelectorAll(selector);
+                                    elements.forEach(el => {
+                                        if (el) {
+                                            el.classList.add('visible');
+                                        }
+                                    });
+                                } catch (error) {
+                                    console.warn('Fallback error for ' + selector + ':', error);
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.warn('Animation initialization error:', error);
+                    }
+                }, { timeout: 500 });
+            } catch (error) {
+                console.warn('Main script initialization error:', error);
+            }
         });
     </script>
 
     <!-- Distinct ID Umami Analytics -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof umami !== 'undefined') {
-                setDistinctId();
-            } else {
-                const checkUmami = setInterval(() => {
-                    if (typeof umami !== 'undefined') {
-                        clearInterval(checkUmami);
-                        setDistinctId();
-                    }
-                }, 100);
+            try {
+                if (typeof umami !== 'undefined') {
+                    setDistinctId();
+                } else {
+                    let checkAttempts = 0;
+                    const maxAttempts = 50; // Max 5 seconds
+                    
+                    const checkUmami = setInterval(() => {
+                        checkAttempts++;
+                        
+                        if (typeof umami !== 'undefined') {
+                            clearInterval(checkUmami);
+                            setDistinctId();
+                        } else if (checkAttempts >= maxAttempts) {
+                            clearInterval(checkUmami);
+                            console.warn('Umami analytics failed to load after 5 seconds');
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.warn('Analytics initialization error:', error);
             }
         });
 
         function setDistinctId() {
-            let visitorId = localStorage.getItem('portfolio_visitor_id');
-            
-            if (!visitorId) {
-                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('portfolio_visitor_id', visitorId);
+            try {
+                // Check if localStorage is available (privacy mode, etc.)
+                if (typeof Storage === 'undefined') {
+                    console.warn('localStorage not available, skipping visitor ID');
+                    return;
+                }
+                
+                let visitorId = null;
+                
+                try {
+                    visitorId = localStorage.getItem('portfolio_visitor_id');
+                } catch (error) {
+                    console.warn('Failed to access localStorage:', error);
+                    return;
+                }
+                
+                if (!visitorId) {
+                    try {
+                        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        localStorage.setItem('portfolio_visitor_id', visitorId);
+                    } catch (error) {
+                        console.warn('Failed to set visitor ID:', error);
+                        return;
+                    }
+                }
+                
+                if (typeof umami !== 'undefined' && typeof umami.identify === 'function') {
+                    umami.identify(visitorId);
+                } else {
+                    console.warn('Umami identify function not available');
+                }
+            } catch (error) {
+                console.warn('Visitor ID setup error:', error);
             }
-            
-            umami.identify(visitorId);
         }
     </script>
 

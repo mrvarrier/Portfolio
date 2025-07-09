@@ -472,9 +472,32 @@
         .fab.fa-linkedin-in:before { content: "\f0e1"; }
         .far.fa-envelope:before { content: "\f0e0"; }
         .fab.fa-instagram:before { content: "\f16d"; }
+        
+        /* Skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            z-index: 1001;
+            background: #000;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: top 0.3s ease;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
     </style>
 </head>
 <body>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Navigation -->
     <nav id="main-nav">
         <a href="index.html">Home</a>
@@ -497,36 +520,39 @@
             </div>
         </header>
 
-        <!-- Work section -->
-        <section class="work-section">
-            <h2 class="lucida-typewriter">I've worked on</h2>
-            
-            <div class="case-studies">
-                <!-- Case study 1 - Zenodo -->
-                <div class="case-study">
-                    <a href="" class="case-study-img">
-                        <img src="images/index/zenodo.webp" alt="Zenodo" width="500" height="300">
-                    </a>
-                    <div class="case-study-content">
-                        <h3>Zenodo</h3>
-                        <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
-                        <a href="" class="interactive with-arrow">Coming Soon</a>
+        <!-- Main content -->
+        <main id="main-content">
+            <!-- Work section -->
+            <section class="work-section">
+                <h2 class="lucida-typewriter">I've worked on</h2>
+                
+                <div class="case-studies">
+                    <!-- Case study 1 - Zenodo -->
+                    <div class="case-study">
+                        <a href="" class="case-study-img">
+                            <img src="images/index/zenodo.webp" alt="Zenodo" width="500" height="300">
+                        </a>
+                        <div class="case-study-content">
+                            <h3>Zenodo</h3>
+                            <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
+                            <a href="" class="interactive with-arrow">Coming Soon</a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Case study 2 - Empathly -->
-                <div class="case-study">
-                    <a href="empathly.html" class="case-study-img">
-                        <img src="images/index/empathly.webp" alt="Empath.ly" width="500" height="300" loading="lazy" decoding="async">
-                    </a>
-                    <div class="case-study-content">
-                        <h3>Empath.ly</h3>
-                        <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
-                        <a href="empathly.html" class="interactive with-arrow">View Case Study</a>
+                    <!-- Case study 2 - Empathly -->
+                    <div class="case-study">
+                        <a href="empathly.html" class="case-study-img">
+                            <img src="images/index/empathly.webp" alt="Empath.ly" width="500" height="300" loading="lazy" decoding="async">
+                        </a>
+                        <div class="case-study-content">
+                            <h3>Empath.ly</h3>
+                            <p>Designed a video conferencing app with integrated emotional analytics, helping HR and marketing teams track emotional dynamics during meetings. Created a scannable dashboard for quick insights, leading to first place at HackHarvard 2022.</p>
+                            <a href="empathly.html" class="interactive with-arrow">View Case Study</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <footer>
             <p>&copy; 2025 Manish. All rights reserved. | <a href="privacy.html" style="color: #666; text-decoration: underline;">Privacy Policy</a></p>
@@ -535,63 +561,109 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize scroll position for navigation effects
-            let lastScrollTop = 0;
-            const nav = document.getElementById('main-nav');
-            
-            // Enhanced scroll handling for nav appearance/disappearance
-            window.addEventListener('scroll', function() {
-                const st = window.pageYOffset || document.documentElement.scrollTop;
+            try {
+                // Initialize scroll position for navigation effects
+                let lastScrollTop = 0;
+                const nav = document.getElementById('main-nav');
                 
-                // Control nav visibility based on scroll direction
-                if (st > 100) {
-                    nav.classList.add('scrolled');
-                    if (st > lastScrollTop && st > 300) {
-                        // Scrolling down
-                        nav.classList.add('hidden');
-                    } else {
-                        // Scrolling up
-                        nav.classList.remove('hidden');
-                    }
-                } else {
-                    nav.classList.remove('scrolled');
+                // Validate nav element exists before proceeding
+                if (!nav) {
+                    console.warn('Navigation element not found, skipping scroll effects');
+                    return;
                 }
                 
-                lastScrollTop = st <= 0 ? 0 : st;
-            }, false);
-            
-            // Intersection Observer for case study animations with enhanced options
-            const caseObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        // Staggered animation of child elements happens via CSS transitions
-                    }
-                });
-            }, { 
-                threshold: 0.1, 
-                rootMargin: "0px 0px -100px 0px" 
-            });
-
-            document.querySelectorAll('.case-study').forEach(caseStudy => {
-                caseObserver.observe(caseStudy);
-            });
-            
-            // Preload images for smoother transitions
-            function preloadImages() {
-                const images = document.querySelectorAll('img');
-                images.forEach(img => {
-                    if (img.getAttribute('loading') !== 'lazy') {
-                        const src = img.getAttribute('src');
-                        if (src) {
-                            const imageObj = new Image();
-                            imageObj.src = src;
+                // Enhanced scroll handling for nav appearance/disappearance
+                window.addEventListener('scroll', function() {
+                    try {
+                        const st = window.pageYOffset || document.documentElement.scrollTop;
+                        
+                        // Control nav visibility based on scroll direction
+                        if (st > 100) {
+                            nav.classList.add('scrolled');
+                            if (st > lastScrollTop && st > 300) {
+                                // Scrolling down
+                                nav.classList.add('hidden');
+                            } else {
+                                // Scrolling up
+                                nav.classList.remove('hidden');
+                            }
+                        } else {
+                            nav.classList.remove('scrolled');
                         }
+                        
+                        lastScrollTop = st <= 0 ? 0 : st;
+                    } catch (error) {
+                        console.warn('Scroll handler error:', error);
                     }
-                });
-            }
+                }, false);
             
-            preloadImages();
+                // Intersection Observer for case study animations with enhanced options
+                if ('IntersectionObserver' in window) {
+                    try {
+                        const caseObserver = new IntersectionObserver((entries) => {
+                            try {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting && entry.target) {
+                                        entry.target.classList.add('visible');
+                                        // Staggered animation of child elements happens via CSS transitions
+                                    }
+                                });
+                            } catch (error) {
+                                console.warn('Intersection Observer callback error:', error);
+                            }
+                        }, { 
+                            threshold: 0.1, 
+                            rootMargin: "0px 0px -100px 0px" 
+                        });
+
+                        const caseStudies = document.querySelectorAll('.case-study');
+                        if (caseStudies.length > 0) {
+                            caseStudies.forEach(caseStudy => {
+                                if (caseStudy) {
+                                    caseObserver.observe(caseStudy);
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.warn('Intersection Observer initialization failed:', error);
+                    }
+                } else {
+                    // Fallback for browsers without Intersection Observer
+                    console.warn('Intersection Observer not supported, animations disabled');
+                    const caseStudies = document.querySelectorAll('.case-study');
+                    caseStudies.forEach(caseStudy => {
+                        if (caseStudy) {
+                            caseStudy.classList.add('visible');
+                        }
+                    });
+                }
+                
+                // Preload images for smoother transitions
+                function preloadImages() {
+                    try {
+                        const images = document.querySelectorAll('img');
+                        images.forEach(img => {
+                            try {
+                                if (img && img.getAttribute('loading') !== 'lazy') {
+                                    const src = img.getAttribute('src');
+                                    if (src) {
+                                        const imageObj = new Image();
+                                        imageObj.src = src;
+                                    }
+                                }
+                            } catch (error) {
+                                console.warn('Image preload error:', error);
+                            }
+                        });
+                    } catch (error) {
+                        console.warn('Image preloading failed:', error);
+                    }
+                }
+                
+                preloadImages();
+            } catch (error) {
+                console.warn('Main application initialization error:', error);
+            }
         });
     </script>
 
@@ -599,30 +671,68 @@
     <script>
         // Minimal Distinct ID for Umami Analytics
         document.addEventListener('DOMContentLoaded', function() {
-            // Wait for Umami to load
-            if (typeof umami !== 'undefined') {
-                setDistinctId();
-            } else {
-                const checkUmami = setInterval(() => {
-                    if (typeof umami !== 'undefined') {
-                        clearInterval(checkUmami);
-                        setDistinctId();
-                    }
-                }, 100);
+            try {
+                // Wait for Umami to load
+                if (typeof umami !== 'undefined') {
+                    setDistinctId();
+                } else {
+                    let checkAttempts = 0;
+                    const maxAttempts = 50; // Max 5 seconds
+                    
+                    const checkUmami = setInterval(() => {
+                        checkAttempts++;
+                        
+                        if (typeof umami !== 'undefined') {
+                            clearInterval(checkUmami);
+                            setDistinctId();
+                        } else if (checkAttempts >= maxAttempts) {
+                            clearInterval(checkUmami);
+                            console.warn('Umami analytics failed to load after 5 seconds');
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.warn('Analytics initialization error:', error);
             }
         });
 
         function setDistinctId() {
-            // Get or create visitor ID
-            let visitorId = localStorage.getItem('portfolio_visitor_id');
-            
-            if (!visitorId) {
-                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('portfolio_visitor_id', visitorId);
+            try {
+                // Check if localStorage is available (privacy mode, etc.)
+                if (typeof Storage === 'undefined') {
+                    console.warn('localStorage not available, skipping visitor ID');
+                    return;
+                }
+                
+                // Get or create visitor ID
+                let visitorId = null;
+                
+                try {
+                    visitorId = localStorage.getItem('portfolio_visitor_id');
+                } catch (error) {
+                    console.warn('Failed to access localStorage:', error);
+                    return;
+                }
+                
+                if (!visitorId) {
+                    try {
+                        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        localStorage.setItem('portfolio_visitor_id', visitorId);
+                    } catch (error) {
+                        console.warn('Failed to set visitor ID:', error);
+                        return;
+                    }
+                }
+                
+                // Set the distinct ID for this visitor
+                if (typeof umami !== 'undefined' && typeof umami.identify === 'function') {
+                    umami.identify(visitorId);
+                } else {
+                    console.warn('Umami identify function not available');
+                }
+            } catch (error) {
+                console.warn('Visitor ID setup error:', error);
             }
-            
-            // Set the distinct ID for this visitor
-            umami.identify(visitorId);
         }
     </script>
 
@@ -630,58 +740,95 @@
     <script>
         // Performance-optimized time tracking using visibilitychange API
         document.addEventListener('DOMContentLoaded', function() {
-            let pageStartTime = Date.now();
-            let totalActiveTime = 0;
-            let lastActiveTime = Date.now();
-            let isPageActive = true;
-            let hasTracked = false;
-            
-            // Track when page becomes hidden/visible (tab switching, minimizing, closing)
-            document.addEventListener('visibilitychange', function() {
-                if (document.visibilityState === 'hidden') {
-                    // Page became hidden - calculate total active time
-                    if (isPageActive) {
-                        totalActiveTime += Date.now() - lastActiveTime;
-                        isPageActive = false;
-                        
-                        // Only track if user spent meaningful time (> 3 seconds) and hasn't been tracked yet
-                        if (totalActiveTime > 3000 && typeof umami !== 'undefined' && !hasTracked) {
-                            // Use setTimeout to defer tracking to next tick (non-blocking)
-                            setTimeout(() => {
-                                try {
-                                    umami.track('time_on_page', {
-                                        page: 'index',
-                                        duration_seconds: Math.round(totalActiveTime / 1000),
-                                        total_time_ms: totalActiveTime
-                                    });
-                                    hasTracked = true;
-                                } catch (e) {
-                                    console.warn('Time tracking failed:', e);
+            try {
+                // Check if required APIs are available
+                if (typeof document.visibilityState === 'undefined') {
+                    console.warn('Page Visibility API not supported, time tracking disabled');
+                    return;
+                }
+                
+                let pageStartTime = Date.now();
+                let totalActiveTime = 0;
+                let lastActiveTime = Date.now();
+                let isPageActive = true;
+                let hasTracked = false;
+                
+                // Track when page becomes hidden/visible (tab switching, minimizing, closing)
+                document.addEventListener('visibilitychange', function() {
+                    try {
+                        if (document.visibilityState === 'hidden') {
+                            // Page became hidden - calculate total active time
+                            if (isPageActive) {
+                                const currentTime = Date.now();
+                                const sessionTime = currentTime - lastActiveTime;
+                                
+                                // Validate time calculation
+                                if (sessionTime > 0 && sessionTime < 3600000) { // Max 1 hour session
+                                    totalActiveTime += sessionTime;
+                                    isPageActive = false;
+                                    
+                                    // Only track if user spent meaningful time (> 3 seconds) and hasn't been tracked yet
+                                    if (totalActiveTime > 3000 && totalActiveTime < 3600000 && !hasTracked) {
+                                        // Use setTimeout to defer tracking to next tick (non-blocking)
+                                        setTimeout(() => {
+                                            try {
+                                                if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+                                                    umami.track('time_on_page', {
+                                                        page: 'index',
+                                                        duration_seconds: Math.round(totalActiveTime / 1000),
+                                                        total_time_ms: totalActiveTime
+                                                    });
+                                                    hasTracked = true;
+                                                } else {
+                                                    console.warn('Umami tracking not available');
+                                                }
+                                            } catch (e) {
+                                                console.warn('Time tracking failed:', e);
+                                            }
+                                        }, 0);
+                                    }
                                 }
-                            }, 0);
+                            }
+                        } else if (document.visibilityState === 'visible') {
+                            // Page became visible again - reset active time tracking
+                            lastActiveTime = Date.now();
+                            isPageActive = true;
                         }
+                    } catch (error) {
+                        console.warn('Visibility change handler error:', error);
                     }
-                } else if (document.visibilityState === 'visible') {
-                    // Page became visible again - reset active time tracking
-                    lastActiveTime = Date.now();
-                    isPageActive = true;
-                }
-            });
-            
-            // Optional: Track on window focus/blur as additional fallback
-            window.addEventListener('blur', function() {
-                if (isPageActive) {
-                    totalActiveTime += Date.now() - lastActiveTime;
-                    isPageActive = false;
-                }
-            });
-            
-            window.addEventListener('focus', function() {
-                if (!isPageActive) {
-                    lastActiveTime = Date.now();
-                    isPageActive = true;
-                }
-            });
+                });
+                
+                // Optional: Track on window focus/blur as additional fallback
+                window.addEventListener('blur', function() {
+                    try {
+                        if (isPageActive) {
+                            const currentTime = Date.now();
+                            const sessionTime = currentTime - lastActiveTime;
+                            
+                            if (sessionTime > 0 && sessionTime < 3600000) {
+                                totalActiveTime += sessionTime;
+                                isPageActive = false;
+                            }
+                        }
+                    } catch (error) {
+                        console.warn('Blur handler error:', error);
+                    }
+                });
+                
+                window.addEventListener('focus', function() {
+                    try {
+                        if (!isPageActive) {
+                            lastActiveTime = Date.now();
+                            isPageActive = true;
+                        }
+                    } catch (error) {
+                        console.warn('Focus handler error:', error);
+                    }
+                });
+            } catch (error) {
+                console.warn('Time tracking initialization error:', error);
+            }
         });
     </script>
 
