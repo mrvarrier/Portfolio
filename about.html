@@ -955,11 +955,25 @@
         }, { passive: true });
     </script>
 
-    <!-- Dual Umami Analytics with Distinct IDs -->
+    <!-- Distinct ID Umami Analytics -->
     <script>
-        // Enhanced Distinct ID for Dual Umami Analytics
+        // Minimal Distinct ID for Umami Analytics
         document.addEventListener('DOMContentLoaded', function() {
-            // Generate or retrieve visitor ID
+            // Wait for Umami to load
+            if (typeof umami !== 'undefined') {
+                setDistinctId();
+            } else {
+                const checkUmami = setInterval(() => {
+                    if (typeof umami !== 'undefined') {
+                        clearInterval(checkUmami);
+                        setDistinctId();
+                    }
+                }, 100);
+            }
+        });
+
+        function setDistinctId() {
+            // Get or create visitor ID
             let visitorId = localStorage.getItem('portfolio_visitor_id');
             
             if (!visitorId) {
@@ -967,67 +981,9 @@
                 localStorage.setItem('portfolio_visitor_id', visitorId);
             }
             
-            // Track loaded instances
-            const loadedInstances = new Set();
-            
-            // Function to set distinct ID for available umami instance
-            function setDistinctId() {
-                if (typeof umami !== 'undefined' && !loadedInstances.has('primary')) {
-                    try {
-                        umami.identify(visitorId);
-                        loadedInstances.add('primary');
-                    } catch (e) {
-                        console.warn('Failed to set distinct ID for primary Umami instance:', e);
-                    }
-                }
-            }
-            
-            // Function to handle multiple umami instances
-            function handleMultipleInstances() {
-                // Check for primary instance
-                if (typeof umami !== 'undefined') {
-                    setDistinctId();
-                }
-                
-                // Check for secondary instance (cloud version)
-                // The cloud version might create a different global or overwrite the existing one
-                const scripts = document.querySelectorAll('script[data-website-id]');
-                let attemptCount = 0;
-                const maxAttempts = 50; // 5 seconds total
-                
-                const checkInterval = setInterval(() => {
-                    attemptCount++;
-                    
-                    if (typeof umami !== 'undefined') {
-                        try {
-                            // Set distinct ID for current umami instance
-                            umami.identify(visitorId);
-                        } catch (e) {
-                            console.warn('Failed to set distinct ID:', e);
-                        }
-                    }
-                    
-                    // Stop checking after max attempts or if we've handled both scripts
-                    if (attemptCount >= maxAttempts || scripts.length === 0) {
-                        clearInterval(checkInterval);
-                    }
-                }, 100);
-            }
-            
-            // Start the detection process
-            handleMultipleInstances();
-            
-            // Also listen for script load events
-            document.addEventListener('script-loaded', function() {
-                if (typeof umami !== 'undefined') {
-                    try {
-                        umami.identify(visitorId);
-                    } catch (e) {
-                        console.warn('Failed to set distinct ID on script load:', e);
-                    }
-                }
-            });
-        });
+            // Set the distinct ID for this visitor
+            umami.identify(visitorId);
+        }
     </script>
 
 </body>
