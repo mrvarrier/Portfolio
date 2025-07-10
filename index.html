@@ -678,6 +678,13 @@
             try {
                 // Wait for Umami to load
                 if (typeof umami !== 'undefined') {
+
+                    // Tracking for UTM Source
+                    const params  = new URLSearchParams(window.location.search);
+                    const source  = params.get('utm_source');
+                    const medium  = params.get('utm_medium') || 'unknown';
+                    if (source)  umami.track(`UTM • ${source} • ${medium}`);
+
                     setDistinctId();
                 } else {
                     let checkAttempts = 0;
