@@ -427,7 +427,7 @@
                     <li><strong>Page views:</strong> Which pages you visit and how long you spend on them</li>
                     <li><strong>Device information:</strong> Browser type, operating system, and screen resolution (anonymized)</li>
                     <li><strong>Geographic location:</strong> Country and city level (no precise location tracking)</li>
-                    <li><strong>Visitor ID:</strong> A randomly generated identifier to distinguish unique visitors (not linked to personal information)</li>
+                    <li><strong>Visitor ID:</strong> A randomly generated identifier to distinguish unique visitors (not linked to personal information) - only tracked by the primary self-hosted service, not by the fallback service</li>
                 </ul>
                 
                 <h3>Contact Information</h3>
@@ -443,6 +443,14 @@
                     <li>All data is anonymized</li>
                     <li>Can be self-hosted (which is what I'm doing) for full data control</li>
                 </ul>
+                
+                <h3>Dual Analytics Setup</h3>
+                <p>For reliability and uptime, I use a dual analytics setup:</p>
+                <ul>
+                    <li><strong>Primary (Self-hosted):</strong> My own Umami instance hosted on Vercel with data stored in Supabase. This includes full analytics capabilities with visitor ID tracking for understanding user behavior patterns.</li>
+                    <li><strong>Fallback (Cloud service):</strong> cloud.umami.is provides basic analytics when my primary service is unavailable. This fallback service does not track distinct visitor IDs and collects only basic page view data.</li>
+                </ul>
+                <p>Both services follow the same privacy-first principles, but the self-hosted version provides more detailed (though still anonymous) analytics for better user experience optimization.</p>
             </div>
             
             <div class="section">
@@ -467,15 +475,20 @@
                 <h2>Data Storage and Security</h2>
                 
                 <h3>Analytics Data</h3>
-                <p>Analytics data is stored securely using:</p>
+                <p>Analytics data is stored securely using dual storage locations:</p>
                 <ul>
-                    <li><strong>Supabase:</strong> Managed PostgreSQL database hosting with enterprise-grade security</li>
-                    <li><strong>Vercel:</strong> Application hosting with SSL encryption</li>
-                    <li><strong>Local Storage:</strong> Visitor IDs are stored locally in your browser and can be cleared at any time</li>
+                    <li><strong>Primary storage (Supabase):</strong> Managed PostgreSQL database hosting with enterprise-grade security for self-hosted analytics</li>
+                    <li><strong>Fallback storage (cloud.umami.is):</strong> Cloud-hosted database managed by Umami for basic analytics when primary service is unavailable</li>
+                    <li><strong>Vercel:</strong> Application hosting with SSL encryption for the self-hosted analytics frontend</li>
+                    <li><strong>Local Storage:</strong> Visitor IDs are stored locally in your browser and can be cleared at any time (only used by primary service)</li>
                 </ul>
                 
                 <h3>Data Retention</h3>
-                <p>Analytics data is stored in a Supabase-hosted database. I have not set up any automatic data purging as of now, so data is retained indefinitely. If I implement any automatic deletion policies in the future, this page will be updated to reflect those changes.</p>
+                <p>Analytics data retention varies by service:</p>
+                <ul>
+                    <li><strong>Primary (Supabase):</strong> Data is retained indefinitely as I have not set up automatic data purging. If I implement any automatic deletion policies in the future, this page will be updated.</li>
+                    <li><strong>Fallback (cloud.umami.is):</strong> Data retention follows their standard policies. Please refer to their privacy policy for specific retention periods.</li>
+                </ul>
             </div>
             
             <div class="section">
@@ -511,6 +524,12 @@
                 
                 <p>These services have their own privacy policies, and I'm not responsible for their data practices.</p>
                 
+                <h3>Analytics Services</h3>
+                <p>For analytics reliability, I use a fallback service:</p>
+                <ul>
+                    <li><strong>cloud.umami.is:</strong> Fallback analytics service used only when my primary self-hosted analytics is unavailable. This service provides basic page view analytics without distinct visitor tracking. Please refer to <a href="https://umami.is/privacy" target="_blank">Umami's privacy policy</a> for their data practices.</li>
+                </ul>
+                
                 <h3>Hosting and Infrastructure</h3>
                 <p>This website is hosted on GitHub Pages, which may collect basic server logs. For their privacy practices, please refer to <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">GitHub's Privacy Statement</a>.</p>
             </div>
@@ -540,7 +559,7 @@
         
         <!-- Footer -->
         <footer>
-            <p>Last updated: June 4, 2025</p>
+            <p>Last updated: January 10, 2025</p>
             <p>&copy; 2025 Manish Varrier. All rights reserved.</p>
         </footer>
     </div>
