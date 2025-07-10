@@ -29,7 +29,7 @@
     <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin>
     
     <!-- Preload hero images -->
-    <link rel="preload" as="image" href="zenodo.webp">
+    <link rel="preload" as="image" href="images/index/zenodo.webp">
     
     <!-- Load non-critical CSS with low priority -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -514,9 +514,9 @@
             
             <!-- Social links -->
             <div class="social-links">
-                <a href="https://linkedin.com/in/manish-varrier" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:manishvarrier@gmail.com" title="Email"><i class="far fa-envelope"></i></a>
-                <a href="https://instagram.com/_manishr_" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/in/manish-varrier" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                <a href="mailto:manishvarrier@gmail.com" title="Email"><i class="far fa-envelope" aria-hidden="true"></i></a>
+                <a href="https://instagram.com/_manishr_" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
             </div>
         </header>
 
@@ -529,13 +529,13 @@
                 <div class="case-studies">
                     <!-- Case study 1 - Zenodo -->
                     <div class="case-study">
-                        <a href="" class="case-study-img">
+                        <a href="#" class="case-study-img" aria-label="Zenodo case study - Coming soon">
                             <img src="images/index/zenodo.webp" alt="Zenodo" width="500" height="300">
                         </a>
                         <div class="case-study-content">
                             <h3>Zenodo</h3>
                             <p>Designed and implemented a Zenodo archival integration for the Correlate system, enabling seamless research data publishing to meet European consortium requirements. Conducted technical API assessments, built custom publishing workflows supporting both draft and direct publication paths, and created an intuitive metadata input interface.</p>
-                            <a href="" class="interactive with-arrow">Coming Soon</a>
+                            <a href="#" class="interactive with-arrow" aria-label="Zenodo case study - Coming soon">Coming Soon</a>
                         </div>
                     </div>
 
@@ -716,7 +716,7 @@
                 
                 if (!visitorId) {
                     try {
-                        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
                         localStorage.setItem('portfolio_visitor_id', visitorId);
                     } catch (error) {
                         console.warn('Failed to set visitor ID:', error);

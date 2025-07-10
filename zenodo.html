@@ -46,6 +46,18 @@
             font-weight: normal;
             font-style: normal;
         }
+        @font-face {
+            font-family: 'FontAwesomeSolid';
+            font-display: swap;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
+        .fas {
+            font-family: 'FontAwesomeSolid';
+            font-weight: 900;
+            font-style: normal;
+        }
     </style>
     
     <style>
@@ -872,10 +884,10 @@
 <body>
     <!-- Navigation -->
     <nav id="nav" role="navigation" aria-label="Main navigation">
-        <a href="../index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
+        <a href="index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
         <div class="nav-links">
-            <a href="../index.html">Home</a>
-            <a href="../about.html">About</a>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
             <a href="https://drive.google.com/file/d/1Pl2JjSYH7AoyVf-QXi9xhVaqILJyMfJk/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
         </div>
     </nav>
@@ -1326,7 +1338,7 @@
                 
                 if (!visitorId) {
                     try {
-                        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
                         localStorage.setItem('portfolio_visitor_id', visitorId);
                     } catch (error) {
                         console.warn('Failed to set visitor ID:', error);
