@@ -445,12 +445,12 @@
                 </ul>
                 
                 <h3>Dual Analytics Setup</h3>
-                <p>For reliability and uptime, I use a dual analytics setup:</p>
+                <p>For reliability and data integrity, I use dual analytics tracking with both services running simultaneously:</p>
                 <ul>
                     <li><strong>Primary (Self-hosted):</strong> My own Umami instance hosted on Vercel with data stored in Supabase. This includes full analytics capabilities with visitor ID tracking for understanding user behavior patterns.</li>
-                    <li><strong>Fallback (Cloud service):</strong> cloud.umami.is provides basic analytics when my primary service is unavailable. This fallback service does not track distinct visitor IDs and collects only basic page view data.</li>
+                    <li><strong>Secondary (Cloud service):</strong> cloud.umami.is runs alongside my self-hosted analytics for redundancy. This service does not track distinct visitor IDs and collects only basic page view data.</li>
                 </ul>
-                <p>Both services follow the same privacy-first principles, but the self-hosted version provides more detailed (though still anonymous) analytics for better user experience optimization.</p>
+                <p>Both services collect data concurrently to ensure analytics continuity and follow the same privacy-first principles, though the self-hosted version provides more detailed (though still anonymous) analytics for better user experience optimization.</p>
             </div>
             
             <div class="section">
@@ -478,7 +478,7 @@
                 <p>Analytics data is stored securely using dual storage locations:</p>
                 <ul>
                     <li><strong>Primary storage (Supabase):</strong> Managed PostgreSQL database hosting with enterprise-grade security for self-hosted analytics</li>
-                    <li><strong>Fallback storage (cloud.umami.is):</strong> Cloud-hosted database managed by Umami for basic analytics when primary service is unavailable</li>
+                    <li><strong>Secondary storage (cloud.umami.is):</strong> Cloud-hosted database managed by Umami for concurrent basic analytics collection</li>
                     <li><strong>Vercel:</strong> Application hosting with SSL encryption for the self-hosted analytics frontend</li>
                     <li><strong>Local Storage:</strong> Visitor IDs are stored locally in your browser and can be cleared at any time (only used by primary service)</li>
                 </ul>
@@ -487,7 +487,7 @@
                 <p>Analytics data retention varies by service:</p>
                 <ul>
                     <li><strong>Primary (Supabase):</strong> Data is retained indefinitely as I have not set up automatic data purging. If I implement any automatic deletion policies in the future, this page will be updated.</li>
-                    <li><strong>Fallback (cloud.umami.is):</strong> Data retention follows their standard policies. Please refer to their privacy policy for specific retention periods.</li>
+                    <li><strong>Secondary (cloud.umami.is):</strong> Data retention follows their standard policies. Please refer to their privacy policy for specific retention periods.</li>
                 </ul>
             </div>
             
@@ -525,9 +525,9 @@
                 <p>These services have their own privacy policies, and I'm not responsible for their data practices.</p>
                 
                 <h3>Analytics Services</h3>
-                <p>For analytics reliability, I use a fallback service:</p>
+                <p>For analytics reliability, I use a secondary service alongside my primary self-hosted analytics:</p>
                 <ul>
-                    <li><strong>cloud.umami.is:</strong> Fallback analytics service used only when my primary self-hosted analytics is unavailable. This service provides basic page view analytics without distinct visitor tracking. Please refer to <a href="https://umami.is/privacy" target="_blank">Umami's privacy policy</a> for their data practices.</li>
+                    <li><strong>cloud.umami.is:</strong> Secondary analytics service that runs concurrently with my self-hosted analytics for redundancy and data integrity. This service provides basic page view analytics without distinct visitor tracking. Please refer to <a href="https://umami.is/privacy" target="_blank">Umami's privacy policy</a> for their data practices.</li>
                 </ul>
                 
                 <h3>Hosting and Infrastructure</h3>
