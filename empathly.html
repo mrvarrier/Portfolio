@@ -97,9 +97,9 @@
         /* Navigation */
         nav {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
-            padding: 30px 30px 10px 30px;
+            padding: 20px 30px 10px 30px;
             position: fixed;
             top: 0;
             right: 0;
@@ -111,10 +111,12 @@
             z-index: 1000;
             transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
+            gap: 20px;
         }
         
         .nav-links {
             display: flex;
+            margin-left: auto;
         }
         
         nav.scrolled {
@@ -150,34 +152,74 @@
             transform-origin: bottom left;
         }
         
-        /* Back to home link animation - Apple-inspired */
+        /* Enhanced Back to Home Button */
         .back-home {
             display: inline-flex;
             align-items: center;
             text-decoration: none;
             color: #000;
             font-weight: 500;
-            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-            padding-left: 0;
             font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
-            font-size: 16px;
+            font-size: 15px;
+            padding: 8px 16px 8px 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+            min-height: 36px;
+        }
+        
+        .back-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.03), transparent);
+            transition: left 0.5s;
         }
         
         .back-home i {
             margin-right: 8px;
-            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            font-size: 13px;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* Fallback arrow if Font Awesome fails */
+        .back-home i::before {
+            content: "\2190" !important; /* Unicode left arrow */
+            font-family: inherit !important;
         }
         
         .back-home:hover {
-            padding-left: 5px;
+            background: rgba(243, 244, 246, 0.9);
+            border-color: rgba(209, 213, 219, 0.9);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .back-home:hover::before {
+            left: 100%;
         }
         
         .back-home:hover i {
-            transform: translateX(-4px);
+            transform: translateX(-2px);
         }
         
         .back-home:active {
-            transform: scale(0.98);
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Focus states for accessibility */
+        .back-home:focus {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+            border-radius: 20px;
         }
         
         /* Header */
@@ -593,11 +635,18 @@
             }
             
             nav {
-                padding: 20px 20px 10px 0;
+                padding: 15px 20px 10px 20px;
+                flex-wrap: wrap;
+                gap: 15px;
             }
             
             nav a {
-                margin-left: 30px;
+                margin-left: 20px;
+            }
+            
+            .nav-links {
+                margin-left: 0;
+                margin-top: 5px;
             }
             
             .case-study-title {
@@ -605,7 +654,9 @@
             }
             
             .back-home {
-                margin-top: 100px;
+                padding: 10px 16px 10px 12px;
+                font-size: 14px;
+                min-height: 44px; /* Improved touch target */
             }
             
             .highlight-box h3, .highlight-box p,
@@ -620,11 +671,25 @@
         
         @media (max-width: 576px) {
             nav {
-                justify-content: center;
+                justify-content: flex-start;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 15px 10px 15px;
+            }
+            
+            .nav-links {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                justify-content: space-between;
             }
             
             .case-study-title {
                 font-size: 32px;
+            }
+            
+            .back-home {
+                margin-bottom: 5px;
             }
         }
         
@@ -655,7 +720,7 @@
     
     <!-- Navigation -->
     <nav id="nav">
-        <a href="index.html" class="back-home"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
+        <a href="index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>

@@ -97,9 +97,9 @@
         /* Navigation */
         nav {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
-            padding: 30px 30px 10px 30px;
+            padding: 20px 30px 10px 30px;
             position: fixed;
             top: 0;
             right: 0;
@@ -107,6 +107,7 @@
             max-width: 1400px;
             margin: 0 auto;
             background-color: rgba(255, 255, 255, 0.95);
+            gap: 20px;
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
@@ -115,6 +116,7 @@
         
         .nav-links {
             display: flex;
+            margin-left: auto;
         }
         
         nav.scrolled {
@@ -150,23 +152,24 @@
             transform-origin: bottom left;
         }
         
-        /* Improved Back to Home Button */
+        /* Enhanced Back to Home Button */
         .back-home {
             display: inline-flex;
             align-items: center;
             text-decoration: none;
-            color: #374151;
+            color: #000;
             font-weight: 500;
+            font-family: 'Lucida Sans Typewriter', 'Courier New', monospace;
             font-size: 15px;
-            padding: 10px 16px;
-            border-radius: 8px;
-            background: rgba(249, 250, 251, 0.8);
-            border: 1px solid rgba(229, 231, 235, 0.8);
-            backdrop-filter: blur(8px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 8px 16px 8px 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             position: relative;
             overflow: hidden;
+            min-height: 36px;
         }
         
         .back-home::before {
@@ -187,7 +190,13 @@
         .back-home i {
             margin-right: 8px;
             font-size: 13px;
-            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* Fallback arrow if Font Awesome fails */
+        .back-home i::before {
+            content: "\2190" !important; /* Unicode left arrow */
+            font-family: inherit !important;
         }
         
         .back-home:hover {
