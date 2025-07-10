@@ -30,8 +30,7 @@
     <!-- Load non-critical CSS with low priority -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <!-- Add cache control headers -->
-    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+    <!-- Cache control handled by server configuration -->
     
     <style>
         * {
@@ -680,6 +679,19 @@
         .skip-link:focus {
             top: 6px;
         }
+        
+        /* Visually hidden class for accessibility */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -708,6 +720,7 @@
         <main id="main-content">
             <!-- Key Metrics -->
             <section class="key-metrics">
+                <h2 class="visually-hidden">Key Metrics</h2>
             <div class="metric">
                 <span class="metric-number counter" data-count="2">0</span>
                 <span class="metric-label">Years Full-time<br>Experience</span>
@@ -720,6 +733,7 @@
 
         <!-- About Main Content -->
         <section class="about-main">
+            <h2 class="visually-hidden">About Me</h2>
             <div class="about-text">
                 <p>At Correlate AS, I've worn both Product Manager and UX Designer hats—giving me a rare 360° view of product development and the ability to translate between technical and user needs.</p>
                 

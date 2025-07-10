@@ -29,8 +29,7 @@
     <!-- Load non-critical CSS with low priority -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <!-- Add cache control headers -->
-    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+    <!-- Cache control handled by server configuration -->
     
     <!-- Inline critical Font Awesome icons instead of loading the entire library -->
     <style>
@@ -765,7 +764,7 @@
         }
         
         /* High contrast mode support */
-        @media (prefers-contrast: high) {
+        @media (prefers-contrast: more) {
             .insight-card,
             .result-card,
             .technical-challenge,
@@ -901,7 +900,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="nav" role="navigation" aria-label="Main navigation">
+    <nav id="nav" aria-label="Main navigation">
         <div class="nav-container">
             <a href="index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
             <div class="nav-links">
@@ -1015,6 +1014,8 @@
         
         <!-- Technical Challenge -->
         <section class="case-study-section">
+            <div class="section-number">03. TECHNICAL CHALLENGE</div>
+            <h2 class="section-title">Architecture Discovery</h2>
             <div class="technical-challenge">
                 <div class="challenge-header">
                     <div class="challenge-icon">⚠️</div>
@@ -1168,6 +1169,7 @@
                 </div>
             </div>
         </section>
+        </main>
     </div>
 
     <!-- Footer -->
