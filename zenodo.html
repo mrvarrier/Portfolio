@@ -104,14 +104,23 @@
             top: 0;
             right: 0;
             left: 0;
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
             gap: 20px;
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            gap: 20px;
         }
         
         .nav-links {
@@ -124,7 +133,7 @@
             border-bottom: 1px solid #f0f0f0;
         }
         
-        nav a {
+        .nav-container a {
             margin-left: 50px;
             text-decoration: none;
             color: #000;
@@ -134,7 +143,7 @@
             position: relative;
         }
         
-        nav a::after {
+        .nav-container a::after {
             content: '';
             position: absolute;
             width: 100%;
@@ -147,7 +156,7 @@
             transition: transform 0.4s ease;
         }
         
-        nav a:hover::after {
+        .nav-container a:hover::after {
             transform: scaleX(1);
             transform-origin: bottom left;
         }
@@ -216,7 +225,7 @@
         }
         
         /* Focus states for accessibility */
-        nav a:focus,
+        .nav-container a:focus,
         .back-home:focus {
             outline: 2px solid #667eea;
             outline-offset: 2px;
@@ -841,7 +850,7 @@
                 padding: 20px;
             }
             
-            nav a {
+            .nav-container a {
                 margin-left: 30px;
             }
             
@@ -870,7 +879,7 @@
         }
         
         @media (max-width: 576px) {
-            nav {
+            .nav-container {
                 justify-content: center;
             }
             
@@ -893,11 +902,13 @@
 <body>
     <!-- Navigation -->
     <nav id="nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="https://drive.google.com/file/d/1ec6Qcfl3B0VG4Ji8NpmA2c67Ycz5I9cV/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+        <div class="nav-container">
+            <a href="index.html" class="back-home" aria-label="Go back to home page"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to home</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="https://drive.google.com/file/d/1ec6Qcfl3B0VG4Ji8NpmA2c67Ycz5I9cV/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+            </div>
         </div>
     </nav>
     
