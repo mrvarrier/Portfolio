@@ -1039,6 +1039,38 @@
             }
         }
         
+        // Double hashing function for password verification
+        async function doubleHash(password) {
+            const firstHash = await sha256(password);
+            const secondHash = await sha256(firstHash);
+            return secondHash;
+        }
+        
+        // SHA-256 implementation using Web Crypto API
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+        
+        // Store the double hash of your password here (generate using hash-calculator.html)
+        const ZENODO_HASH = '7b3d979ca8330a94fa7e9e1b466d8b99e0bcdea1ec90596c0dcc8d7ef6b4300c';
+        
+        // Session management
+        function createAuthSession() {
+            const sessionToken = 'zenodo_' + Date.now() + '_' + Math.random().toString(36).substring(2, 15);
+            const sessionData = {
+                token: sessionToken,
+                timestamp: Date.now(),
+                expires: Date.now() + (30 * 60 * 1000) // 30 minutes
+            };
+            
+            sessionStorage.setItem('zenodo_auth', JSON.stringify(sessionData));
+            return sessionToken;
+        }
+        
         function handlePasswordSubmit(event) {
             event.preventDefault();
             
@@ -1069,12 +1101,32 @@
             loadingSpinner.hidden = false;
             loadingSpinner.style.opacity = '1';
             
-            // Simulate authentication delay (2-3 seconds)
-            const authDelay = Math.random() * 1000 + 2000; // 2-3 seconds
-            
-            setTimeout(() => {
-                // All passwords are wrong - this is the intended behavior
-                handlePasswordError();
+            // Verify password with double hashing
+            doubleHash(password).then(hashedPassword => {
+                // Simulate authentication delay (1-2 seconds)
+                const authDelay = Math.random() * 1000 + 1000;
+                
+                setTimeout(() => {
+                    if (hashedPassword === ZENODO_HASH) {
+                        // Successful authentication
+                        handlePasswordSuccess();
+                    } else {
+                        // Failed authentication
+                        handlePasswordError();
+                        
+                        // Reset loading state
+                        submitBtn.classList.remove('loading');
+                        submitBtn.disabled = false;
+                        btnText.style.opacity = '1';
+                        loadingSpinner.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingSpinner.hidden = true;
+                        }, 300);
+                    }
+                }, authDelay);
+            }).catch(error => {
+                console.error('Hashing error:', error);
+                showPasswordError('Authentication error. Please try again.');
                 
                 // Reset loading state
                 submitBtn.classList.remove('loading');
@@ -1084,8 +1136,26 @@
                 setTimeout(() => {
                     loadingSpinner.hidden = true;
                 }, 300);
+            });
+        }
+        
+        function handlePasswordSuccess() {
+            // Create authentication session
+            createAuthSession();
+            
+            // Close modal with success animation
+            const modal = document.getElementById('passwordModal');
+            modal.classList.remove('show');
+            
+            // Hide modal after animation
+            setTimeout(() => {
+                modal.hidden = true;
+                document.body.style.overflow = '';
+                document.removeEventListener('keydown', handleEscapeKey);
                 
-            }, authDelay);
+                // Redirect to zenodo.html
+                window.location.href = 'zenodo.html';
+            }, 300);
         }
         
         function handlePasswordError() {
