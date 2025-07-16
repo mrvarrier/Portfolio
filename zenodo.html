@@ -899,6 +899,50 @@
     </style>
 </head>
 <body>
+    <!-- Direct Access Protection Script - Runs immediately when page loads -->
+    <script>
+        (function() {
+            try {
+                // Check for authentication session
+                const authData = sessionStorage.getItem('zenodo_auth');
+                
+                if (!authData) {
+                    // No session found, redirect to home
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                let sessionInfo;
+                try {
+                    sessionInfo = JSON.parse(authData);
+                } catch (e) {
+                    // Invalid session data, redirect to home
+                    sessionStorage.removeItem('zenodo_auth');
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                // Check if session has expired
+                const now = Date.now();
+                if (!sessionInfo.expires || now > sessionInfo.expires) {
+                    // Session expired, clean up and redirect
+                    sessionStorage.removeItem('zenodo_auth');
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                // Valid session found, page can continue loading
+                console.log('Access granted: Valid session found');
+                
+            } catch (error) {
+                // Any error in authentication check, redirect to home
+                console.warn('Authentication error:', error);
+                sessionStorage.removeItem('zenodo_auth');
+                window.location.href = 'index.html';
+            }
+        })();
+    </script>
+    
     <!-- Navigation -->
     <nav id="nav" aria-label="Main navigation">
         <div class="nav-container">
@@ -1178,7 +1222,38 @@
     </footer>
 
     <script>
+        // Session validation and cleanup
+        function validateSession() {
+            const authData = sessionStorage.getItem('zenodo_auth');
+            
+            if (!authData) {
+                return false;
+            }
+            
+            try {
+                const sessionInfo = JSON.parse(authData);
+                const now = Date.now();
+                
+                if (!sessionInfo.expires || now > sessionInfo.expires) {
+                    sessionStorage.removeItem('zenodo_auth');
+                    return false;
+                }
+                
+                return true;
+            } catch (e) {
+                sessionStorage.removeItem('zenodo_auth');
+                return false;
+            }
+        }
+        
+        // Additional session check after DOM loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Double-check session validity
+            if (!validateSession()) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
             try {
                 // Navigation scroll effect
                 let lastScrollTop = 0;
@@ -1312,6 +1387,32 @@
                 console.warn('Main script initialization error:', error);
             }
         });
+        
+        // Session timeout warning (optional)
+        function setupSessionWarning() {
+            const authData = sessionStorage.getItem('zenodo_auth');
+            if (!authData) return;
+            
+            try {
+                const sessionInfo = JSON.parse(authData);
+                const timeLeft = sessionInfo.expires - Date.now();
+                
+                // Show warning 10 minutes before expiration
+                if (timeLeft > 600000) { // 10 minutes
+                    setTimeout(() => {
+                        if (confirm('Your session will expire in 10 minutes. Would you like to continue viewing this case study?')) {
+                            // User wants to continue, they can re-authenticate if needed
+                            console.log('Session warning acknowledged');
+                        }
+                    }, timeLeft - 600000);
+                }
+            } catch (e) {
+                console.warn('Session warning setup error:', e);
+            }
+        }
+        
+        // Set up session warning
+        setupSessionWarning();
     </script>
 
     <!-- Distinct ID Umami Analytics -->
@@ -1343,6 +1444,12 @@
 
         function setDistinctId() {
             try {
+                // Additional session validation before analytics
+                if (!validateSession()) {
+                    console.warn('Invalid session detected during analytics setup');
+                    return;
+                }
+                
                 // Check if localStorage is available (privacy mode, etc.)
                 if (typeof Storage === 'undefined') {
                     console.warn('localStorage not available, skipping visitor ID');
@@ -1370,6 +1477,8 @@
                 
                 if (typeof umami !== 'undefined' && typeof umami.identify === 'function') {
                     umami.identify(visitorId);
+                    // Track authenticated access to case study
+                    umami.track('zenodo_case_study_access', { authenticated: true });
                 } else {
                     console.warn('Umami identify function not available');
                 }
