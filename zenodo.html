@@ -970,7 +970,7 @@
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Addressing Correlates Technical Challenge</h3>
-                        <p>During my API research, I uncovered a fundamental architecture challenge: Correlate doesn't store files locally—all documents exist as links to users' external integrations (Google Drive, etc.). This meant we couldn't directly transfer files to Zenodo using standard methods. I proposed leveraging our existing server infrastructure to temporarily download files, transfer them via API, then immediately delete them from our servers.</p>
+                        <p>Understanding Zenodo's technical requirements and challenges was one thing, but the same went for Correlate. The biggest issue I ran into when I hit the design board was that Correlate doesn't have its own storage since we only integrate with other applications for our users. This meant I had to figure out a way to work around this technical limitation. My solution was to leverage our existing server infrastructure to temporarily download files from integrations like Google Drive or OneDrive (the files users want to archive), upload them to Zenodo via their API, then immediately delete them from our servers.</p>
                     </div>
                 </div>
 
@@ -980,7 +980,7 @@
                 <div class="two-column">
                     <div class="ideation-text">
                         <h3 style="font-size: 26px; font-weight: 600; margin-bottom: 15px; line-height: 1.3;">Simplified Integration Authentication</h3>
-                        <p>I designed a streamlined OAuth setup flow that allows users to connect their Zenodo accounts without leaving Correlate. The interface clearly communicates permissions and provides helpful guidance for first-time Zenodo users. This approach reduced the authentication friction that often prevents users from adopting new integrations.</p>
+                        <p>The integration itself was made seamlessly into Correlate where users can easily access the Zenodo integration via the existing integration tab and easily connect their Zenodo account, and even multiple accounts if they wanted. This ensures there is no external website or extra steps or configuration for the user to go through. A seamless experience that removes the typical authentication friction that often prevents users from adopting new integrations, keeping everything right within Correlate's familiar interface.</p>
                     </div>
                     <div class="column-right">
                         <div class="pdf-left">
@@ -998,7 +998,7 @@
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Collaborative Design Process</h3>
-                        <p>After creating comprehensive technical documentation and initial wireframes, I worked closely with our Chief Design Officer who refined the visual design while I continued collaborating on interaction design and user flow optimization. Multiple stakeholder review cycles ensured alignment between design vision, technical feasibility, and business requirements.</p>
+                        <p>This project required a lot of reiterations from initial stages like wireframes to low fidelity prototypes to high fidelity prototypes. Especially during the high fidelity prototype design and iteration stage, I worked together with the Chief Design Officer to make improvements to the design. We were also in active communication with the project managers and researchers from the consortiums who were a huge help to us in making sure we hit all the targets they would need for an MVP. Multiple stakeholder review cycles ensured alignment between design vision, technical feasibility, and business requirements.</p>
                     </div>
                 </div>
 
@@ -1016,7 +1016,7 @@
                     </div>
                     <div class="pdf-right">
                         <h3 class="pdf-subtitle">Smart Metadata Pre-population</h3>
-                        <p>I leveraged existing Correlate data to automatically populate Zenodo's mandatory fields where possible. Document titles, creation dates, and author information are extracted from Correlate, reducing form completion time by an estimated 60%. Users only need to add project-specific metadata required for compliance, making the archival process significantly faster.</p>
+                        <p>The design leverages both already existing and ready to fetch data as well as using AI to help populate all the metadata fields required to publish or save a draft. This includes automatically pulling document titles, creation dates, author information, and file descriptions directly from Correlate's existing data. The AI assistance can suggest relevant keywords, research categories, and even help generate abstracts based on document content. This helps reduce completion time by approximately 62%.</p>
                     </div>
                 </div>
 
